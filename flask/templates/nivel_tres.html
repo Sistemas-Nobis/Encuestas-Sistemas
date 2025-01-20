@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Encuesta de Satisfacción - Sistemas Nobis Medical</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f9f9f9;
+        }
+        #encuestaForm {
+            max-width: 700px;
+            margin: 40px auto;
+            padding: 20px;
+            background-color: #ffffff;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+        h2, h3 {
+            color: #333333;
+            text-align: center;
+        }
+        label {
+            font-size: 1em;
+            font-weight: bold;
+            margin-bottom: 5px;
+            display: block;
+        }
+        select, input[type="radio"] + label {
+            font-size: 0.95em;
+        }
+        select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            margin-bottom: 15px;
+            background-color: #fdfdfd;
+        }
+        .question-group {
+            margin-bottom: 20px;
+        }
+        .radio-group {
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            background-color: #f8f8f8;
+        }
+        .radio-option {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .flex-container {
+            display: flex;
+            align-items: flex-start;
+            gap: 20px;
+        }
+        .flex-container label {
+            width: 65%;
+        }
+        .flex-container .radio-group {
+            width: 35%;
+        }
+        button {
+            background-color: #008000;
+            color: white;
+            padding: 12px 25px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: bold;
+            transition: background-color 0.3s ease;
+        }
+        button:hover {
+            background-color: #006600;
+        }
+    </style>
+</head>
+<body>
+    <form id="encuestaForm">
+        <h2>Encuesta de Satisfacción</h2>
+        <h3>{{gestion_id}} | {{titulo}}</h3>
+
+        <div class="question-group">
+            <label for="primera" style="margin-top: 50px;">¿Considera que la planificación inicial y los recursos asignados fueron suficientes para abordar su solicitud?</label>
+            <select id="primera" name="primera" required>
+                <option value="3">Totalmente de acuerdo</option>
+                <option value="2">De acuerdo</option>
+                <option value="1">En desacuerdo</option>
+                <option value="0">Totalmente en desacuerdo</option>
+            </select>
+        </div>
+
+        <div class="question-group flex-container">
+            <label for="segunda">¿Se sintió informado sobre los avances y etapas del proyecto durante toda la gestión?</label>
+            <div class="radio-group">
+                <div class="radio-option">
+                    <input type="radio" id="muy_clara" name="segunda" value="3" required>
+                    <label for="muy_clara">😊 Siempre</label>
+                </div>
+                <div class="radio-option">
+                    <input type="radio" id="clara" name="segunda" value="2">
+                    <label for="clara">😐 Regularmente</label>
+                </div>
+                <div class="radio-option">
+                    <input type="radio" id="poco" name="segunda" value="1">
+                    <label for="poco">😞 Ocasionalmente</label>
+                </div>
+                <div class="radio-option">
+                    <input type="radio" id="nunca" name="segunda" value="0">
+                    <label for="nunca">😡 Nunca</label>
+                </div>
+            </div>
+        </div>
+
+        <div class="question-group flex-container">
+            <label for="tercera">¿La solución final implementada cumplió con sus expectativas y resolvió su problema de manera efectiva?</label>
+            <div class="radio-group">
+                <div class="radio-option">
+                    <input type="radio" id="si" name="tercera" value="3" required>
+                    <label for="si">Sí</label>
+                </div>
+                <div class="radio-option">
+                    <input type="radio" id="parcial" name="tercera" value="1">
+                    <label for="parcial">No</label>
+                </div>
+                <div class="radio-option">
+                    <input type="radio" id="no" name="tercera" value="0">
+                    <label for="no">Parcialmente</label>
+                </div>
+            </div>
+        </div>
+
+        <div class="question-group flex-container">
+            <label for="cuarta">¿El tiempo tomado para resolver su solicitud estuvo dentro de lo que consideraba razonable o fue lo planificado y comunicado en el marco inicial de la gestión?</label>
+            <div class="radio-group">
+                <div class="radio-option">
+                    <input type="radio" id="si_cuarta" name="cuarta" value="3" required>
+                    <label for="si_cuarta">Sí</label>
+                </div>
+                <div class="radio-option">
+                    <input type="radio" id="no_cuarta" name="cuarta" value="1">
+                    <label for="no_cuarta">No</label>
+                </div>
+                <div class="radio-option">
+                    <input type="radio" id="parcial_cuarta" name="cuarta" value="0">
+                    <label for="parcial_cuarta">Parcialmente</label>
+                </div>
+            </div>
+        </div>
+
+        <div style="text-align: center; margin-top: 40px;">
+            <button type="submit">Enviar</button>
+        </div>
+    </form>
+</body>
+</html>
+
+
+<script>
+    document.getElementById('encuestaForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        var formData = new FormData(this);
+        formData.append('gestion_id', '{{ gestion_id }}');
+        formData.append('cliente', '{{ cliente }}');
+        formData.append('nivel', '{{ nivel }}');
+
+        fetch('/procesar-encuesta', {
+            method: 'POST',
+            body: formData
+        })
+        .then(response => {
+            // Verifica si la respuesta tiene un estado exitoso (200-299)
+            if (!response.ok) {
+                return response.json().then(data => {
+                    // Lanza un error con el mensaje devuelto por el servidor
+                    throw new Error(data.message || 'Error desconocido');
+                });
+            }
+            return response.json();
+        })
+        .then(data => {
+            alert('Gracias por su feedback. Su encuesta ha sido enviada correctamente.');
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            alert(`Hubo un error al enviar la encuesta: ${error.message}`);
+        });
+    });
+</script>
