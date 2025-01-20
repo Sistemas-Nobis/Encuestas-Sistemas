@@ -132,8 +132,8 @@ def enviar_encuesta(gestion):
             html_content = html_content.replace('{{seg_dif}}', str(seg_dif))
 
             # Obtener el usuario relacionado con la gestión
-            usuario = db.session.get(Usuario, gestion.owner_id) # Posible cambio a cliente actualizado.
-            html_content = html_content.replace('{{cliente}}', str(gestion.owner_id)) # created_by_id
+            usuario = db.session.get(Usuario, gestion.created_by_id) # Posible cambio a cliente actualizado.
+            html_content = html_content.replace('{{cliente}}', str(gestion.created_by_id)) # created_by_id
             if not usuario:
                 print(f"No se encontró un usuario con id {gestion.created_by_id}")
                 return
@@ -424,7 +424,7 @@ if __name__ == '__main__':
         print("Base de datos creada en:", os.path.join(basedir, 'encuestas.db'))
 
     scheduler = BackgroundScheduler()
-    scheduler.add_job(func=datos_nuevos, trigger="interval", minutes=60)
+    #scheduler.add_job(func=datos_nuevos, trigger="interval", minutes=60)
     #scheduler.add_job(func=verificar_y_enviar_encuestas, trigger="interval", hours=2)
     scheduler.start()
 
