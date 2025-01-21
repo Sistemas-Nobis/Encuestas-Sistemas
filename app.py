@@ -123,6 +123,7 @@ def enviar_encuesta(gestion):
             mail.send(msg)
 
             print(f"Encuesta enviada a {usuario.email}")
+            gestion.estado_enviado = True
             return True
         except Exception as e:
             print(f"Error al enviar encuesta: {e}")
@@ -131,20 +132,21 @@ def enviar_encuesta(gestion):
 
 def verificar_y_enviar_encuestas():
     with app.app_context():
-        ahora = datetime.now(timezone.utc)
-        limite = ahora - timedelta(hours=24)
-        gestiones_pendientes = Gestion.query.filter_by(estado_enviado=False).all()
-        print(f"Gestiones pendientes encontradas: {len(gestiones_pendientes)}")
+        try:
+            ahora = datetime.now(timezone.utc)
+            limite = ahora - timedelta(hours=24)
+            gestiones_pendientes = Gestion.query.filter_by(estado_enviado=False).all()
+            print(f"Gestiones pendientes encontradas: {len(gestiones_pendientes)}")
 
-        for gestion in gestiones_pendientes:
-            envio_exitoso = enviar_encuesta(gestion)
-            if envio_exitoso:
-                gestion.estado_enviado = True  # Marcar como enviada solo si tuvo éxito
+            for gestion in gestiones_pendientes:
+                enviar_encuesta(gestion)
 
-        # Guardar los cambios en la base de datos
-        db.session.commit()
-        #print("Estado de gestiones actualizado correctamente.")
-
+            # Guardar los cambios en la base de datos
+            db.session.commit()
+            #print("Estado de gestiones actualizado correctamente.")
+        except Exception as e:
+            return jsonify({"status": "error", "message": str(e)}), 500
+        
 
 @app.route('/procesar-encuesta', methods=['POST'])
 def procesar_encuesta():
@@ -268,9 +270,12 @@ def mostrar_encuesta(gestion_id):
 
 @app.route('/verificar-y-enviar-encuestas', methods=['GET'])
 def trigger_verificar_y_enviar_encuestas():
-    #print("Iniciando verificación y envío de encuestas")
-    verificar_y_enviar_encuestas()
-    return "Verificación y envío de encuestas realizado"
+    try:
+        #print("Iniciando verificación y envío de encuestas")
+        verificar_y_enviar_encuestas()
+        return "Verificación y envío de encuestas realizado"
+    except Exception as e:
+        return jsonify({"status": "error", "message": str(e)}), 502
 
 
 @app.route('/test-email')
@@ -443,8 +448,8 @@ if __name__ == '__main__':
         print("Base de datos creada en:", os.path.join(basedir, 'encuestas.db'))
 
     scheduler = BackgroundScheduler()
-    #scheduler.add_job(func=datos_nuevos, trigger="interval", minutes=60)
-    #scheduler.add_job(func=verificar_y_enviar_encuestas, trigger="interval", hours=2)
+    scheduler.add_job(func=datos_nuevos, trigger="interval", minutes=60)
+    scheduler.add_job(func=verificar_y_enviar_encuestas, trigger="interval", hours=2)
     scheduler.start()
 
     app.run(host="0.0.0.0")
