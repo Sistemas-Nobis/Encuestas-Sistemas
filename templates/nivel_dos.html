@@ -91,6 +91,19 @@
     <form id="encuestaForm">
         <h2>Encuesta de Satisfacción</h2>
         <h3>{{gestion_id}} | {{titulo}}</h3>
+        <h5 style="text-align: center; color: red;">{{primer_dif}}
+            <span 
+                style="color: #007bff; font-weight: bold; margin-left: 0.15px;" 
+                title="Demora entre:&#10;Creación y primera respuesta.">
+                ⓘ
+            </span><span style="color: gray; text-align: center;">|</span>
+        <span style="text-align: right; color: #008000;">{{seg_dif}}
+            <span 
+                style="color: #007bff; font-weight: bold; margin-left: 0.15px;" 
+                title="Demora entre:&#10;Primera respuesta y cierre de gestión.">
+                ⓘ
+            </span></span>
+        </h5>
 
         <div class="question-group">
             <label for="primera" style="margin-top: 40px;">¿Se le mantuvo informado regularmente sobre el avance de su ticket?</label>
@@ -145,25 +158,22 @@
             
             var formData = new FormData(this);
             formData.append('gestion_id', '{{ gestion_id }}');
-            formData.append('cliente', '{{ created_by_id }}');
-            formData.append('nivel', '{{ level }}');
-    
+            formData.append('cliente', '{{created_by_id}}');
+            formData.append('nivel', '{{level}}');
+
             fetch('/procesar-encuesta', {
                 method: 'POST',
                 body: formData
             })
             .then(response => {
-                // Verifica si la respuesta tiene un estado exitoso (200-299)
-                if (!response.ok) {
+                // Si la respuesta es un estado de redirección (3xx), el navegador lo gestionará automáticamente
+                if (response.ok) {
+                    window.location.href = '/gracias'; // Opcional, si no quieres confiar en la redirección del backend.
+                } else {
                     return response.json().then(data => {
-                        // Lanza un error con el mensaje devuelto por el servidor
                         throw new Error(data.message || 'Error desconocido');
                     });
                 }
-                return response.json();
-            })
-            .then(data => {
-                alert('Gracias por su feedback. Su encuesta ha sido enviada correctamente.');
             })
             .catch(error => {
                 console.error('Error:', error);

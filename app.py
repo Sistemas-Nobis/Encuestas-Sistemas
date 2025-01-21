@@ -1,5 +1,5 @@
 import os
-from flask import Flask, request, jsonify, render_template_string, render_template
+from flask import Flask, request, jsonify, render_template_string, render_template, redirect, url_for
 from flask_sqlalchemy import SQLAlchemy
 from flask_mail import Mail, Message
 from apscheduler.schedulers.background import BackgroundScheduler
@@ -213,11 +213,17 @@ def procesar_encuesta():
         db.session.add(nueva_respuesta)
         db.session.commit()
 
-        return jsonify({"status": "success", "message": "Encuesta procesada correctamente."})
+        # Redirigir al template gracias.html
+        return redirect(url_for('gracias'))
 
     except Exception as e:
         print("Error:", e)  # Esto imprimirá el error en la consola del servidor
         return jsonify({"status": "error", "message": str(e)}), 500
+
+
+@app.route('/gracias')
+def gracias():
+    return render_template('gracias.html')
 
 
 @app.route('/encuesta/<int:gestion_id>')
@@ -246,8 +252,14 @@ def mostrar_encuesta(gestion_id):
         html_content = html_content.replace('{{gestion_id}}', str(gestion.id))
         html_content = html_content.replace('{{titulo}}', str(gestion.title))
 
-        html_content = html_content.replace('{{level}}', str(gestion.level))
-        html_content = html_content.replace('{{created_by_id}}', str(gestion.created_by_id)) # created_by_id
+        
+        usuario_creador = gestion.created_by_id
+        print("Created by ID:", usuario_creador)
+        nivel = gestion.level
+        print("Level:", nivel)
+
+        html_content = html_content.replace('{{level}}', str(nivel))
+        html_content = html_content.replace('{{created_by_id}}', str(usuario_creador)) # created_by_id
 
         created_at_date = datetime.strptime(gestion.created_at, '%Y-%m-%dT%H:%M:%S.%fZ')
         first_response_date = datetime.strptime(gestion.first_response_at, '%Y-%m-%dT%H:%M:%S.%fZ')

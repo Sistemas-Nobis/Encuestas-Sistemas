@@ -162,25 +162,22 @@
             
             var formData = new FormData(this);
             formData.append('gestion_id', '{{ gestion_id }}');
-            formData.append('nivel', '{{level}}');
             formData.append('cliente', '{{created_by_id}}');
-    
+            formData.append('nivel', '{{level}}');
+
             fetch('/procesar-encuesta', {
                 method: 'POST',
                 body: formData
             })
             .then(response => {
-                // Verifica si la respuesta tiene un estado exitoso (200-299)
-                if (!response.ok) {
+                // Si la respuesta es un estado de redirección (3xx), el navegador lo gestionará automáticamente
+                if (response.ok) {
+                    window.location.href = '/gracias'; // Opcional, si no quieres confiar en la redirección del backend.
+                } else {
                     return response.json().then(data => {
-                        // Lanza un error con el mensaje devuelto por el servidor
                         throw new Error(data.message || 'Error desconocido');
                     });
                 }
-                return response.json();
-            })
-            .then(data => {
-                alert('Gracias por su feedback. Su encuesta ha sido enviada correctamente.');
             })
             .catch(error => {
                 console.error('Error:', error);
