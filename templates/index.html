@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Encuesta de Satisfacción</title>
+</head>
+<body>
+    <p style="display: flex; justify-content: space-between; width: 100%;">
+        Hola, 
+        <span style="margin-left: auto;">Ticket # <span style="font-weight: bold; color: #008000;">{{ gestion_numero }}</span></span>
+    </p>           
+    <p >Nos gustaría conocer tu opinión sobre la gestión {{ gestion_title }}.</p><br>
+    <p style="text-align: center;">Haz clic en el siguiente botón para responder nuestra encuesta</p>
+    <table border="0" align="center">
+        <tr>
+            <td align="center">
+                <a href="https://encuestas.nobissalud.com:4343/encuesta/{{ gestion_id }}" 
+                   style="display: inline-block; font-family: Arial, sans-serif; font-size: 16px; color: #ffffff; text-decoration: none; padding: 10px 20px; background-color: #008000; border-radius: 5px;">
+                    Responder Encuesta
+                </a>
+            </td>
+        </tr>
+    </table>
+    <p>¡Saludos!</p>
+
+    <!-- Firma -->
+    <hr style="border: none; border-top: 1px solid #ccc; margin: 20px 0;">
+    <p style="font-family: Arial, sans-serif; font-size: 14px; color: #8CC63F;">
+        <strong style="color: #008000;">Equipo de Sistemas</strong><br>
+        soporte@nobis.com.ar
+    </p>
+
+</body>
+</html>

@@ -5,6 +5,7 @@ from flask_mail import Mail, Message
 from apscheduler.schedulers.background import BackgroundScheduler
 from datetime import datetime, timedelta, timezone
 from flask_migrate import Migrate
+import requests
 
 basedir = os.path.abspath(os.path.dirname(__file__))
 
@@ -95,62 +96,36 @@ def format_timedelta(td):
 def enviar_encuesta(gestion):
     with app.app_context():
         try:
-            # Seleccionar el HTML según el nivel
-            if gestion.level == "Nivel 1":
-                template_file = 'flask/templates/nivel_uno.html'
-            elif gestion.level == "Nivel 2":
-                template_file = 'flask/templates/nivel_dos.html'
-            elif gestion.level == "Nivel 3":
-                template_file = 'flask/templates/nivel_tres.html'
-            else:
-                print(f"Nivel desconocido: {gestion.level}")
-                template_file = 'flask/templates/nivel_uno.html'
-                return
-
-            # Leer el contenido del archivo HTML
-            with open(template_file, 'r', encoding='utf-8') as file:
-                html_content = file.read()
-
-
-            # Reemplazar los placeholders del HTML
-            html_content = html_content.replace('{{gestion_id}}', str(gestion.id))
-            html_content = html_content.replace('{{titulo}}', str(gestion.title))
-
-            html_content = html_content.replace('{{nivel}}', str(gestion.level))
-
-            created_at_date = datetime.strptime(gestion.created_at, '%Y-%m-%dT%H:%M:%S.%fZ')
-            first_response_date = datetime.strptime(gestion.first_response_at, '%Y-%m-%dT%H:%M:%S.%fZ')
-            close_at_date = datetime.strptime(gestion.close_at, '%Y-%m-%dT%H:%M:%S.%fZ')
-
-            # Diferencias
-            creado_a_firstresponse = first_response_date - created_at_date
-            first_closed = close_at_date - first_response_date
-
-            primer_dif = format_timedelta(creado_a_firstresponse)
-            seg_dif = format_timedelta(first_closed)
-            html_content = html_content.replace('{{primer_dif}}', str(primer_dif))
-            html_content = html_content.replace('{{seg_dif}}', str(seg_dif))
 
             # Obtener el usuario relacionado con la gestión
-            usuario = db.session.get(Usuario, gestion.created_by_id) # Posible cambio a cliente actualizado.
-            html_content = html_content.replace('{{cliente}}', str(gestion.created_by_id)) # created_by_id
+            usuario = db.session.get(Usuario, gestion.created_by_id)  # Posible cambio a cliente actualizado.
+            
             if not usuario:
                 print(f"No se encontró un usuario con id {gestion.created_by_id}")
                 return
+
+            # Renderizar el template con contenido dinámico
+            cuerpo_mensaje = render_template(
+                'index.html',  # Nombre del archivo del template
+                gestion_id=gestion.id,
+                gestion_numero=gestion.number,
+                gestion_title=gestion.title
+            )
 
             # Configurar y enviar el mensaje
             msg = Message(
                 'Encuesta de Satisfacción',
                 sender=app.config['MAIL_USERNAME'],
-                recipients=[usuario.email]
+                recipients=[usuario.email],
+                html=cuerpo_mensaje  # Usar el contenido HTML renderizado
             )
-            msg.html = render_template_string(html_content)
+
             mail.send(msg)
 
             print(f"Encuesta enviada a {usuario.email}")
             return True
         except Exception as e:
-            print(f"Error al enviar encuesta: {str(e)}")
+            print(f"Error al enviar encuesta: {e}")
             return False
 
 
@@ -168,7 +143,7 @@ def verificar_y_enviar_encuestas():
 
         # Guardar los cambios en la base de datos
         db.session.commit()
-        print("Estado de gestiones actualizado correctamente.")
+        #print("Estado de gestiones actualizado correctamente.")
 
 
 @app.route('/procesar-encuesta', methods=['POST'])
@@ -245,12 +220,55 @@ def procesar_encuesta():
 
 @app.route('/encuesta/<int:gestion_id>')
 def mostrar_encuesta(gestion_id):
-    gestion = Gestion.query.get_or_404(gestion_id)
-    return render_template('nivel_uno.html', gestion_id=gestion_id)
+    
+    try:
+        gestion = Gestion.query.get_or_404(gestion_id)
+
+        # Seleccionar el HTML según el nivel
+        if gestion.level == "Nivel 1":
+            template_file = 'templates/nivel_uno.html'
+        elif gestion.level == "Nivel 2":
+            template_file = 'templates/nivel_dos.html'
+        elif gestion.level == "Nivel 3":
+            template_file = 'templates/nivel_tres.html'
+        else:
+            print(f"Nivel desconocido: {gestion.level}")
+            template_file = 'templates/nivel_uno.html'
+            return
+
+        # Leer el contenido del archivo HTML
+        with open(template_file, 'r', encoding='utf-8') as file:
+            html_content = file.read()
+
+        # Reemplazar los placeholders del HTML
+        html_content = html_content.replace('{{gestion_id}}', str(gestion.id))
+        html_content = html_content.replace('{{titulo}}', str(gestion.title))
+
+        html_content = html_content.replace('{{level}}', str(gestion.level))
+        html_content = html_content.replace('{{created_by_id}}', str(gestion.created_by_id)) # created_by_id
+
+        created_at_date = datetime.strptime(gestion.created_at, '%Y-%m-%dT%H:%M:%S.%fZ')
+        first_response_date = datetime.strptime(gestion.first_response_at, '%Y-%m-%dT%H:%M:%S.%fZ')
+        close_at_date = datetime.strptime(gestion.close_at, '%Y-%m-%dT%H:%M:%S.%fZ')
+
+        # Diferencias
+        creado_a_firstresponse = first_response_date - created_at_date
+        first_closed = close_at_date - first_response_date
+
+        primer_dif = format_timedelta(creado_a_firstresponse)
+        seg_dif = format_timedelta(first_closed)
+        html_content = html_content.replace('{{primer_dif}}', str(primer_dif))
+        html_content = html_content.replace('{{seg_dif}}', str(seg_dif))
+
+        return render_template_string(html_content, gestion_id=gestion_id)
+    
+    except Exception as e:
+        return jsonify({"status": "error", "message": str(e)}), 500
+
 
 @app.route('/verificar-y-enviar-encuestas', methods=['GET'])
 def trigger_verificar_y_enviar_encuestas():
-    print("Iniciando verificación y envío de encuestas")
+    #print("Iniciando verificación y envío de encuestas")
     verificar_y_enviar_encuestas()
     return "Verificación y envío de encuestas realizado"
 
@@ -275,6 +293,7 @@ def ver_gestiones():
         'id': g.id,
         'encuesta_enviada': g.estado_enviado
     } for g in gestiones])
+
 
 # Insertar Usuarios y gestiones
 def get_last_page(endpoint, default=1):
@@ -321,6 +340,7 @@ def insertar_gestiones(registros):
     db.session.commit()
     return nuevos_registros
 
+
 def insertar_usuarios(registros):
     nuevos_registros = 0
     for usuario in registros:
@@ -351,7 +371,6 @@ def insertar_usuarios(registros):
     return nuevos_registros
 
 
-import requests
 def procesar_entidades(endpoint, insertar_funcion):
     page = get_last_page(endpoint)
     nuevos_registros_totales = 0

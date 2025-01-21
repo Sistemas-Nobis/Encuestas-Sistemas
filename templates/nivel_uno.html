@@ -26,7 +26,7 @@
         h2 {
             margin-bottom: 10px;
         }
-        h3 {
+        h3, h5 {
             margin-bottom: 20px;
             color: #3d3d3d;
         }
@@ -91,8 +91,20 @@
     <form id="encuestaForm">
         <h2>Encuesta de Satisfacción</h2>
         <h3>{{gestion_id}} | {{titulo}}</h3>
-        <label>{{primer_dif}} - {{seg_dif}}</label>
-
+        <h5 style="text-align: center; color: red;">{{primer_dif}}
+            <span 
+                style="color: #007bff; font-weight: bold; margin-left: 0.15px;" 
+                title="Demora entre:&#10;Creación y primera respuesta.">
+                ⓘ
+            </span><span style="color: gray; text-align: center;">|</span>
+        <span style="text-align: right; color: #008000;">{{seg_dif}}
+            <span 
+                style="color: #007bff; font-weight: bold; margin-left: 0.15px;" 
+                title="Demora entre:&#10;Primera respuesta y cierre de gestión.">
+                ⓘ
+            </span></span>
+        </h5>
+        
         <div class="question-group">
             <label for="primera" style="margin-top: 40px;">¿La solución brindada resolvió su problema?</label>
             <select id="primera" name="primera" required>
@@ -150,8 +162,8 @@
             
             var formData = new FormData(this);
             formData.append('gestion_id', '{{ gestion_id }}');
-            formData.append('cliente', '{{ cliente }}');
-            formData.append('nivel', '{{ nivel }}');
+            formData.append('nivel', '{{level}}');
+            formData.append('cliente', '{{created_by_id}}');
     
             fetch('/procesar-encuesta', {
                 method: 'POST',
