@@ -72,7 +72,7 @@ class Respuesta(db.Model):
     cliente = db.Column(db.String(100), nullable=False)
     promedio_respuestas = db.Column(db.String(10), nullable=False)
     porcentaje_respuestas = db.Column(db.Float, nullable=False)
-    fecha_respuesta = db.Column(db.DateTime, default=datetime.now(timezone.utc))
+    fecha_respuesta = db.Column(db.DateTime, nullable=False)
 
 class ExecutionLog(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -207,7 +207,8 @@ def procesar_encuesta():
             comentarios=datos.get('comentarios'),
             cliente=datos.get('cliente'),
             promedio_respuestas=promedio_respuestas,
-            porcentaje_respuestas=porcentaje
+            porcentaje_respuestas=porcentaje,
+            fecha_respuesta=datetime.now(timezone.utc)
         )
 
         db.session.add(nueva_respuesta)
