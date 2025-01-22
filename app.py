@@ -460,9 +460,9 @@ if __name__ == '__main__':
         db.create_all()
         print("Base de datos creada en:", os.path.join(basedir, 'encuestas.db'))
 
-    scheduler = BackgroundScheduler()
-    scheduler.add_job(func=datos_nuevos, trigger="interval", minutes=60)
-    scheduler.add_job(func=verificar_y_enviar_encuestas, trigger="interval", hours=2)
-    scheduler.start()
+    #scheduler = BackgroundScheduler()
+    #scheduler.add_job(func=datos_nuevos, trigger="interval", minutes=60)
+    #scheduler.add_job(func=verificar_y_enviar_encuestas, trigger="interval", hours=2)
+    #scheduler.start()
 
     app.run(host="0.0.0.0")
