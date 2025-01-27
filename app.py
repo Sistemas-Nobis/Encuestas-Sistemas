@@ -93,43 +93,55 @@ def format_timedelta(td):
         return f"{hours} horas, {minutes} minutos"
 
 
-def enviar_encuesta(gestion):
+def enviar_encuesta(gestion, intentos=3, retraso_reintento=5):
     with app.app_context():
-        try:
+        for intento in range(intentos):
+            try:
+                # Verificar si ya fue enviada
+                if gestion.estado_enviado:
+                    print(f"Gestión {gestion.id} ya fue enviada. No se enviará de nuevo.")
+                    return True
 
-            # Obtener el usuario relacionado con la gestión
-            usuario = db.session.get(Usuario, gestion.created_by_id)  # Posible cambio a cliente actualizado.
-            
-            if not usuario:
-                print(f"No se encontró un usuario con id {gestion.created_by_id}")
-                return
+                # Obtener el usuario relacionado con la gestión
+                usuario = db.session.get(Usuario, gestion.created_by_id)
+                if not usuario:
+                    print(f"No se encontró un usuario con id {gestion.created_by_id}")
+                    return False
 
-            # Renderizar el template con contenido dinámico
-            cuerpo_mensaje = render_template(
-                'index.html',  # Nombre del archivo del template
-                gestion_id=gestion.id,
-                gestion_numero=gestion.number,
-                gestion_title=gestion.title
-            )
+                # Renderizar el template con contenido dinámico
+                cuerpo_mensaje = render_template(
+                    'index.html',  # Nombre del archivo del template
+                    gestion_id=gestion.id,
+                    gestion_numero=gestion.number,
+                    gestion_title=gestion.title
+                )
 
-            # Configurar y enviar el mensaje
-            msg = Message(
-                'Encuesta de Satisfacción',
-                sender=app.config['MAIL_USERNAME'],
-                recipients=[usuario.email],
-                html=cuerpo_mensaje  # Usar el contenido HTML renderizado
-            )
+                # Configurar y enviar el mensaje
+                msg = Message(
+                    'Encuesta de Satisfacción',
+                    sender=app.config['MAIL_USERNAME'],
+                    recipients=[usuario.email],
+                    html=cuerpo_mensaje
+                )
 
-            mail.send(msg)
+                mail.send(msg)
+                print(f"Encuesta enviada a {usuario.email}")
 
-            print(f"Encuesta enviada a {usuario.email}")
-            gestion.estado_enviado = True
-            return True
-        except Exception as e:
-            print(f"Error al enviar encuesta: {e}")
-            return False
+                # Actualizar estado de la gestión
+                gestion.estado_enviado = True
+                db.session.commit()
+                return True  # Salir del bucle al enviar exitosamente
 
+            except Exception as e:
+                print(f"Error al enviar encuesta (intento {intento + 1}/{intentos}): {e}")
+                if intento < intentos - 1:
+                    print(f"Reintentando en {retraso_reintento} segundos...")
+                    time.sleep(retraso_reintento)
+                else:
+                    print(f"No se pudo enviar la encuesta para la gestión {gestion.id} después de {intentos} intentos.")
+                    return False
 
+import time
 def verificar_y_enviar_encuestas():
     with app.app_context():
         try:
@@ -138,8 +150,19 @@ def verificar_y_enviar_encuestas():
             gestiones_pendientes = Gestion.query.filter_by(estado_enviado=False).all()
             print(f"Gestiones pendientes encontradas: {len(gestiones_pendientes)}")
 
+            count = 0
+            print(gestiones_pendientes)
             for gestion in gestiones_pendientes:
                 enviar_encuesta(gestion)
+                time.sleep(5)
+                #if gestion.created_by_id == 6770:
+                #    count += 1
+                #    print(f"Encuestas de sherrera: {count}")
+                #    enviar_encuesta(gestion)
+                #    time.sleep(5)
+                #else:
+                #    pass
+                    #print(f"Encuestas de otros usuarios: {gestion.created_by_id}")
 
             # Guardar los cambios en la base de datos
             db.session.commit()
@@ -263,7 +286,10 @@ def mostrar_encuesta(gestion_id):
         html_content = html_content.replace('{{created_by_id}}', str(usuario_creador)) # created_by_id
 
         created_at_date = datetime.strptime(gestion.created_at, '%Y-%m-%dT%H:%M:%S.%fZ')
-        first_response_date = datetime.strptime(gestion.first_response_at, '%Y-%m-%dT%H:%M:%S.%fZ')
+        if gestion.first_response_at is not None:
+            first_response_date = datetime.strptime(gestion.first_response_at, '%Y-%m-%dT%H:%M:%S.%fZ')
+        else:
+            first_response_date = created_at_date
         close_at_date = datetime.strptime(gestion.close_at, '%Y-%m-%dT%H:%M:%S.%fZ')
 
         # Diferencias
@@ -327,6 +353,8 @@ def save_last_page(endpoint, page):
         with open(last_page_file, "w") as file:
             file.write(str(page))
 
+import re
+
 def insertar_gestiones(registros):
     nuevos_registros = 0
     for gestion in registros:
@@ -351,8 +379,28 @@ def insertar_gestiones(registros):
                 level=gestion.get("niveles")
             )
             created_at_date = datetime.strptime(nueva_gestion.created_at, '%Y-%m-%dT%H:%M:%S.%fZ')
+
+            # Obtener el usuario relacionado con la gestión
+            usuario = db.session.get(Usuario, nueva_gestion.created_by_id)  # Posible cambio a cliente actualizado.
+            #print(usuario.email)
+
+            validez = False
+
+            # Verificar que el correo electrónico tenga el dominio "nobis" o "nobissalud"
+            if re.search(r"@(nobis|nobissalud)\.com(\.ar)?$", usuario.email):
+                #print("El correo tiene un dominio válido.")
+                validez = True
+                #print(validez)
+            else:
+                #print("El correo no tiene un dominio válido.")
+                pass
+            
+            if not usuario:
+                print(f"No se encontró un usuario con id {gestion.created_by_id}")
+                return
+
             # Comparar con la fecha deseada
-            if nueva_gestion.state_id == 4 and nueva_gestion.group_id == 13 and created_at_date >= datetime(2025, 1, 1): # 01/01/2025
+            if nueva_gestion.state_id == 4 and nueva_gestion.group_id == 13 and created_at_date >= datetime(2025, 1, 1) and validez: # 01/01/2025
                 db.session.add(nueva_gestion)
                 nuevos_registros += 1
     db.session.commit()
@@ -414,9 +462,10 @@ def procesar_entidades(endpoint, insertar_funcion):
                 if len(registros_en_pagina) < PER_PAGE:
                     print("Última página alcanzada.")
                     break
-
+                
                 page += 1
-                save_last_page(endpoint, page)
+                if endpoint != "tickets":
+                    save_last_page(endpoint, page)
             else:
                 print("No hay más registros para procesar.")
                 break
@@ -456,13 +505,4 @@ def home():
         return("OK!.")
 
 if __name__ == '__main__':
-    with app.app_context():
-        db.create_all()
-        print("Base de datos creada en:", os.path.join(basedir, 'encuestas.db'))
-
-    #scheduler = BackgroundScheduler()
-    #scheduler.add_job(func=datos_nuevos, trigger="interval", minutes=60)
-    #scheduler.add_job(func=verificar_y_enviar_encuestas, trigger="interval", hours=2)
-    #scheduler.start()
-
     app.run(host="0.0.0.0")

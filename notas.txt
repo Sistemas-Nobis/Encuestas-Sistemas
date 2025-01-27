@@ -1,0 +1,8 @@
+-> Eliminar paginado para tickets:
+    --> Tomar tickets antiguos que puedan haber cambiado de estado. ✅
+    --> Mantener filtro de fechas. Enero de 2025 en adelante. ✅
+    --> Filtro de dominio en los usuarios que crean tickets y reciben encuesta. Solo se aceptan @nobis y @nobissalud. ✅
+
+-> Revisar funciones automaticas:
+    --> Ejecución de las mismas, con log.
+    --> Detección de errores y guardado de los mismos.
