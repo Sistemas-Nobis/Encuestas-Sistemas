@@ -519,32 +519,5 @@ def datos_nuevos():
 def home():
         return("OK!.")
 
-def migrar_datos():
-    try:
-        with app.app_context():
-            respuestas = Respuesta.query.all()
-            detalles = []
-
-            for resp in respuestas:
-                if hasattr(resp, "primera"):
-                    detalles.append(RespuestaDetalle(respuesta_id=resp.id, pregunta="Primera", valor=resp.primera))
-                if hasattr(resp, "segunda"):
-                    detalles.append(RespuestaDetalle(respuesta_id=resp.id, pregunta="Segunda", valor=resp.segunda))
-                if hasattr(resp, "tercera"):
-                    detalles.append(RespuestaDetalle(respuesta_id=resp.id, pregunta="Tercera", valor=resp.tercera))
-                if hasattr(resp, "cuarta") and resp.cuarta is not None:
-                    detalles.append(RespuestaDetalle(respuesta_id=resp.id, pregunta="Cuarta", valor=resp.cuarta))
-
-            if detalles:
-                db.session.add_all(detalles)
-                db.session.commit()
-
-            return "Migración completada exitosamente"
-
-    except Exception as e:
-        print("Error en la migración:", e)
-        return f"Error en la migración: {str(e)}"
-
 if __name__ == '__main__':
-    migrar_datos()
-    #app.run(host="0.0.0.0")
+    app.run(host="0.0.0.0")
