@@ -164,6 +164,7 @@
             formData.append('gestion_id', '{{ gestion_id }}');
             formData.append('cliente', '{{created_by_id}}');
             formData.append('nivel', '{{level}}');
+            console.log([...formData]);
 
             fetch('/procesar-encuesta', {
                 method: 'POST',

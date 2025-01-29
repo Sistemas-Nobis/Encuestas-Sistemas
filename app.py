@@ -230,6 +230,21 @@ def procesar_encuesta():
         gestion = db.session.get(Gestion, gestion_id)
         usuario_age = db.session.get(Usuario, gestion.owner_id)
 
+        if usuario_age.id == 10787:
+            age_nombre = 'Juan Cuevas'
+        elif usuario_age.id in (7211, 5922):
+            age_nombre = 'Agustin Jimenez'
+        elif usuario_age.id == 8506:
+            age_nombre = 'Valentina Martinelli'
+        elif usuario_age.id in (3733, 6859):
+            age_nombre = 'Lazaro Gonzalez'
+        elif usuario_age.id in (33, 6716):
+            age_nombre = 'Nahuel Saracho'
+        elif usuario_age.id == 12066:
+            age_nombre = 'Iara Zalazar'
+        else:
+            age_nombre = 'Desconocido'
+
         # Crear la respuesta principal
         nueva_respuesta = Respuesta(
             gestion_id=int(gestion_id),
@@ -240,7 +255,7 @@ def procesar_encuesta():
             porcentaje_respuestas=porcentaje,
             fecha_respuesta=respuesta_time,
             agente_id=usuario_age.id,
-            agente_nombre=usuario_age.email
+            agente_nombre=age_nombre
         )
         db.session.add(nueva_respuesta)
         db.session.commit()  # Se necesita para obtener el ID de la respuesta
