@@ -90,7 +90,7 @@
 <body>
     <form id="encuestaForm">
         <h2>Encuesta de Satisfacción</h2>
-        <h3>{{gestion_id}} | {{titulo}}</h3>
+        <h3><a href="https://soporte.nobissalud.com/#ticket/zoom/{{gestion_id}}" target="_blank">{{gestion_id}}</a> | {{titulo}}</h3>
         <h5 style="text-align: center; color: red;">{{primer_dif}}
             <span 
                 style="color: #007bff; font-weight: bold; margin-left: 0.15px;" 
@@ -161,28 +161,28 @@
             e.preventDefault();
             
             var formData = new FormData(this);
-            formData.append('gestion_id', '{{ gestion_id }}');
-            formData.append('cliente', '{{created_by_id}}');
-            formData.append('nivel', '{{level}}');
+            let respuestas = [
+                { pregunta: "Primera", valor: document.getElementById("primera").value },
+                { pregunta: "Segunda", valor: document.querySelector('input[name="segunda"]:checked').value },
+                { pregunta: "Tercera", valor: document.querySelector('input[name="tercera"]:checked').value }
+            ];
 
             fetch('/procesar-encuesta', {
                 method: 'POST',
-                body: formData
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    gestion_id: '{{ gestion_id }}',
+                    cliente: '{{ created_by_id }}',
+                    nivel: '{{ level }}',
+                    respuestas: respuestas
+                })
             })
-            .then(response => {
-                // Si la respuesta es un estado de redirección (3xx), el navegador lo gestionará automáticamente
-                if (response.ok) {
-                    window.location.href = '/gracias'; // Opcional, si no quieres confiar en la redirección del backend.
-                } else {
-                    return response.json().then(data => {
-                        throw new Error(data.message || 'Error desconocido');
-                    });
-                }
+            .then(response => response.json())
+            .then(data => {
+                alert('Encuesta enviada con éxito');
+                window.location.href = '/gracias';
             })
-            .catch(error => {
-                console.error('Error:', error);
-                alert(`Hubo un error al enviar la encuesta: ${error.message}`);
-            });
+            .catch(error => console.error('Error:', error));
         });
     </script>
     

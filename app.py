@@ -64,15 +64,23 @@ class Respuesta(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     gestion_id = db.Column(db.Integer, db.ForeignKey('gestion.id'), nullable=False)
     nivel = db.Column(db.String(10), nullable=True)
-    primera = db.Column(db.Integer, nullable=False)
-    segunda = db.Column(db.Integer, nullable=False)
-    tercera = db.Column(db.Integer, nullable=False)
-    cuarta = db.Column(db.Integer, nullable=True)
     comentarios = db.Column(db.Text, nullable=True)
     cliente = db.Column(db.String(100), nullable=False)
     promedio_respuestas = db.Column(db.String(10), nullable=False)
     porcentaje_respuestas = db.Column(db.Float, nullable=False)
     fecha_respuesta = db.Column(db.DateTime, nullable=False)
+    agente_id = db.Column(db.Integer, db.ForeignKey('usuario.id'))
+    agente_nombre = db.Column(db.String(150), nullable=False)
+
+    detalles = db.relationship("RespuestaDetalle", backref="respuesta", lazy=True)
+
+
+class RespuestaDetalle(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    respuesta_id = db.Column(db.Integer, db.ForeignKey('respuesta.id'), nullable=False)
+    pregunta = db.Column(db.String(50), nullable=False)  # "Primera", "Segunda", etc.
+    valor = db.Column(db.Integer, nullable=False)  # El valor de la respuesta
+
 
 class ExecutionLog(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -170,6 +178,8 @@ def verificar_y_enviar_encuestas():
         except Exception as e:
             return jsonify({"status": "error", "message": str(e)}), 500
         
+# Definir la zona horaria de Buenos Aires
+zona_horaria = timezone(timedelta(hours=-3))
 
 @app.route('/procesar-encuesta', methods=['POST'])
 def procesar_encuesta():
@@ -191,53 +201,58 @@ def procesar_encuesta():
             }), 400
 
         nivel_g = datos.get('nivel')
+        comentarios = datos.get('comentarios', '')
 
-        # Obtén las respuestas individuales, asegurándonos de no tener valores por defecto si la respuesta no existe
-        respuestas = [
-            int(datos.get('primera', None)) if datos.get('primera') is not None else None,
-            int(datos.get('segunda', None)) if datos.get('segunda') is not None else None,
-            int(datos.get('tercera', None)) if datos.get('tercera') is not None else None,
-            int(datos.get('cuarta', None)) if datos.get('cuarta') is not None else None
-        ]
+        # Extraer respuestas del formulario
+        preguntas = ["Primera", "Segunda", "Tercera", "Cuarta"]
+        respuestas = {
+            "Primera": int(datos.get('primera', 0)) if datos.get('primera') else None,
+            "Segunda": int(datos.get('segunda', 0)) if datos.get('segunda') else None,
+            "Tercera": int(datos.get('tercera', 0)) if datos.get('tercera') else None,
+            "Cuarta": int(datos.get('cuarta', 0)) if datos.get('cuarta') else None
+        }
 
-        # Filtra las respuestas que son válidas (no None)
-        respuestas_validas = [respuesta for respuesta in respuestas if respuesta is not None]
-
-        # Si no hay respuestas válidas, no podemos calcular el promedio
+        # Filtrar respuestas válidas
+        respuestas_validas = {k: v for k, v in respuestas.items() if v is not None}
         if not respuestas_validas:
             raise ValueError("No hay respuestas válidas para calcular el promedio")
 
-        # Calcula el puntaje total
-        puntaje_total = sum(respuestas_validas)
-
-        # Calcula el puntaje máximo posible (3 puntos por respuesta)
+        # Calcular puntajes
+        puntaje_total = sum(respuestas_validas.values())
         puntaje_maximo = len(respuestas_validas) * 3
-
-        # Calcula el promedio de las respuestas
         promedio_respuestas = f"{puntaje_total}/{puntaje_maximo}"
-
-        # Calcula el porcentaje de puntajes
         porcentaje = (puntaje_total / puntaje_maximo) * 100
 
-        # Crea la nueva respuesta en la base de datos
+        # Obtener fecha actual en Buenos Aires
+        respuesta_time = datetime.now(zona_horaria).strftime('%d-%m-%Y %H:%M:%S')
+
+        # Obtener datos de la gestión y agente
+        gestion = db.session.get(Gestion, gestion_id)
+        usuario_age = db.session.get(Usuario, gestion.owner_id)
+
+        # Crear la respuesta principal
         nueva_respuesta = Respuesta(
             gestion_id=int(gestion_id),
             nivel=nivel_g,
-            primera=respuestas[0] if len(respuestas) > 0 else None,
-            segunda=respuestas[1] if len(respuestas) > 1 else None,
-            tercera=respuestas[2] if len(respuestas) > 2 else None,
-            cuarta=respuestas[3] if len(respuestas) > 3 else None,
-            comentarios=datos.get('comentarios'),
+            comentarios=comentarios,
             cliente=datos.get('cliente'),
             promedio_respuestas=promedio_respuestas,
             porcentaje_respuestas=porcentaje,
-            fecha_respuesta=datetime.now(timezone.utc)
+            fecha_respuesta=respuesta_time,
+            agente_id=usuario_age.id,
+            agente_nombre=usuario_age.email
         )
-
         db.session.add(nueva_respuesta)
+        db.session.commit()  # Se necesita para obtener el ID de la respuesta
+
+        # Guardar respuestas individuales en `RespuestaDetalle`
+        detalles = [
+            RespuestaDetalle(respuesta_id=nueva_respuesta.id, pregunta=preg, valor=valor)
+            for preg, valor in respuestas_validas.items()
+        ]
+        db.session.add_all(detalles)
         db.session.commit()
 
-        # Redirigir al template gracias.html
         return redirect(url_for('gracias'))
 
     except Exception as e:
@@ -278,9 +293,9 @@ def mostrar_encuesta(gestion_id):
 
         
         usuario_creador = gestion.created_by_id
-        print("Created by ID:", usuario_creador)
+        #print("Created by ID:", usuario_creador)
         nivel = gestion.level
-        print("Level:", nivel)
+        #print("Level:", nivel)
 
         html_content = html_content.replace('{{level}}', str(nivel))
         html_content = html_content.replace('{{created_by_id}}', str(usuario_creador)) # created_by_id
@@ -504,5 +519,32 @@ def datos_nuevos():
 def home():
         return("OK!.")
 
+def migrar_datos():
+    try:
+        with app.app_context():
+            respuestas = Respuesta.query.all()
+            detalles = []
+
+            for resp in respuestas:
+                if hasattr(resp, "primera"):
+                    detalles.append(RespuestaDetalle(respuesta_id=resp.id, pregunta="Primera", valor=resp.primera))
+                if hasattr(resp, "segunda"):
+                    detalles.append(RespuestaDetalle(respuesta_id=resp.id, pregunta="Segunda", valor=resp.segunda))
+                if hasattr(resp, "tercera"):
+                    detalles.append(RespuestaDetalle(respuesta_id=resp.id, pregunta="Tercera", valor=resp.tercera))
+                if hasattr(resp, "cuarta") and resp.cuarta is not None:
+                    detalles.append(RespuestaDetalle(respuesta_id=resp.id, pregunta="Cuarta", valor=resp.cuarta))
+
+            if detalles:
+                db.session.add_all(detalles)
+                db.session.commit()
+
+            return "Migración completada exitosamente"
+
+    except Exception as e:
+        print("Error en la migración:", e)
+        return f"Error en la migración: {str(e)}"
+
 if __name__ == '__main__':
-    app.run(host="0.0.0.0")
+    migrar_datos()
+    #app.run(host="0.0.0.0")
