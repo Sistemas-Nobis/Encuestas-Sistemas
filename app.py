@@ -1,5 +1,5 @@
 import os
-from flask import Flask, request, jsonify, render_template_string, render_template, redirect, url_for
+from flask import Flask, request, jsonify, render_template_string, render_template, redirect, url_for, send_from_directory
 from flask_sqlalchemy import SQLAlchemy
 from flask_mail import Mail, Message
 from apscheduler.schedulers.background import BackgroundScheduler
@@ -78,6 +78,7 @@ class Respuesta(db.Model):
 class RespuestaDetalle(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     respuesta_id = db.Column(db.Integer, db.ForeignKey('respuesta.id'), nullable=False)
+    nivel = db.Column(db.String(10), nullable=True)
     pregunta = db.Column(db.String(50), nullable=False)  # "Primera", "Segunda", etc.
     valor = db.Column(db.Integer, nullable=False)  # El valor de la respuesta
 
@@ -148,6 +149,12 @@ def enviar_encuesta(gestion, intentos=3, retraso_reintento=5):
                 else:
                     print(f"No se pudo enviar la encuesta para la gestión {gestion.id} después de {intentos} intentos.")
                     return False
+                
+
+@app.route('/favicon.ico')
+def favicon():
+    return send_from_directory('static', 'favicon.ico', mimetype='image/vnd.microsoft.icon')
+
 
 import time
 def verificar_y_enviar_encuestas():
@@ -262,7 +269,11 @@ def procesar_encuesta():
 
         # Guardar respuestas individuales en `RespuestaDetalle`
         detalles = [
-            RespuestaDetalle(respuesta_id=nueva_respuesta.id, pregunta=preg, valor=valor)
+            RespuestaDetalle(
+                respuesta_id=nueva_respuesta.id,
+                nivel=nivel_g,
+                pregunta=preg,
+                valor=valor)
             for preg, valor in respuestas_validas.items()
         ]
         db.session.add_all(detalles)
