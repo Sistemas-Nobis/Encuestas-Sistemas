@@ -11,7 +11,7 @@ basedir = os.path.abspath(os.path.dirname(__file__))
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = (
-    """mssql+pyodbc://sa:SisteNob%2B25@172.16.1.200/encuestador?driver=ODBC+Driver+18+for+SQL+Server&TrustServerCertificate=yes"""
+    """mssql+pyodbc://sa:SisteNob+25@172.16.1.200/encuestador?driver=ODBC+Driver+18+for+SQL+Server&TrustServerCertificate=yes"""
 )# Configuracion SQL Server
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['MAIL_SERVER'] = 'smtp-mail.outlook.com'
@@ -237,6 +237,8 @@ def procesar_encuesta():
         gestion = db.session.get(Gestion, gestion_id)
         usuario_age = db.session.get(Usuario, gestion.owner_id)
 
+        print(f"Usuario AGENTE ID: {usuario_age.id}")
+
         if usuario_age.id == 10787:
             age_nombre = 'Juan Cuevas'
         elif usuario_age.id in (7211, 5922):
@@ -249,6 +251,8 @@ def procesar_encuesta():
             age_nombre = 'Nahuel Saracho'
         elif usuario_age.id == 12066:
             age_nombre = 'Iara Zalazar'
+        elif usuario_age.id == 13833:
+            age_nombre = 'Guillermina Caceres'
         else:
             age_nombre = 'Desconocido'
 
@@ -396,6 +400,7 @@ def save_last_page(endpoint, page):
 
 import re
 
+blacklist = ['nahuel.saracho@nobis.com.ar', 'nsaracho@nobissalud.com.ar', 'lbgonzalez@nobissalud.com.ar', 'lazaro.gonzalez@nobis.com.ar']
 def insertar_gestiones(registros):
     nuevos_registros = 0
     for gestion in registros:
@@ -422,13 +427,15 @@ def insertar_gestiones(registros):
             created_at_date = datetime.strptime(nueva_gestion.created_at, '%Y-%m-%dT%H:%M:%S.%fZ')
 
             # Obtener el usuario relacionado con la gestión
-            usuario = db.session.get(Usuario, nueva_gestion.created_by_id)  # Posible cambio a cliente actualizado.
+            usuario = db.session.get(Usuario, nueva_gestion.created_by_id)  # Cliente.
             #print(usuario.email)
+
+            usuario2 = db.session.get(Usuario, nueva_gestion.updated_by_id)  # Usuario analista.
 
             validez = False
 
             # Verificar que el correo electrónico tenga el dominio "nobis" o "nobissalud"
-            if re.search(r"@(nobis|nobissalud)\.com(\.ar)?$", usuario.email):
+            if re.search(r"@(nobis|nobissalud)\.com(\.ar)?$", usuario.email) and usuario.email != 'soporte@nobis.com.ar' and usuario2.email != usuario.email and usuario.email not in blacklist:
                 #print("El correo tiene un dominio válido.")
                 validez = True
                 #print(validez)
