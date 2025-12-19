@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Progreso - Grabación de Gestiones</title>
+    <link rel="icon" type="image/x-icon" href="/static/favicon.ico">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        
+        .container {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+            padding: 40px;
+            max-width: 900px;
+            width: 100%;
+        }
+        
+        h1 {
+            color: #333;
+            margin-bottom: 30px;
+            text-align: center;
+            font-size: 28px;
+            font-weight: 600;
+        }
+        
+        .progress-container {
+            margin-bottom: 30px;
+        }
+        
+        .progress-bar {
+            width: 100%;
+            height: 35px;
+            background-color: #e0e0e0;
+            border-radius: 18px;
+            overflow: hidden;
+            position: relative;
+            margin-bottom: 10px;
+        }
+        
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+            width: 0%;
+            transition: width 0.3s ease;
+            border-radius: 18px;
+        }
+        
+        .progress-text {
+            text-align: center;
+            font-size: 20px;
+            font-weight: 600;
+            color: #333;
+            margin-top: 10px;
+        }
+        
+        .status-message {
+            background-color: #f5f5f5;
+            border-left: 4px solid #667eea;
+            padding: 15px;
+            margin-bottom: 15px;
+            border-radius: 4px;
+            font-size: 14px;
+            color: #555;
+        }
+        
+        .status-message.error {
+            border-left-color: #f44336;
+            background-color: #ffebee;
+        }
+        
+        .status-message.success {
+            border-left-color: #4caf50;
+            background-color: #e8f5e9;
+        }
+        
+        .status-message.warning {
+            border-left-color: #ff9800;
+            background-color: #fff3e0;
+        }
+        
+        .log-container {
+            max-height: 400px;
+            overflow-y: auto;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            padding: 15px;
+            background-color: #fafafa;
+            font-family: 'Courier New', monospace;
+            font-size: 12px;
+        }
+        
+        .log-entry {
+            padding: 6px 0;
+            border-bottom: 1px solid #e0e0e0;
+            color: #666;
+            line-height: 1.5;
+        }
+        
+        .log-entry:last-child {
+            border-bottom: none;
+        }
+        
+        .log-entry.success {
+            color: #4caf50;
+            font-weight: 600;
+        }
+        
+        .log-entry.error {
+            color: #f44336;
+            font-weight: 600;
+        }
+        
+        .log-entry.warning {
+            color: #ff9800;
+        }
+        
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .stat-card {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 8px;
+            text-align: center;
+        }
+        
+        .stat-value {
+            font-size: 32px;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        
+        .stat-label {
+            font-size: 14px;
+            opacity: 0.9;
+        }
+        
+        .loading-spinner {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid rgba(102, 126, 234, 0.3);
+            border-radius: 50%;
+            border-top-color: #667eea;
+            animation: spin 1s ease-in-out infinite;
+            margin-right: 10px;
+        }
+        
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+        
+        .hidden {
+            display: none;
+        }
+        
+        .phase-indicator {
+            display: flex;
+            justify-content: space-around;
+            margin-bottom: 20px;
+            padding: 15px;
+            background-color: #f8f9fa;
+            border-radius: 8px;
+        }
+        
+        .phase {
+            text-align: center;
+            flex: 1;
+        }
+        
+        .phase.active {
+            color: #667eea;
+            font-weight: 600;
+        }
+        
+        .phase.completed {
+            color: #4caf50;
+        }
+        
+        .phase-icon {
+            font-size: 24px;
+            margin-bottom: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>💾 Grabación de Gestiones y Usuarios</h1>
+        
+        <div class="phase-indicator">
+            <div class="phase" id="phaseUsuarios">
+                <div class="phase-icon">👥</div>
+                <div>Usuarios</div>
+            </div>
+            <div class="phase" id="phaseGestiones">
+                <div class="phase-icon">📋</div>
+                <div>Gestiones</div>
+            </div>
+            <div class="phase" id="phaseLog">
+                <div class="phase-icon">💾</div>
+                <div>Guardar Log</div>
+            </div>
+        </div>
+        
+        <div class="progress-container">
+            <div class="progress-bar">
+                <div class="progress-fill" id="progressFill"></div>
+            </div>
+            <div class="progress-text" id="progressText">0%</div>
+        </div>
+        
+        <div class="status-message" id="statusMessage">
+            <span class="loading-spinner"></span>
+            <span id="statusText">Iniciando proceso...</span>
+        </div>
+        
+        <div class="stats hidden" id="statsContainer">
+            <div class="stat-card">
+                <div class="stat-value" id="statUsuarios">0</div>
+                <div class="stat-label">Usuarios Nuevos</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value" id="statGestiones">0</div>
+                <div class="stat-label">Gestiones Nuevas</div>
+            </div>
+        </div>
+        
+        <div class="log-container" id="logContainer">
+            <div class="log-entry">Esperando eventos...</div>
+        </div>
+    </div>
+
+    <script>
+        const progressFill = document.getElementById('progressFill');
+        const progressText = document.getElementById('progressText');
+        const statusMessage = document.getElementById('statusMessage');
+        const statusText = document.getElementById('statusText');
+        const logContainer = document.getElementById('logContainer');
+        const statsContainer = document.getElementById('statsContainer');
+        const statUsuarios = document.getElementById('statUsuarios');
+        const statGestiones = document.getElementById('statGestiones');
+        
+        const phaseUsuarios = document.getElementById('phaseUsuarios');
+        const phaseGestiones = document.getElementById('phaseGestiones');
+        const phaseLog = document.getElementById('phaseLog');
+
+        function addLogEntry(message, type = 'info') {
+            const entry = document.createElement('div');
+            entry.className = `log-entry ${type}`;
+            const timestamp = new Date().toLocaleTimeString();
+            entry.textContent = `[${timestamp}] ${message}`;
+            logContainer.insertBefore(entry, logContainer.firstChild);
+            
+            // Mantener solo los últimos 100 logs
+            while (logContainer.children.length > 100) {
+                logContainer.removeChild(logContainer.lastChild);
+            }
+        }
+
+        function updateProgress(porcentaje, mensaje) {
+            progressFill.style.width = porcentaje + '%';
+            progressText.textContent = porcentaje + '%';
+            statusText.textContent = mensaje;
+        }
+
+        function updateStatus(tipo, mensaje) {
+            statusMessage.className = `status-message ${tipo}`;
+            
+            if (tipo === 'error') {
+                statusMessage.innerHTML = `<span style="color: #f44336;">✗ ${mensaje}</span>`;
+            } else if (tipo === 'success') {
+                statusMessage.innerHTML = `<span style="color: #4caf50;">✓ ${mensaje}</span>`;
+            } else {
+                statusMessage.innerHTML = `<span class="loading-spinner"></span><span>${mensaje}</span>`;
+            }
+        }
+
+        function updatePhase(phase) {
+            // Reset all phases
+            [phaseUsuarios, phaseGestiones, phaseLog].forEach(p => {
+                p.classList.remove('active', 'completed');
+            });
+            
+            if (phase === 'usuarios') {
+                phaseUsuarios.classList.add('active');
+            } else if (phase === 'gestiones') {
+                phaseUsuarios.classList.add('completed');
+                phaseGestiones.classList.add('active');
+            } else if (phase === 'log') {
+                phaseUsuarios.classList.add('completed');
+                phaseGestiones.classList.add('completed');
+                phaseLog.classList.add('active');
+            } else if (phase === 'complete') {
+                [phaseUsuarios, phaseGestiones, phaseLog].forEach(p => {
+                    p.classList.add('completed');
+                });
+            }
+        }
+
+        function updateStats(resultado) {
+            if (resultado) {
+                statUsuarios.textContent = resultado.usuarios_nuevos || 0;
+                statGestiones.textContent = resultado.gestiones_nuevas || 0;
+                statsContainer.classList.remove('hidden');
+            }
+        }
+
+        // Conectar al stream SSE
+        const eventSource = new EventSource('/stream-grabar-gestiones');
+
+        eventSource.onmessage = function(event) {
+            try {
+                const data = JSON.parse(event.data);
+                
+                if (data.tipo === 'start') {
+                    updateStatus('info', data.mensaje);
+                    addLogEntry(data.mensaje, 'info');
+                } else if (data.mensaje && data.mensaje.includes('[Usuarios]')) {
+                    updatePhase('usuarios');
+                    updateProgress(data.porcentaje, data.mensaje);
+                    addLogEntry(data.mensaje, data.tipo === 'error' ? 'error' : 'info');
+                } else if (data.mensaje && data.mensaje.includes('[Gestiones]')) {
+                    updatePhase('gestiones');
+                    updateProgress(data.porcentaje, data.mensaje);
+                    addLogEntry(data.mensaje, data.tipo === 'error' ? 'error' : 'info');
+                } else if (data.mensaje && data.mensaje.includes('Log')) {
+                    updatePhase('log');
+                    updateProgress(data.porcentaje, data.mensaje);
+                    addLogEntry(data.mensaje, data.tipo === 'warning' ? 'warning' : 'success');
+                } else if (data.tipo === 'progress' || data.tipo === 'info') {
+                    updateProgress(data.porcentaje, data.mensaje);
+                    addLogEntry(data.mensaje, 'info');
+                } else if (data.tipo === 'success') {
+                    updateProgress(data.porcentaje, data.mensaje);
+                    updateStatus('success', data.mensaje);
+                    addLogEntry(data.mensaje, 'success');
+                } else if (data.tipo === 'error') {
+                    updateStatus('error', data.mensaje);
+                    addLogEntry(data.mensaje, 'error');
+                } else if (data.tipo === 'end') {
+                    updateProgress(100, data.mensaje);
+                    updateStatus('success', data.mensaje);
+                    updatePhase('complete');
+                    addLogEntry(data.mensaje, 'success');
+                    updateStats(data.resultado);
+                    eventSource.close();
+                }
+            } catch (e) {
+                console.error('Error parsing SSE data:', e);
+                addLogEntry('Error al procesar evento: ' + e.message, 'error');
+            }
+        };
+
+        eventSource.onerror = function(event) {
+            console.error('SSE error:', event);
+            updateStatus('error', 'Error de conexión con el servidor');
+            addLogEntry('Error de conexión', 'error');
+            eventSource.close();
+        };
+    </script>
+</body>
+</html>
+

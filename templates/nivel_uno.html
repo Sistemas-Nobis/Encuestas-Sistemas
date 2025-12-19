@@ -1,113 +1,8 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Encuesta de Satisfacción</title>
-    <link rel="icon" type="image/x-icon" href="/static/favicon.ico">
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f9f9f9;
-            margin: 0;
-            padding: 0;
-        }
-        #encuestaForm {
-            max-width: 700px;
-            margin: 40px auto;
-            padding: 20px;
-            background-color: #ffffff;
-            border-radius: 10px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-        }
-        h2, h3 {
-            text-align: center;
-            color: #333333;
-        }
-        h2 {
-            margin-bottom: 10px;
-        }
-        h3, h5 {
-            margin-bottom: 20px;
-            color: #3d3d3d;
-        }
-        label {
-            font-size: 1em;
-            font-weight: bold;
-            margin-bottom: 5px;
-            display: block;
-        }
-        select, textarea {
-            width: 90%;
-            padding: 10px;
-            border: 1px solid #ddd;
-            border-radius: 5px;
-            background-color: #fdfdfd;
-            margin-bottom: 20px;
-        }
-        .question-group {
-            margin-bottom: 20px;
-        }
-        .radio-group {
-            display: flex;
-            flex-direction: column;
-            padding: 10px;
-            border: 1px solid #ddd;
-            border-radius: 5px;
-            background-color: #f8f8f8;
-        }
-        .radio-option {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-        .flex-container {
-            display: flex;
-            align-items: flex-start;
-            gap: 20px;
-        }
-        .flex-container label {
-            width: 60%;
-        }
-        .flex-container .radio-group {
-            width: 40%;
-        }
-        button {
-            background-color: #008000;
-            color: white;
-            padding: 12px 25px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 16px;
-            font-weight: bold;
-            transition: background-color 0.3s ease;
-        }
-        button:hover {
-            background-color: #006600;
-        }
-    </style>
-</head>
-<body>
-    <form id="encuestaForm">
-        <h2>Encuesta de Satisfacción</h2>
-        <h3><a href="https://soporte.nobissalud.com/#ticket/zoom/{{gestion_id}}" target="_blank">{{gestion_id}}</a> | {{titulo}}</h3>
-        <h5 style="text-align: center; color: red;">{{primer_dif}}
-            <span 
-                style="color: #007bff; font-weight: bold; margin-left: 0.15px;" 
-                title="Demora entre:&#10;Creación y primera respuesta.">
-                ⓘ
-            </span><span style="color: gray; text-align: center;">|</span>
-        <span style="text-align: right; color: #008000;">{{seg_dif}}
-            <span 
-                style="color: #007bff; font-weight: bold; margin-left: 0.15px;" 
-                title="Demora entre:&#10;Primera respuesta y cierre de gestión.">
-                ⓘ
-            </span></span>
-        </h5>
-        
+{% extends "base_encuesta.html" %}
+
+{% block form_content %}
         <div class="question-group">
-            <label for="primera" style="margin-top: 40px;">¿La solución brindada resolvió su problema?</label>
+            <label for="primera">¿La solución brindada resolvió su problema?</label>
             <select id="primera" name="primera" required>
                 <option value="3">Totalmente</option>
                 <option value="1">Parcialmente</option>
@@ -120,7 +15,7 @@
             <div class="radio-group">
                 <div class="radio-option">
                     <input type="radio" id="muy_clara" name="segunda" value="3" required>
-                    <label for="muy_clara">😊 Muy clara</label>
+                    <label for="muy_clara">😎 Muy clara</label>
                 </div>
                 <div class="radio-option">
                     <input type="radio" id="clara" name="segunda" value="1">
@@ -151,42 +46,8 @@
             <label for="comentarios">¿Hay algo que podríamos haber hecho mejor en esta gestión?</label>
             <textarea id="comentarios" name="comentarios" rows="4" placeholder="Comentarios..."></textarea>
         </div>
+{% endblock %}
 
-        <div style="text-align: center;">
-            <button type="submit">Enviar</button>
-        </div>
-    </form>
-
-    <script>
-        document.getElementById('encuestaForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            var formData = new FormData(this);
-            formData.append('gestion_id', '{{ gestion_id }}');
-            formData.append('cliente', '{{created_by_id}}');
-            formData.append('nivel', '{{level}}');
+{% block extra_form_data %}
             console.log([...formData]);
-
-            fetch('/procesar-encuesta', {
-                method: 'POST',
-                body: formData
-            })
-            .then(response => {
-                // Si la respuesta es un estado de redirección (3xx), el navegador lo gestionará automáticamente
-                if (response.ok) {
-                    window.location.href = '/gracias'; // Opcional, si no quieres confiar en la redirección del backend.
-                } else {
-                    return response.json().then(data => {
-                        throw new Error(data.message || 'Error desconocido');
-                    });
-                }
-            })
-            .catch(error => {
-                console.error('Error:', error);
-                alert(`Hubo un error al enviar la encuesta: ${error.message}`);
-            });
-        });
-    </script>
-    
-</body>
-</html>
+{% endblock %}
