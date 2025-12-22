@@ -12,6 +12,9 @@ from flask_migrate import Migrate
 import requests
 from sqlalchemy.exc import SQLAlchemyError, IntegrityError
 from requests.exceptions import RequestException, Timeout
+import queue
+import threading
+
 
 basedir = os.path.abspath(os.path.dirname(__file__))
 
@@ -53,7 +56,7 @@ migrate = Migrate(app, db)
 # Configuración
 PER_PAGE = int(os.getenv('PER_PAGE', 100))
 TOKEN = os.getenv('API_TOKEN', "uqdXYUb4k6AmcFtDOfzoPpdSTykiXPhxLe8UEpiyXtUJHw3ipa4klPhjmpwemgaT")
-REQUEST_TIMEOUT = int(os.getenv('REQUEST_TIMEOUT', 30))
+REQUEST_TIMEOUT = int(os.getenv('REQUEST_TIMEOUT', 60))
 LAST_PAGE_FILES = {
     "tickets": "paginas/last_page_tickets.txt",
     "users": "paginas/last_page_users.txt"
@@ -231,39 +234,83 @@ def favicon():
     return send_from_directory('static', 'favicon.ico', mimetype='image/vnd.microsoft.icon')
 
 
-def verificar_y_enviar_encuestas():
-    """Verifica y envía encuestas pendientes con manejo de errores mejorado."""
+def verificar_y_enviar_encuestas(progress_callback=None, sleep_between=2):
+    """
+    Verifica y envía encuestas pendientes, reportando progreso en tiempo real vía callback.
+    progress_callback(tipo, mensaje, porcentaje, extra_dict_opcional)
+    """
+    def emit(tipo, mensaje, porcentaje=None, extra=None):
+        if progress_callback:
+            try:
+                progress_callback(tipo, mensaje, porcentaje, extra or {})
+            except Exception:
+                # Nunca dejamos que falle el proceso por un callback roto
+                logger.exception("Error en progress_callback")
+
     with app.app_context():
         try:
-            gestiones_pendientes = Gestion.query.filter_by(estado_enviado=False).all()
-            logger.info(f"Gestiones pendientes encontradas: {len(gestiones_pendientes)}")
+            # Traer solo lo que necesitás (reduce memoria/tiempo)
+            gestiones = Gestion.query.filter_by(estado_enviado=False).all()
+            total = len(gestiones)
 
-            count_exitosos = 0
-            count_fallidos = 0
-            
-            for gestion in gestiones_pendientes:
+            emit("start", f"Gestiones pendientes encontradas: {total}", 0, {"total": total})
+
+            if total == 0:
+                res = {"exitosos": 0, "fallidos": 0, "total": 0}
+                emit("end", "No hay encuestas pendientes.", 100, res)
+                return res
+
+            exitosos = 0
+            fallidos = 0
+
+            for idx, gestion in enumerate(gestiones, start=1):
+                # porcentaje “suave”: de 1..99 durante proceso
+                pct = int((idx - 1) / total * 100)
+                pct = max(1, min(pct, 99))
+
+                emit("progress", f"Procesando {idx}/{total} (gestión {gestion.id})...", pct, {
+                    "idx": idx, "total": total, "exitosos": exitosos, "fallidos": fallidos
+                })
+
                 try:
-                    if enviar_encuesta(gestion):
-                        count_exitosos += 1
+                    ok = enviar_encuesta(gestion)
+                    if ok:
+                        exitosos += 1
+                        emit("success", f"Encuesta enviada (gestión {gestion.id})", min(99, pct + 1), {
+                            "idx": idx, "total": total, "exitosos": exitosos, "fallidos": fallidos
+                        })
                     else:
-                        count_fallidos += 1
-                    # Pequeña pausa para no sobrecargar el servidor de email
-                    time.sleep(2)
-                except Exception as e:
-                    logger.error(f"Error inesperado al procesar gestión {gestion.id}: {e}")
-                    count_fallidos += 1
-                    continue
+                        fallidos += 1
+                        emit("warning", f"No se pudo enviar (gestión {gestion.id})", min(99, pct + 1), {
+                            "idx": idx, "total": total, "exitosos": exitosos, "fallidos": fallidos
+                        })
 
-            logger.info(f"Proceso completado: {count_exitosos} exitosos, {count_fallidos} fallidos")
-            return {"exitosos": count_exitosos, "fallidos": count_fallidos}
-            
+                except Exception as e:
+                    fallidos += 1
+                    logger.exception(f"Error inesperado al procesar gestión {gestion.id}: {e}")
+                    emit("error", f"Error procesando gestión {gestion.id}: {str(e)}", min(99, pct + 1), {
+                        "idx": idx, "total": total, "exitosos": exitosos, "fallidos": fallidos
+                    })
+
+                if sleep_between:
+                    time.sleep(sleep_between)
+
+            res = {"exitosos": exitosos, "fallidos": fallidos, "total": total}
+            emit("end", "Proceso completado.", 100, res)
+            db.session.commit()
+            db.session.remove()
+            return res
+
         except SQLAlchemyError as e:
-            logger.error(f"Error de base de datos en verificar_y_enviar_encuestas: {e}")
+            logger.exception(f"Error de base de datos en verificar_y_enviar_encuestas: {e}")
             db.session.rollback()
+            emit("error", f"Error de base de datos: {str(e)}", 0, {})
             raise
         except Exception as e:
-            logger.error(f"Error inesperado en verificar_y_enviar_encuestas: {e}")
+            logger.exception(f"Error inesperado en verificar_y_enviar_encuestas: {e}")
+            emit("error", f"Error inesperado: {str(e)}", 0, {})
             raise
+
         
 # Definir la zona horaria de Buenos Aires
 zona_horaria = timezone(timedelta(hours=-3))
@@ -489,30 +536,62 @@ def progreso_enviar_encuestas():
 
 @app.route('/stream-enviar-encuestas')
 def stream_enviar_encuestas():
-    """Endpoint SSE para streaming del progreso de envío de encuestas."""
-    def generate():
-        def progress_callback(tipo, mensaje, porcentaje):
-            data = {
-                "tipo": tipo,
-                "mensaje": mensaje,
-                "porcentaje": porcentaje,
-                "timestamp": datetime.now().isoformat()
-            }
-            yield f"data: {json.dumps(data)}\n\n"
-        
+    q = queue.Queue()
+    done = threading.Event()
+
+    def push_event(payload: dict):
+        # Aseguramos campos
+        payload.setdefault("timestamp", datetime.now().isoformat())
+        q.put(payload)
+
+    def progress_callback(tipo, mensaje, porcentaje=None, extra=None):
+        payload = {
+            "tipo": tipo,
+            "mensaje": mensaje,
+        }
+        if porcentaje is not None:
+            payload["porcentaje"] = int(porcentaje)
+        if extra:
+            payload.update(extra)  # mete exitosos/fallidos/total si vienen
+        push_event(payload)
+
+    def worker():
         try:
-            # Enviar evento inicial
-            yield f"data: {json.dumps({'tipo': 'start', 'mensaje': 'Iniciando proceso...', 'porcentaje': 0})}\n\n"
-            
-            # Ejecutar función con callback
-            resultado = verificar_y_enviar_encuestas(progress_callback=progress_callback)
-            
-            # Enviar evento final
-            yield f"data: {json.dumps({'tipo': 'end', 'mensaje': 'Proceso completado', 'resultado': resultado, 'porcentaje': 100})}\n\n"
+            verificar_y_enviar_encuestas(progress_callback=progress_callback, sleep_between=2)
         except Exception as e:
-            yield f"data: {json.dumps({'tipo': 'error', 'mensaje': f'Error: {str(e)}', 'porcentaje': 0})}\n\n"
-    
-    return Response(stream_with_context(generate()), mimetype='text/event-stream')
+            # Si algo explota, avisamos
+            push_event({"tipo": "error", "mensaje": f"Error: {str(e)}", "porcentaje": 0})
+        finally:
+            done.set()
+
+    t = threading.Thread(target=worker, daemon=True)
+    t.start()
+
+    def generate():
+        # 1) evento inicial rápido (para que el front no quede “Esperando…”)
+        yield f"data: {json.dumps({'tipo': 'start', 'mensaje': 'Iniciando proceso...', 'porcentaje': 0})}\n\n"
+
+        # 2) loop de eventos
+        heartbeat_secs = 15
+        last_heartbeat = time.time()
+
+        while not done.is_set() or not q.empty():
+            try:
+                payload = q.get(timeout=1.0)
+                yield f"data: {json.dumps(payload)}\n\n"
+            except queue.Empty:
+                # heartbeat para mantener viva la conexión
+                if (time.time() - last_heartbeat) >= heartbeat_secs:
+                    yield f"data: {json.dumps({'tipo':'info', 'mensaje':'Esperando...', 'porcentaje': None})}\n\n"
+                    last_heartbeat = time.time()
+                continue
+
+    return Response(stream_with_context(generate()), mimetype='text/event-stream', headers={
+        "Cache-Control": "no-cache",
+        "X-Accel-Buffering": "no",
+        "Connection": "keep-alive",
+    })
+
 
 
 @app.route('/test-email')

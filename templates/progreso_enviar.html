@@ -1,305 +1,433 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Progreso - Envío de Encuestas</title>
-    <link rel="icon" type="image/x-icon" href="/static/favicon.ico">
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 20px;
-        }
-        
-        .container {
-            background: white;
-            border-radius: 12px;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
-            padding: 40px;
-            max-width: 800px;
-            width: 100%;
-        }
-        
-        h1 {
-            color: #333;
-            margin-bottom: 30px;
-            text-align: center;
-            font-size: 28px;
-            font-weight: 600;
-        }
-        
-        .progress-container {
-            margin-bottom: 30px;
-        }
-        
-        .progress-bar {
-            width: 100%;
-            height: 30px;
-            background-color: #e0e0e0;
-            border-radius: 15px;
-            overflow: hidden;
-            position: relative;
-            margin-bottom: 10px;
-        }
-        
-        .progress-fill {
-            height: 100%;
-            background: linear-gradient(90deg, #13A538 0%, #A2C617 100%);
-            width: 0%;
-            transition: width 0.3s ease;
-            border-radius: 15px;
-        }
-        
-        .progress-text {
-            text-align: center;
-            font-size: 18px;
-            font-weight: 600;
-            color: #333;
-            margin-top: 10px;
-        }
-        
-        .status-message {
-            background-color: #f5f5f5;
-            border-left: 4px solid #13A538;
-            padding: 15px;
-            margin-bottom: 15px;
-            border-radius: 4px;
-            font-size: 14px;
-            color: #555;
-        }
-        
-        .status-message.error {
-            border-left-color: #f44336;
-            background-color: #ffebee;
-        }
-        
-        .status-message.success {
-            border-left-color: #4caf50;
-            background-color: #e8f5e9;
-        }
-        
-        .status-message.warning {
-            border-left-color: #ff9800;
-            background-color: #fff3e0;
-        }
-        
-        .log-container {
-            max-height: 400px;
-            overflow-y: auto;
-            border: 1px solid #e0e0e0;
-            border-radius: 8px;
-            padding: 15px;
-            background-color: #fafafa;
-        }
-        
-        .log-entry {
-            padding: 8px 0;
-            border-bottom: 1px solid #e0e0e0;
-            font-size: 13px;
-            color: #666;
-        }
-        
-        .log-entry:last-child {
-            border-bottom: none;
-        }
-        
-        .log-entry.success {
-            color: #4caf50;
-        }
-        
-        .log-entry.error {
-            color: #f44336;
-        }
-        
-        .stats {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-            gap: 15px;
-            margin-top: 20px;
-        }
-        
-        .stat-card {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            padding: 20px;
-            border-radius: 8px;
-            text-align: center;
-        }
-        
-        .stat-value {
-            font-size: 32px;
-            font-weight: bold;
-            margin-bottom: 5px;
-        }
-        
-        .stat-label {
-            font-size: 14px;
-            opacity: 0.9;
-        }
-        
-        .loading-spinner {
-            display: inline-block;
-            width: 20px;
-            height: 20px;
-            border: 3px solid rgba(19, 165, 56, 0.3);
-            border-radius: 50%;
-            border-top-color: #13A538;
-            animation: spin 1s ease-in-out infinite;
-            margin-right: 10px;
-        }
-        
-        @keyframes spin {
-            to { transform: rotate(360deg); }
-        }
-        
-        .hidden {
-            display: none;
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Progreso - Envío de Encuestas</title>
+  <link rel="icon" type="image/x-icon" href="/static/favicon.ico" />
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+
+    .container {
+      background: white;
+      border-radius: 12px;
+      box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+      padding: 40px;
+      max-width: 900px;
+      width: 100%;
+    }
+
+    h1 {
+      color: #333;
+      margin-bottom: 30px;
+      text-align: center;
+      font-size: 28px;
+      font-weight: 700;
+    }
+
+    .progress-container { margin-bottom: 22px; }
+
+    .progress-bar {
+      width: 100%;
+      height: 30px;
+      background-color: #e0e0e0;
+      border-radius: 15px;
+      overflow: hidden;
+      position: relative;
+      margin-bottom: 10px;
+    }
+
+    .progress-fill {
+      height: 100%;
+      background: linear-gradient(90deg, #13A538 0%, #A2C617 100%);
+      width: 0%;
+      transition: width 0.25s ease;
+      border-radius: 15px;
+    }
+
+    .progress-text {
+      text-align: center;
+      font-size: 18px;
+      font-weight: 700;
+      color: #333;
+      margin-top: 6px;
+    }
+
+    .status-message {
+      background-color: #f5f5f5;
+      border-left: 4px solid #13A538;
+      padding: 14px 14px;
+      margin-bottom: 14px;
+      border-radius: 6px;
+      font-size: 14px;
+      color: #555;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      min-height: 44px;
+    }
+
+    .status-message.error {
+      border-left-color: #f44336;
+      background-color: #ffebee;
+    }
+
+    .status-message.success {
+      border-left-color: #4caf50;
+      background-color: #e8f5e9;
+    }
+
+    .status-message.warning {
+      border-left-color: #ff9800;
+      background-color: #fff3e0;
+    }
+
+    .status-icon {
+      width: 26px;
+      text-align: center;
+      font-size: 18px;
+      line-height: 1;
+      user-select: none;
+    }
+
+    .status-text { flex: 1; }
+
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(140px, 1fr));
+      gap: 12px;
+      margin: 14px 0 18px;
+    }
+
+    @media (max-width: 720px) {
+      .container { padding: 22px; }
+      .stats { grid-template-columns: 1fr; }
+    }
+
+    .stat-card {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      padding: 16px;
+      border-radius: 10px;
+      text-align: center;
+      box-shadow: 0 6px 18px rgba(0,0,0,0.12);
+    }
+
+    .stat-value {
+      font-size: 30px;
+      font-weight: 800;
+      margin-bottom: 4px;
+    }
+
+    .stat-label {
+      font-size: 13px;
+      opacity: 0.9;
+      letter-spacing: 0.2px;
+    }
+
+    .log-container {
+      max-height: 420px;
+      overflow-y: auto;
+      border: 1px solid #e0e0e0;
+      border-radius: 10px;
+      padding: 12px 14px;
+      background-color: #fafafa;
+    }
+
+    .log-entry {
+      padding: 8px 0;
+      border-bottom: 1px solid #e9e9e9;
+      font-size: 13px;
+      color: #666;
+      white-space: pre-wrap;
+      word-break: break-word;
+    }
+
+    .log-entry:last-child { border-bottom: none; }
+
+    .log-entry.success { color: #2e7d32; }
+    .log-entry.error { color: #d32f2f; }
+    .log-entry.warning { color: #ef6c00; }
+    .log-entry.info { color: #555; }
+
+    .loading-spinner {
+      display: inline-block;
+      width: 18px;
+      height: 18px;
+      border: 3px solid rgba(19, 165, 56, 0.25);
+      border-radius: 50%;
+      border-top-color: #13A538;
+      animation: spin 1s ease-in-out infinite;
+      flex: none;
+    }
+
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    .hidden { display: none; }
+
+    .footer-note {
+      margin-top: 12px;
+      font-size: 12px;
+      color: rgba(0,0,0,0.55);
+      text-align: center;
+    }
+  </style>
 </head>
 <body>
-    <div class="container">
-        <h1>📧 Envío de Encuestas</h1>
-        
-        <div class="progress-container">
-            <div class="progress-bar">
-                <div class="progress-fill" id="progressFill"></div>
-            </div>
-            <div class="progress-text" id="progressText">0%</div>
-        </div>
-        
-        <div class="status-message" id="statusMessage">
-            <span class="loading-spinner"></span>
-            <span id="statusText">Iniciando proceso...</span>
-        </div>
-        
-        <div class="stats hidden" id="statsContainer">
-            <div class="stat-card">
-                <div class="stat-value" id="statExitosos">0</div>
-                <div class="stat-label">Exitosos</div>
-            </div>
-            <div class="stat-card">
-                <div class="stat-value" id="statFallidos">0</div>
-                <div class="stat-label">Fallidos</div>
-            </div>
-            <div class="stat-card">
-                <div class="stat-value" id="statTotal">0</div>
-                <div class="stat-label">Total</div>
-            </div>
-        </div>
-        
-        <div class="log-container" id="logContainer">
-            <div class="log-entry">Esperando eventos...</div>
-        </div>
+  <div class="container">
+    <h1>📧 Envío de Encuestas</h1>
+
+    <div class="progress-container">
+      <div class="progress-bar">
+        <div class="progress-fill" id="progressFill"></div>
+      </div>
+      <div class="progress-text" id="progressText">0%</div>
     </div>
 
-    <script>
-        const progressFill = document.getElementById('progressFill');
-        const progressText = document.getElementById('progressText');
-        const statusMessage = document.getElementById('statusMessage');
-        const statusText = document.getElementById('statusText');
-        const logContainer = document.getElementById('logContainer');
-        const statsContainer = document.getElementById('statsContainer');
-        const statExitosos = document.getElementById('statExitosos');
-        const statFallidos = document.getElementById('statFallidos');
-        const statTotal = document.getElementById('statTotal');
+    <div class="status-message" id="statusMessage">
+      <span class="loading-spinner" id="statusSpinner"></span>
+      <span class="status-icon" id="statusIcon">⏳</span>
+      <span class="status-text" id="statusText">Iniciando proceso...</span>
+    </div>
 
-        function addLogEntry(message, type = 'info') {
-            const entry = document.createElement('div');
-            entry.className = `log-entry ${type}`;
-            const timestamp = new Date().toLocaleTimeString();
-            entry.textContent = `[${timestamp}] ${message}`;
-            logContainer.insertBefore(entry, logContainer.firstChild);
-            
-            // Mantener solo los últimos 50 logs
-            while (logContainer.children.length > 50) {
-                logContainer.removeChild(logContainer.lastChild);
-            }
-        }
+    <div class="stats hidden" id="statsContainer">
+      <div class="stat-card">
+        <div class="stat-value" id="statExitosos">0</div>
+        <div class="stat-label">Exitosos</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-value" id="statFallidos">0</div>
+        <div class="stat-label">Fallidos</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-value" id="statTotal">0</div>
+        <div class="stat-label">Total</div>
+      </div>
+    </div>
 
-        function updateProgress(porcentaje, mensaje) {
-            progressFill.style.width = porcentaje + '%';
-            progressText.textContent = porcentaje + '%';
-            statusText.textContent = mensaje;
-        }
+    <div class="log-container" id="logContainer">
+      <div class="log-entry info">Esperando eventos...</div>
+    </div>
 
-        function updateStatus(tipo, mensaje) {
-            statusMessage.className = `status-message ${tipo}`;
-            statusText.textContent = mensaje;
-            
-            if (tipo === 'error') {
-                statusMessage.innerHTML = `<span style="color: #f44336;">✗ ${mensaje}</span>`;
-            } else if (tipo === 'success') {
-                statusMessage.innerHTML = `<span style="color: #4caf50;">✓ ${mensaje}</span>`;
-            } else {
-                statusMessage.innerHTML = `<span class="loading-spinner"></span><span>${mensaje}</span>`;
-            }
-        }
+    <div class="footer-note" id="footerNote"></div>
+  </div>
 
-        function updateStats(resultado) {
-            if (resultado) {
-                statExitosos.textContent = resultado.exitosos || 0;
-                statFallidos.textContent = resultado.fallidos || 0;
-                statTotal.textContent = resultado.total || 0;
-                statsContainer.classList.remove('hidden');
-            }
-        }
+  <script>
+    const progressFill = document.getElementById('progressFill');
+    const progressText = document.getElementById('progressText');
 
-        // Conectar al stream SSE
-        const eventSource = new EventSource('/stream-enviar-encuestas');
+    const statusMessage = document.getElementById('statusMessage');
+    const statusSpinner = document.getElementById('statusSpinner');
+    const statusIcon = document.getElementById('statusIcon');
+    const statusText = document.getElementById('statusText');
 
-        eventSource.onmessage = function(event) {
-            try {
-                const data = JSON.parse(event.data);
-                
-                if (data.tipo === 'start') {
-                    updateStatus('info', data.mensaje);
-                    addLogEntry(data.mensaje, 'info');
-                } else if (data.tipo === 'progress' || data.tipo === 'info') {
-                    updateProgress(data.porcentaje, data.mensaje);
-                    addLogEntry(data.mensaje, 'info');
-                } else if (data.tipo === 'success') {
-                    updateProgress(data.porcentaje, data.mensaje);
-                    updateStatus('success', data.mensaje);
-                    addLogEntry(data.mensaje, 'success');
-                } else if (data.tipo === 'error') {
-                    updateStatus('error', data.mensaje);
-                    addLogEntry(data.mensaje, 'error');
-                } else if (data.tipo === 'end') {
-                    updateProgress(100, data.mensaje);
-                    updateStatus('success', data.mensaje);
-                    addLogEntry(data.mensaje, 'success');
-                    updateStats(data.resultado);
-                    eventSource.close();
-                } else if (data.tipo === 'complete') {
-                    updateProgress(100, data.mensaje);
-                    updateStatus('success', data.mensaje);
-                    addLogEntry(data.mensaje, 'success');
-                    eventSource.close();
-                }
-            } catch (e) {
-                console.error('Error parsing SSE data:', e);
-            }
-        };
+    const logContainer = document.getElementById('logContainer');
 
-        eventSource.onerror = function(event) {
-            console.error('SSE error:', event);
-            updateStatus('error', 'Error de conexión con el servidor');
-            addLogEntry('Error de conexión', 'error');
+    const statsContainer = document.getElementById('statsContainer');
+    const statExitosos = document.getElementById('statExitosos');
+    const statFallidos = document.getElementById('statFallidos');
+    const statTotal = document.getElementById('statTotal');
+
+    const footerNote = document.getElementById('footerNote');
+
+    let lastProgress = 0;
+    let lastEventAt = Date.now();
+    let startedAt = null;
+
+    function clampInt(val, min, max) {
+      const n = Number(val);
+      if (!Number.isFinite(n)) return min;
+      return Math.min(max, Math.max(min, Math.round(n)));
+    }
+
+    function formatDuration(ms) {
+      const s = Math.floor(ms / 1000);
+      const mm = Math.floor(s / 60);
+      const ss = s % 60;
+      if (mm <= 0) return `${ss}s`;
+      return `${mm}m ${ss}s`;
+    }
+
+    function clearPlaceholderIfNeeded() {
+      if (logContainer.children.length === 1 && logContainer.firstElementChild?.textContent?.includes('Esperando eventos')) {
+        logContainer.removeChild(logContainer.firstElementChild);
+      }
+    }
+
+    function addLogEntry(message, type = 'info') {
+      clearPlaceholderIfNeeded();
+
+      const entry = document.createElement('div');
+      entry.className = `log-entry ${type}`;
+
+      const timestamp = new Date().toLocaleTimeString();
+      entry.textContent = `[${timestamp}] ${message}`;
+
+      // Insertar arriba (más nuevo primero)
+      logContainer.insertBefore(entry, logContainer.firstChild);
+
+      // Mantener solo los últimos 80 logs
+      while (logContainer.children.length > 80) {
+        logContainer.removeChild(logContainer.lastChild);
+      }
+    }
+
+    function setProgress(porcentaje, mensaje) {
+      const pct = clampInt(porcentaje ?? lastProgress, 0, 100);
+      lastProgress = pct;
+
+      progressFill.style.width = pct + '%';
+      progressText.textContent = pct + '%';
+
+      if (mensaje) statusText.textContent = mensaje;
+    }
+
+    function setStatus(tipo, mensaje) {
+      // tipo: info | progress | success | warning | error
+      const normalized = (tipo === 'progress') ? 'info' : (tipo || 'info');
+
+      statusMessage.className = `status-message ${normalized}`;
+      statusText.textContent = mensaje || statusText.textContent;
+
+      // Spinner visible solo en estados "en proceso"
+      const inProgress = (normalized === 'info');
+      statusSpinner.classList.toggle('hidden', !inProgress);
+
+      // Icono por tipo
+      if (normalized === 'success') statusIcon.textContent = '✓';
+      else if (normalized === 'warning') statusIcon.textContent = '!';
+      else if (normalized === 'error') statusIcon.textContent = '✗';
+      else statusIcon.textContent = '⏳';
+    }
+
+    function updateStats(exitosos, fallidos, total) {
+      if ([exitosos, fallidos, total].some(v => typeof v !== 'undefined')) {
+        if (typeof exitosos !== 'undefined') statExitosos.textContent = exitosos;
+        if (typeof fallidos !== 'undefined') statFallidos.textContent = fallidos;
+        if (typeof total !== 'undefined') statTotal.textContent = total;
+        statsContainer.classList.remove('hidden');
+      }
+    }
+
+    function handleData(data) {
+      lastEventAt = Date.now();
+
+      // Stats incremental si vienen en el payload
+      if (typeof data.exitosos !== 'undefined' || typeof data.fallidos !== 'undefined' || typeof data.total !== 'undefined') {
+        updateStats(data.exitosos ?? 0, data.fallidos ?? 0, data.total ?? 0);
+      }
+
+      // Porcentaje puede venir como null (heartbeat). Si es null, no tocamos barra.
+      if (data.porcentaje !== null && typeof data.porcentaje !== 'undefined') {
+        setProgress(data.porcentaje, data.mensaje);
+      } else if (data.mensaje) {
+        // si no hay porcentaje, al menos actualizamos texto
+        statusText.textContent = data.mensaje;
+      }
+
+      // Comportamiento por tipo
+      switch (data.tipo) {
+        case 'start':
+          startedAt = Date.now();
+          setStatus('info', data.mensaje || 'Iniciando proceso...');
+          addLogEntry(data.mensaje || 'Iniciando proceso...', 'info');
+          break;
+
+        case 'progress':
+        case 'info':
+          setStatus('info', data.mensaje || 'Procesando...');
+          addLogEntry(data.mensaje || 'Procesando...', 'info');
+          break;
+
+        case 'success':
+          setStatus('success', data.mensaje || 'OK');
+          addLogEntry(data.mensaje || 'OK', 'success');
+          break;
+
+        case 'warning':
+          setStatus('warning', data.mensaje || 'Advertencia');
+          addLogEntry(data.mensaje || 'Advertencia', 'warning');
+          break;
+
+        case 'error':
+          setStatus('error', data.mensaje || 'Error');
+          addLogEntry(data.mensaje || 'Error', 'error');
+          break;
+
+        case 'end':
+        case 'complete':
+          // Si viene resultado, intentar stats (compat)
+          if (data.resultado) {
+            updateStats(data.resultado.exitosos || 0, data.resultado.fallidos || 0, data.resultado.total || 0);
+          }
+          setProgress(100, data.mensaje || 'Proceso completado');
+          setStatus('success', data.mensaje || 'Proceso completado');
+
+          addLogEntry(data.mensaje || 'Proceso completado', 'success');
+
+          if (startedAt) {
+            footerNote.textContent = `Duración: ${formatDuration(Date.now() - startedAt)}`;
+          }
+          // cierre se maneja fuera (eventSource.close)
+          break;
+
+        default:
+          // Tipo desconocido
+          setStatus('info', data.mensaje || 'Evento recibido');
+          addLogEntry(data.mensaje || 'Evento recibido', 'info');
+      }
+    }
+
+    function startSSE() {
+      // Si tu app está detrás de proxy/https, EventSource respeta el origen.
+      const eventSource = new EventSource('/stream-enviar-encuestas');
+
+      eventSource.onmessage = function(event) {
+        try {
+          const data = JSON.parse(event.data);
+          handleData(data);
+
+          if (data.tipo === 'end' || data.tipo === 'complete') {
             eventSource.close();
-        };
-    </script>
+          }
+        } catch (e) {
+          console.error('Error parsing SSE data:', e);
+          addLogEntry('Error parseando evento SSE', 'error');
+        }
+      };
+
+      eventSource.onerror = function(err) {
+        console.error('SSE error:', err);
+        setStatus('error', 'Error de conexión con el servidor');
+        addLogEntry('Error de conexión con el servidor', 'error');
+        statusSpinner.classList.add('hidden');
+        eventSource.close();
+      };
+
+      // watchdog: si pasan X segundos sin eventos, avisamos (sin cortar)
+      setInterval(() => {
+        const now = Date.now();
+        const delta = now - lastEventAt;
+        if (delta > 30000) {
+          setStatus('warning', 'Sin eventos recientes... (revisando conexión)');
+        }
+      }, 5000);
+    }
+
+    // Init
+    setProgress(0, 'Iniciando proceso...');
+    setStatus('info', 'Conectando al servidor...');
+    startSSE();
+  </script>
 </body>
 </html>
-

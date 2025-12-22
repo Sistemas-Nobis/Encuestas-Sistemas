@@ -202,6 +202,35 @@
             font-size: 24px;
             margin-bottom: 5px;
         }
+
+        .action-container{
+            margin-top: 30px;
+            text-align: center;
+        }
+
+        .action-button{
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 14px 36px;
+            font-size: 16px;
+            font-weight: 600;
+            border-radius: 30px;
+            cursor: not-allowed;
+            opacity: 0.5;
+            transition: all 0.3s ease;
+        }
+
+        .action-button.enabled{
+            cursor: pointer;
+            opacity: 1;
+        }
+
+        .action-button.enabled:hover{
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(102,126,234,0.4);
+        }
+
     </style>
 </head>
 <body>
@@ -249,6 +278,12 @@
         <div class="log-container" id="logContainer">
             <div class="log-entry">Esperando eventos...</div>
         </div>
+        <div class="action-container">
+            <button id="btnEnviarEncuestas" class="action-button" disabled>
+                📧 Enviar Encuestas
+            </button>
+        </div>
+        
     </div>
 
     <script>
@@ -264,6 +299,13 @@
         const phaseUsuarios = document.getElementById('phaseUsuarios');
         const phaseGestiones = document.getElementById('phaseGestiones');
         const phaseLog = document.getElementById('phaseLog');
+
+        const btnEnviarEncuestas = document.getElementById('btnEnviarEncuestas');
+
+        function enableSendButton() {
+            btnEnviarEncuestas.disabled = false;
+            btnEnviarEncuestas.classList.add('enabled');
+        }
 
         function addLogEntry(message, type = 'info') {
             const entry = document.createElement('div');
@@ -364,6 +406,7 @@
                     updatePhase('complete');
                     addLogEntry(data.mensaje, 'success');
                     updateStats(data.resultado);
+                    enableSendButton();
                     eventSource.close();
                 }
             } catch (e) {
@@ -378,6 +421,13 @@
             addLogEntry('Error de conexión', 'error');
             eventSource.close();
         };
+
+        btnEnviarEncuestas.addEventListener('click', () => {
+            if (!btnEnviarEncuestas.disabled) {
+                window.location.href = '/verificar-y-enviar-encuestas';
+            }
+        });
+
     </script>
 </body>
 </html>
