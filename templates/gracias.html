@@ -4,321 +4,99 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Gracias</title>
-  <link rel="icon" type="image/x-icon" href="/static/favicon.ico">
-
   <style>
-    :root{
-      --gray:#4b4b4b;
-      --yellow:#f5cd2d;
-      --blue:#96cbcf;
-      --darkerYellow:#d8ba00;
-      --red:#eb0000;
-      --green:#649632;
-      --darkerGreen:#2d8434;
-      --tan:#aa782c;
-    }
-
-    *{ box-sizing:border-box; margin:0; padding:0; }
-
-    body{
+    body {
+      margin: 0;
+      padding: 0;
       font-family: Arial, sans-serif;
-      min-height: 100vh;
-      display:flex;
-      justify-content:flex-start; /* 👈 ya no centrado vertical */
-      /*align-items:center;*/
-      padding: 42px 20px 20px;   /* 👈 sube todo el contenido */
-      overflow:hidden;
-      position:relative;
-      text-align:center;
-
-      background-color:#6b92b9;
-      background-image:
-        radial-gradient(circle at 10% 20%, rgba(255,255,255,.9) 0 2px, transparent 3px),
-        radial-gradient(circle at 70% 10%, rgba(255,255,255,.75) 0 1.5px, transparent 2.5px),
-        radial-gradient(circle at 40% 80%, rgba(255,255,255,.8) 0 2px, transparent 3px),
-        radial-gradient(circle at 85% 60%, rgba(255,255,255,.65) 0 1.5px, transparent 2.5px),
-        radial-gradient(circle at 25% 55%, rgba(255,255,255,.7) 0 1px, transparent 2px),
-        linear-gradient(135deg, rgba(102,126,234,.35) 0%, rgba(118,75,162,.35) 100%);
-      background-size:
-        180px 180px,
-        220px 220px,
-        260px 260px,
-        300px 300px,
-        200px 200px,
-        cover;
-      animation: snow 20s linear infinite;
-    }
-
-    @keyframes snow{
-      0%{ background-position: 0 0, 0 0, 0 0, 0 0, 0 0, center; }
-      100%{
-        background-position:
-          500px 1000px,
-          400px 600px,
-          300px 900px,
-          250px 700px,
-          350px 800px,
-          center;
-      }
-    }
-
-    .page{
-      width: 100%;
-      max-width: 980px;
-      margin: 0 auto;
-      display:flex;
-      flex-direction: column;
-      align-items:center;
-      gap: 0px; /* separación card-árbol */
-      z-index: 2;
-    }
-
-    .card{
-      width: 100%;
-      background: rgba(255,255,255,.92);
-      backdrop-filter: blur(6px);
-      border-radius: 18px;
-      padding: 30px 26px;
-      box-shadow: 0 12px 44px rgba(0,0,0,.20);
-    }
-
-    h1{
-      color:#4CAF50;
-      margin-bottom: 10px;
-      font-size: 44px;
-      font-weight: 900;
-      letter-spacing: .2px;
-    }
-
-    p{
-      color:#222;
-      line-height:1.5;
-      font-size: 18px;
-      max-width: 860px;
-      margin: 0 auto;
-    }
-
-    /* Árbol */
-    .treeWrap{
-      width: 100%;
-      display:flex;
-      justify-content:center;
-      pointer-events:none;
-    }
-
-    /* contenedor del árbol para anclar estrella */
-    .treeBox{
+      background: #0b1725;
+      color: #fff;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      overflow: hidden;
       position: relative;
-      /* altura “real” del árbol aprox: 15em */
-      padding-top: 3.2em; /* espacio para que la estrella quede dentro del área del árbol */
     }
 
-    .star{
-      position:absolute;
-      left: 50%;
-      transform: translateX(-50%);
-      font-size: 90px;
-      line-height: 70px;
-      color: var(--yellow);
-      text-shadow: 0 8px 16px rgba(0,0,0,.18);
-      animation: flash 1.1s ease-in-out infinite;
-      z-index: 2;          /* 👈 por encima del árbol, pero dentro del treeBox */
+    #fireworks {
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      pointer-events: none;
     }
 
-    @keyframes flash{
-      0%,100%{ transform: translateX(-50%) scale(1); opacity: 1; }
-      50%{ transform: translateX(-50%) scale(0.7); opacity: .85; }
-    }
-
-    .xmasTree{
-      width: 1em;
-      height: 1em;
+    .card {
       position: relative;
-      transform: scale(1.05);
       z-index: 1;
-      box-shadow:
-        0 3em 0 0 var(--gray),
-        1em 4em 0 0 var(--gray),
-        0 4em 0 0 var(--green),
-        -1em 4em 0 0 var(--gray),
-        -2em 5em 0 0 var(--gray),
-        -1em 5em 0 0 var(--blue),
-        0 5em 0 0 var(--green),
-        1em 5em 0 0 var(--green),
-        2em 5em 0 0 var(--gray),
-        3em 6em 0 0 var(--gray),
-        2em 6em 0 0 var(--green),
-        1em 6em 0 0 var(--red),
-        0 6em 0 0 var(--green),
-        -1em 6em 0 0 var(--green),
-        -2em 6em 0 0 var(--green),
-        -3em 6em 0 0 var(--gray),
-        -2em 7em 0 0 var(--gray),
-        -1em 7em 0 0 var(--green),
-        0 7em 0 0 var(--darkerGreen),
-        1em 7em 0 0 var(--green),
-        2em 7em 0 0 var(--gray),
-        3em 8em 0 0 var(--gray),
-        2em 8em 0 0 var(--green),
-        1em 8em 0 0 var(--darkerGreen),
-        0 8em 0 0 var(--green),
-        -1em 8em 0 0 var(--darkerGreen),
-        -2em 8em 0 0 var(--green),
-        -3em 8em 0 0 var(--gray),
-        -4em 9em 0 0 var(--gray),
-        -3em 9em 0 0 var(--green),
-        -2em 9em 0 0 var(--red),
-        -1em 9em 0 0 var(--green),
-        0 9em 0 0 var(--darkerYellow),
-        1em 9em 0 0 var(--green),
-        2em 9em 0 0 var(--blue),
-        3em 9em 0 0 var(--green),
-        4em 9em 0 0 var(--gray),
-        3em 10em 0 0 var(--gray),
-        2em 10em 0 0 var(--green),
-        1em 10em 0 0 var(--darkerGreen),
-        0 10em 0 0 var(--green),
-        -1em 10em 0 0 var(--darkerGreen),
-        -2em 10em 0 0 var(--green),
-        -3em 10em 0 0 var(--gray),
-        -4em 11em 0 0 var(--gray),
-        -3em 11em 0 0 var(--green),
-        -2em 11em 0 0 var(--darkerGreen),
-        -1em 11em 0 0 var(--green),
-        0 11em 0 0 var(--darkerGreen),
-        1em 11em 0 0 var(--green),
-        2em 11em 0 0 var(--darkerGreen),
-        3em 11em 0 0 var(--darkerYellow),
-        4em 11em 0 0 var(--gray),
-        5em 12em 0 0 var(--gray),
-        4em 12em 0 0 var(--green),
-        3em 12em 0 0 var(--green),
-        2em 12em 0 0 var(--green),
-        1em 12em 0 0 var(--green),
-        0 12em 0 0 var(--green),
-        -1em 12em 0 0 var(--green),
-        -2em 12em 0 0 var(--green),
-        -3em 12em 0 0 var(--green),
-        -4em 12em 0 0 var(--green),
-        -5em 12em 0 0 var(--gray),
-        -4em 13em 0 0 var(--gray),
-        -3em 13em 0 0 var(--darkerYellow),
-        -2em 13em 0 0 var(--green),
-        -1em 13em 0 0 var(--blue),
-        0 13em 0 0 var(--green),
-        1em 13em 0 0 var(--green),
-        2em 13em 0 0 var(--red),
-        3em 13em 0 0 var(--green),
-        4em 13em 0 0 var(--gray),
-        3em 14em 0 0 var(--gray),
-        2em 14em 0 0 var(--gray),
-        1em 14em 0 0 var(--gray),
-        0 14em 0 0 var(--tan),
-        -1em 14em 0 0 var(--gray),
-        -2em 14em 0 0 var(--gray),
-        -3em 14em 0 0 var(--gray),
-        -1em 15em 0 0 var(--gray),
-        0 15em 0 0 var(--gray),
-        1em 15em 0 0 var(--gray);
-      filter: drop-shadow(0 10px 16px rgba(0,0,0,.18));
-      animation: xmasTree 2.6s ease-in-out infinite;
+      background: rgba(0, 0, 0, 0.7);
+      backdrop-filter: blur(10px);
+      padding: 40px;
+      border-radius: 20px;
+      text-align: center;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+      border: 1px solid rgba(255,255,255,0.1);
+      max-width: 500px;
     }
 
-    @keyframes xmasTree{
-      0%,100%{ transform: scale(1.05); }
-      50%{ transform: scale(1.09); }
-    }
-
-    @media (max-width: 520px){
-      body{ padding-top: 28px; }
-      .card{ padding: 22px 18px; }
-      h1{ font-size: 30px; }
-      p{ font-size: 15px; }
-      .xmasTree{ transform: scale(.92); }
-      .star{ font-size: 46px; line-height: 46px; }
-      .treeBox{ padding-top: 2.8em; }
-    }
-
-    .merry{
-    margin-top: 275px;
-    font-size: 50px;
-    font-weight: bold;
-    letter-spacing: 1px;
-    text-align: center;
-    color: var(--green);
-    text-shadow:
-        0 0 8px var(--green),
-        0 0 16px var(--green);
-    animation: merryGlow 10s ease-in-out infinite;
-    user-select: none;
-    }
-
-    /* Animación que cicla los colores del árbol */
-    @keyframes merryGlow{
-    0%{
-        color: var(--green);
-        text-shadow:
-        0 0 8px var(--green),
-        0 0 18px var(--green);
-    }
-    25%{
-        color: var(--yellow);
-        text-shadow:
-        0 0 10px var(--yellow),
-        0 0 22px var(--yellow);
-    }
-    50%{
-        color: var(--red);
-        text-shadow:
-        0 0 10px var(--red),
-        0 0 22px var(--red);
-    }
-    75%{
-        color: var(--blue);
-        text-shadow:
-        0 0 10px var(--blue),
-        0 0 22px var(--blue);
-    }
-    100%{
-        color: var(--green);
-        text-shadow:
-        0 0 8px var(--green),
-        0 0 18px var(--green);
-    }
-    }
-
-    /* Mobile */
-    @media (max-width: 520px){
-    .merry{
-        font-size: 30px;
-        margin-top: 6px;
-    }
-    }
-
+    h1 { color: #4CAF50; margin-bottom: 20px; }
+    p { line-height: 1.6; font-size: 18px; }
   </style>
 </head>
-
 <body>
-  <div class="page">
-    <main class="card" role="status" aria-live="polite">
-      <h1>¡Gracias por su feedback!</h1>
-      <p>
-        Su encuesta ha sido enviada correctamente. Apreciamos mucho su opinión y la
-        utilizaremos para mejorar nuestros servicios.
-      </p>
-    </main>
 
-    <div class="treeWrap" aria-hidden="true">
-      <div class="treeBox">
-        <div class="star">★</div>
-        <div class="xmasTree"></div>
-      </div>
-    </div>
+  <div id="fireworks"></div>
 
-    <div class="merry">
-        ¡Feliz Navidad!
-    </div>
-      
+  <div class="card">
+    <h1>¡Gracias por su feedback!</h1>
+    <p>Su encuesta ha sido enviada correctamente. Apreciamos mucho su opinión.</p>
+    <h2 style="margin-top: 50px; margin-bottom: 0;">¡Feliz año nuevo!</h2>
   </div>
+
+  <!-- Carga del bundle UMD -->
+<script src="https://unpkg.com/fireworks-js@2.10.7/dist/index.umd.js"></script>
+<script>
+  // DEBUG opcional
+  console.log('window.Fireworks:', window.Fireworks);
+
+  const container = document.getElementById('fireworks');
+
+  // El módulo UMD ha dejado el constructor dentro de window.Fireworks
+  const FW = window.Fireworks && (window.Fireworks.Fireworks || window.Fireworks.default);
+
+  console.log('Constructor FW:', FW);
+
+  if (typeof FW === 'function') {
+    const fireworks = new FW(container, {
+      rocketsPoint: { min: 0, max: 100 },
+      hue: { min: 0, max: 360 },
+      delay: { min: 15, max: 30 },
+      speed: 2,
+      acceleration: 1.05,
+      friction: 0.98,
+      gravity: 1.5,
+      particles: 120,
+      trace: 3,
+      explosion: 5,
+      autoresize: true,
+      brightness: {
+        min: 50,
+        max: 80,
+        decay: { min: 0.015, max: 0.03 },
+      },
+      boundaries: {
+        x: 0,
+        y: 0,
+        width: window.innerWidth,
+        height: window.innerHeight,
+      },
+      sound: { enabled: false }, // No tenemos los archivos xd
+    });
+
+    fireworks.start();
+  } else {
+    console.error('No se encontró un constructor de Fireworks válido en window.Fireworks:', window.Fireworks);
+  }
+</script>
 </body>
 </html>
