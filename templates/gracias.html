@@ -2,101 +2,205 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Gracias</title>
+  <title>¡Gracias por tu respuesta!</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
   <style>
-    body {
+    * {
+      box-sizing: border-box;
       margin: 0;
       padding: 0;
-      font-family: Arial, sans-serif;
-      background: #0b1725;
-      color: #fff;
-      height: 100vh;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      overflow: hidden;
-      position: relative;
     }
 
-    #fireworks {
-      position: fixed;
+    body, html {
+      height: 100%;
+      overflow: hidden;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+
+    /* Fondo veraniego */
+    .bg {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(to top, #A2C617, #13A538);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      color: #fff;
+      padding: 1.5rem;
+    }
+
+    /* Capa ligera para mejorar contraste del texto */
+    .bg::before {
+      content: "";
+      position: absolute;
       inset: 0;
-      z-index: 0;
+      background: radial-gradient(circle at 10% 20%, rgba(255,255,255,0.20), transparent 50%),
+                  radial-gradient(circle at 80% 80%, rgba(0,0,0,0.15), transparent 55%);
       pointer-events: none;
     }
 
-    .card {
+    .content {
       position: relative;
-      z-index: 1;
-      background: rgba(0, 0, 0, 0.7);
+      z-index: 2;
+      max-width: 600px;
+      /*background: rgba(0, 0, 0, 0.7);*/
       backdrop-filter: blur(10px);
       padding: 40px;
       border-radius: 20px;
       text-align: center;
       box-shadow: 0 10px 30px rgba(0,0,0,0.5);
       border: 1px solid rgba(255,255,255,0.1);
-      max-width: 500px;
     }
 
-    h1 { color: #4CAF50; margin-bottom: 20px; }
-    p { line-height: 1.6; font-size: 18px; }
+    .content h1 {
+      font-size: clamp(2rem, 3vw, 2.8rem);
+      margin-bottom: 0.5rem;
+      text-shadow: 0 3px 10px rgba(0,0,0,0.4);
+    }
+
+    .content p {
+      font-size: 1rem;
+      opacity: 0.95;
+      text-shadow: 0 2px 6px rgba(0,0,0,0.4);
+    }
+
+    .brand-tag {
+      margin-top: 1rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      font-size: 0.8rem;
+      opacity: 0.9;
+    }
+
+    /* Contenedor de los elementos saltarines */
+    .summer-layer {
+      position: absolute;
+      inset: 0;
+      overflow: hidden;
+      pointer-events: none; /* para no interferir con clicks */
+      z-index: 1;
+    }
+
+    .item {
+      position: absolute;
+      bottom: -15%;  /* arrancan escondidos abajo */
+      font-size: 2.5rem;
+      transform-origin: center;
+      opacity: 0;
+      animation: jumpUp 4s ease-in-out forwards;
+    }
+
+    @keyframes jumpUp {
+      0% {
+        transform: translateY(0) scale(0.8) rotate(0deg);
+        opacity: 0;
+      }
+      10% {
+        opacity: 1;
+      }
+      35% {
+        transform: translateY(-45vh) scale(1.1) rotate(15deg);
+        opacity: 1;
+      }
+      60% {
+        transform: translateY(0) scale(1) rotate(0deg);
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(15vh) scale(0.9) rotate(-10deg);
+        opacity: 0;
+      }
+    }
+
+    /* Responsive: un poco más chicos en móviles */
+    @media (max-width: 600px) {
+      .item {
+        font-size: 2rem;
+      }
+    }
   </style>
 </head>
 <body>
 
-  <div id="fireworks"></div>
+  <div class="bg">
+    <div class="summer-layer" id="summer-layer"></div>
 
-  <div class="card">
-    <h1>¡Gracias por su feedback!</h1>
-    <p>Su encuesta ha sido enviada correctamente. Apreciamos mucho su opinión.</p>
-    <h2 style="margin-top: 50px; margin-bottom: 0;">¡Feliz año nuevo!</h2>
+    <div class="content">
+      <h1>¡Gracias por responder nuestra encuesta!</h1>
+      <p>
+        Te deseamos un <strong>excelente comienzo de año</strong>.
+      </p>
+      <p class="brand-tag">
+        Equipo de Sistemas - <span>Nobis Medical</span>
+      </p>
+    </div>
+
+    <div>
+        <img src="{{ url_for('static', filename='logo_operaciones.png') }}" alt="Nobis Medical" style="position: absolute; bottom: 10px; right: 10px; width: 150px; opacity: 1; margin: 15px;">
+    </div>
   </div>
 
-  <!-- Carga del bundle UMD -->
-<script src="https://unpkg.com/fireworks-js@2.10.7/dist/index.umd.js"></script>
-<script>
-  // DEBUG opcional
-  console.log('window.Fireworks:', window.Fireworks);
+  <script>
+    // Elementos veraniegos (podés cambiar emojis por imágenes)
+    const SUMMER_ICONS = [
+      "🛟", // salvavidas
+      "🏖️", // playa
+      "😎", // cara con lentes
+      "🌊",  // ola
+      "🧉", // Mate
+      "🤖", // Robot
+      "🌞",  // sol
+      "🦫"  // castor
+    ];
 
-  const container = document.getElementById('fireworks');
+    const layer = document.getElementById("summer-layer");
 
-  // El módulo UMD ha dejado el constructor dentro de window.Fireworks
-  const FW = window.Fireworks && (window.Fireworks.Fireworks || window.Fireworks.default);
+    function createJumpingItem() {
+      const el = document.createElement("div");
+      el.classList.add("item");
 
-  console.log('Constructor FW:', FW);
+      // Elegimos un icono aleatorio
+      const icon = SUMMER_ICONS[Math.floor(Math.random() * SUMMER_ICONS.length)];
+      el.textContent = icon;
 
-  if (typeof FW === 'function') {
-    const fireworks = new FW(container, {
-      rocketsPoint: { min: 0, max: 100 },
-      hue: { min: 0, max: 360 },
-      delay: { min: 15, max: 30 },
-      speed: 2,
-      acceleration: 1.05,
-      friction: 0.98,
-      gravity: 1.5,
-      particles: 120,
-      trace: 3,
-      explosion: 5,
-      autoresize: true,
-      brightness: {
-        min: 50,
-        max: 80,
-        decay: { min: 0.015, max: 0.03 },
-      },
-      boundaries: {
-        x: 0,
-        y: 0,
-        width: window.innerWidth,
-        height: window.innerHeight,
-      },
-      sound: { enabled: false }, // No tenemos los archivos xd
-    });
+      // Posición horizontal aleatoria
+      const left = Math.random() * 100;
+      el.style.left = `${left}%`;
 
-    fireworks.start();
-  } else {
-    console.error('No se encontró un constructor de Fireworks válido en window.Fireworks:', window.Fireworks);
-  }
-</script>
+      // Pequeñas variaciones de tamaño
+      const sizeFactor = 0.8 + Math.random() * 1.6; // 0.8–2.4
+      el.style.fontSize = `${2.5 * sizeFactor}rem`;
+
+      // Ligera variación de duración para que no sea tan robótico
+      const duration = 2.5 + Math.random() * 2; // 2.5–5.5s
+      el.style.animationDuration = `${duration}s`;
+
+      layer.appendChild(el);
+
+      // Remover el elemento cuando termina la animación
+      el.addEventListener("animationend", () => {
+        el.remove();
+      });
+    }
+
+    // Crear elementos de forma continua
+    // Podés ajustar la frecuencia (en ms)
+    setInterval(() => {
+      // Generamos 1 o 2 elementos cada vez
+      const n = Math.random() < 0.6 ? 1 : 2;
+      for (let i = 0; i < n; i++) {
+        createJumpingItem();
+      }
+    }, 200); // cada 0.2 segundos aprox.
+
+    // Crear algunos elementos iniciales apenas carga
+    for (let i = 0; i < 6; i++) {
+      setTimeout(createJumpingItem, i * 200);
+    }
+  </script>
 </body>
 </html>

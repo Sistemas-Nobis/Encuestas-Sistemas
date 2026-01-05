@@ -1348,3 +1348,749 @@ with app.app_context(). See the documentation for more information.
 2025-12-29 11:33:05,643 - werkzeug - INFO - 127.0.0.1 - - [29/Dec/2025 11:33:05] "[36mGET /favicon.ico HTTP/1.1[0m" 304 -
 2025-12-29 11:33:05,644 - werkzeug - INFO - 127.0.0.1 - - [29/Dec/2025 11:33:05] "[33mGET /explosion1.mp3 HTTP/1.1[0m" 404 -
 2025-12-29 11:33:05,654 - werkzeug - INFO - 127.0.0.1 - - [29/Dec/2025 11:33:05] "[33mGET /explosion2.mp3 HTTP/1.1[0m" 404 -
+2025-12-30 10:19:36,603 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://10.4.34.185:5000
+2025-12-30 10:19:36,604 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2025-12-30 10:19:38,348 - werkzeug - INFO - 127.0.0.1 - - [30/Dec/2025 10:19:38] "[32mGET /grabar-gestiones HTTP/1.1[0m" 302 -
+2025-12-30 10:19:38,367 - werkzeug - INFO - 127.0.0.1 - - [30/Dec/2025 10:19:38] "GET /progreso-grabar-gestiones HTTP/1.1" 200 -
+2025-12-30 10:19:38,502 - werkzeug - INFO - 127.0.0.1 - - [30/Dec/2025 10:19:38] "GET /stream-grabar-gestiones HTTP/1.1" 200 -
+2025-12-30 10:19:38,619 - werkzeug - INFO - 127.0.0.1 - - [30/Dec/2025 10:19:38] "GET /static/favicon.ico HTTP/1.1" 200 -
+2025-12-30 10:19:39,480 - __main__ - INFO - Insertados 3 nuevos usuarios
+2025-12-30 10:19:39,480 - __main__ - INFO - Página 151 de users: 54 registros procesados, 3 nuevos.
+2025-12-30 10:19:39,481 - __main__ - INFO - Última página alcanzada para users
+2025-12-30 10:19:40,182 - __main__ - INFO - Página 190 de tickets: 100 registros procesados, 0 nuevos.
+2025-12-30 10:19:40,897 - __main__ - INFO - Página 191 de tickets: 100 registros procesados, 0 nuevos.
+2025-12-30 10:19:41,580 - __main__ - INFO - Página 192 de tickets: 100 registros procesados, 0 nuevos.
+2025-12-30 10:19:42,314 - __main__ - INFO - Página 193 de tickets: 100 registros procesados, 0 nuevos.
+2025-12-30 10:19:43,033 - __main__ - INFO - Página 194 de tickets: 100 registros procesados, 0 nuevos.
+2025-12-30 10:19:43,781 - __main__ - INFO - Página 195 de tickets: 100 registros procesados, 0 nuevos.
+2025-12-30 10:19:44,514 - __main__ - INFO - Página 196 de tickets: 100 registros procesados, 0 nuevos.
+2025-12-30 10:19:45,200 - __main__ - INFO - Página 197 de tickets: 100 registros procesados, 0 nuevos.
+2025-12-30 10:19:45,843 - __main__ - INFO - Página 198 de tickets: 100 registros procesados, 0 nuevos.
+2025-12-30 10:19:46,636 - __main__ - INFO - Página 199 de tickets: 100 registros procesados, 0 nuevos.
+2025-12-30 10:19:47,275 - __main__ - INFO - Página 200 de tickets: 100 registros procesados, 0 nuevos.
+2025-12-30 10:19:47,867 - __main__ - INFO - Página 201 de tickets: 100 registros procesados, 0 nuevos.
+2025-12-30 10:19:48,550 - __main__ - INFO - Página 202 de tickets: 100 registros procesados, 0 nuevos.
+2025-12-30 10:19:49,189 - __main__ - INFO - Página 203 de tickets: 100 registros procesados, 0 nuevos.
+2025-12-30 10:19:49,798 - __main__ - INFO - Página 204 de tickets: 100 registros procesados, 0 nuevos.
+2025-12-30 10:19:50,541 - __main__ - INFO - Página 205 de tickets: 100 registros procesados, 0 nuevos.
+2025-12-30 10:19:51,122 - __main__ - INFO - Página 206 de tickets: 100 registros procesados, 0 nuevos.
+2025-12-30 10:19:51,856 - __main__ - INFO - Página 207 de tickets: 100 registros procesados, 0 nuevos.
+2025-12-30 10:19:52,578 - __main__ - INFO - Página 208 de tickets: 100 registros procesados, 0 nuevos.
+2025-12-30 10:19:53,220 - __main__ - INFO - Página 209 de tickets: 100 registros procesados, 0 nuevos.
+2025-12-30 10:19:53,971 - __main__ - INFO - Página 210 de tickets: 100 registros procesados, 0 nuevos.
+2025-12-30 10:19:54,645 - __main__ - INFO - Página 211 de tickets: 100 registros procesados, 0 nuevos.
+2025-12-30 10:19:55,377 - __main__ - INFO - Página 212 de tickets: 100 registros procesados, 0 nuevos.
+2025-12-30 10:19:56,050 - __main__ - INFO - Página 213 de tickets: 100 registros procesados, 0 nuevos.
+2025-12-30 10:19:56,706 - __main__ - INFO - Página 214 de tickets: 100 registros procesados, 0 nuevos.
+2025-12-30 10:19:57,466 - __main__ - INFO - Página 215 de tickets: 100 registros procesados, 0 nuevos.
+2025-12-30 10:19:58,152 - __main__ - INFO - Página 216 de tickets: 100 registros procesados, 0 nuevos.
+2025-12-30 10:19:58,845 - __main__ - INFO - Página 217 de tickets: 100 registros procesados, 0 nuevos.
+2025-12-30 10:19:59,620 - __main__ - INFO - Página 218 de tickets: 100 registros procesados, 0 nuevos.
+2025-12-30 10:20:00,293 - __main__ - INFO - Página 219 de tickets: 100 registros procesados, 0 nuevos.
+2025-12-30 10:20:00,921 - __main__ - INFO - Página 220 de tickets: 100 registros procesados, 0 nuevos.
+2025-12-30 10:20:01,615 - __main__ - INFO - Página 221 de tickets: 100 registros procesados, 0 nuevos.
+2025-12-30 10:20:02,355 - __main__ - INFO - Página 222 de tickets: 100 registros procesados, 0 nuevos.
+2025-12-30 10:20:03,064 - __main__ - INFO - Página 223 de tickets: 100 registros procesados, 0 nuevos.
+2025-12-30 10:20:03,891 - __main__ - INFO - Página 224 de tickets: 100 registros procesados, 0 nuevos.
+2025-12-30 10:20:04,555 - __main__ - INFO - Página 225 de tickets: 100 registros procesados, 0 nuevos.
+2025-12-30 10:20:05,163 - __main__ - INFO - Página 226 de tickets: 100 registros procesados, 0 nuevos.
+2025-12-30 10:20:05,826 - __main__ - INFO - Página 227 de tickets: 100 registros procesados, 0 nuevos.
+2025-12-30 10:20:06,487 - __main__ - INFO - Página 228 de tickets: 100 registros procesados, 0 nuevos.
+2025-12-30 10:20:07,234 - __main__ - INFO - Página 229 de tickets: 100 registros procesados, 0 nuevos.
+2025-12-30 10:20:07,874 - __main__ - INFO - Página 230 de tickets: 100 registros procesados, 0 nuevos.
+2025-12-30 10:20:08,617 - __main__ - INFO - Página 231 de tickets: 100 registros procesados, 0 nuevos.
+2025-12-30 10:20:09,243 - __main__ - INFO - Página 232 de tickets: 100 registros procesados, 0 nuevos.
+2025-12-30 10:20:09,943 - __main__ - INFO - Página 233 de tickets: 100 registros procesados, 0 nuevos.
+2025-12-30 10:20:10,688 - __main__ - INFO - Página 234 de tickets: 100 registros procesados, 0 nuevos.
+2025-12-30 10:20:11,320 - __main__ - INFO - Página 235 de tickets: 100 registros procesados, 0 nuevos.
+2025-12-30 10:20:11,965 - __main__ - INFO - Página 236 de tickets: 100 registros procesados, 0 nuevos.
+2025-12-30 10:20:12,547 - __main__ - INFO - Página 237 de tickets: 100 registros procesados, 0 nuevos.
+2025-12-30 10:20:13,225 - __main__ - INFO - Página 238 de tickets: 100 registros procesados, 0 nuevos.
+2025-12-30 10:20:13,898 - __main__ - INFO - Página 239 de tickets: 100 registros procesados, 0 nuevos.
+2025-12-30 10:20:14,642 - __main__ - INFO - Página 240 de tickets: 100 registros procesados, 0 nuevos.
+2025-12-30 10:20:15,293 - __main__ - INFO - Página 241 de tickets: 100 registros procesados, 0 nuevos.
+2025-12-30 10:20:16,101 - __main__ - INFO - Página 242 de tickets: 100 registros procesados, 0 nuevos.
+2025-12-30 10:20:16,814 - __main__ - INFO - Página 243 de tickets: 100 registros procesados, 0 nuevos.
+2025-12-30 10:20:17,451 - __main__ - INFO - Página 244 de tickets: 100 registros procesados, 0 nuevos.
+2025-12-30 10:20:18,216 - __main__ - INFO - Página 245 de tickets: 100 registros procesados, 0 nuevos.
+2025-12-30 10:20:18,886 - __main__ - INFO - Página 246 de tickets: 100 registros procesados, 0 nuevos.
+2025-12-30 10:20:19,511 - __main__ - INFO - Página 247 de tickets: 100 registros procesados, 0 nuevos.
+2025-12-30 10:20:20,178 - __main__ - INFO - Página 248 de tickets: 100 registros procesados, 0 nuevos.
+2025-12-30 10:20:20,816 - __main__ - INFO - Página 249 de tickets: 100 registros procesados, 0 nuevos.
+2025-12-30 10:20:21,594 - __main__ - INFO - Página 250 de tickets: 100 registros procesados, 0 nuevos.
+2025-12-30 10:20:22,238 - __main__ - INFO - Página 251 de tickets: 100 registros procesados, 0 nuevos.
+2025-12-30 10:20:22,931 - __main__ - INFO - Página 252 de tickets: 100 registros procesados, 0 nuevos.
+2025-12-30 10:20:23,775 - __main__ - INFO - Insertadas 2 nuevas gestiones
+2025-12-30 10:20:23,775 - __main__ - INFO - Página 253 de tickets: 100 registros procesados, 2 nuevos.
+2025-12-30 10:20:24,829 - __main__ - INFO - Insertadas 15 nuevas gestiones
+2025-12-30 10:20:24,830 - __main__ - INFO - Página 254 de tickets: 94 registros procesados, 15 nuevos.
+2025-12-30 10:20:24,830 - __main__ - INFO - Última página alcanzada para tickets
+2025-12-30 10:20:29,826 - werkzeug - INFO - 127.0.0.1 - - [30/Dec/2025 10:20:29] "[32mGET /verificar-y-enviar-encuestas HTTP/1.1[0m" 302 -
+2025-12-30 10:20:29,837 - werkzeug - INFO - 127.0.0.1 - - [30/Dec/2025 10:20:29] "GET /progreso-enviar-encuestas HTTP/1.1" 200 -
+2025-12-30 10:20:29,902 - werkzeug - INFO - 127.0.0.1 - - [30/Dec/2025 10:20:29] "GET /stream-enviar-encuestas HTTP/1.1" 200 -
+2025-12-30 10:20:33,960 - __main__ - INFO - Encuesta enviada exitosamente a virginia.molina@nobis.com.ar para gestión 132108
+2025-12-30 10:20:37,987 - __main__ - INFO - Encuesta enviada exitosamente a carla.catalan@nobis.com.ar para gestión 132313
+2025-12-30 10:20:42,211 - __main__ - INFO - Encuesta enviada exitosamente a laura.vargas@nobis.com.ar para gestión 132364
+2025-12-30 10:20:46,119 - __main__ - INFO - Encuesta enviada exitosamente a ludmila.concha@nobis.com.ar para gestión 132395
+2025-12-30 10:20:50,334 - __main__ - INFO - Encuesta enviada exitosamente a yohana.nieto@nobis.com.ar para gestión 132402
+2025-12-30 10:20:54,233 - __main__ - INFO - Encuesta enviada exitosamente a ludmila.concha@nobis.com.ar para gestión 132412
+2025-12-30 10:20:58,206 - __main__ - INFO - Encuesta enviada exitosamente a rocio.ibarra@nobis.com.ar para gestión 132414
+2025-12-30 10:21:02,493 - __main__ - INFO - Encuesta enviada exitosamente a yohana.nieto@nobis.com.ar para gestión 132417
+2025-12-30 10:21:06,426 - __main__ - INFO - Encuesta enviada exitosamente a carla.catalan@nobis.com.ar para gestión 132441
+2025-12-30 10:21:10,857 - __main__ - INFO - Encuesta enviada exitosamente a silvina.bazan@nobis.com.ar para gestión 132472
+2025-12-30 10:21:15,143 - __main__ - INFO - Encuesta enviada exitosamente a anabella.rodriguez@nobis.com.ar para gestión 132479
+2025-12-30 10:21:19,323 - __main__ - INFO - Encuesta enviada exitosamente a ornela.pezzini@nobis.com.ar para gestión 132489
+2025-12-30 10:21:24,331 - __main__ - INFO - Encuesta enviada exitosamente a agustina.flores@nobis.com.ar para gestión 132491
+2025-12-30 10:21:28,216 - __main__ - INFO - Encuesta enviada exitosamente a agostina.loza@nobis.com.ar para gestión 132497
+2025-12-30 10:21:32,235 - __main__ - INFO - Encuesta enviada exitosamente a julieta.litman@nobis.com.ar para gestión 132499
+2025-12-30 10:21:36,670 - __main__ - INFO - Encuesta enviada exitosamente a agostina.zanello@nobis.com.ar para gestión 132511
+2025-12-30 10:21:40,665 - __main__ - INFO - Encuesta enviada exitosamente a carla.catalan@nobis.com.ar para gestión 132513
+2025-12-30 13:18:50,919 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://10.4.34.185:5000
+2025-12-30 13:18:50,920 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2025-12-30 13:18:52,684 - werkzeug - INFO - 127.0.0.1 - - [30/Dec/2025 13:18:52] "[32mGET /grabar-gestiones HTTP/1.1[0m" 302 -
+2025-12-30 13:18:52,706 - werkzeug - INFO - 127.0.0.1 - - [30/Dec/2025 13:18:52] "GET /progreso-grabar-gestiones HTTP/1.1" 200 -
+2025-12-30 13:18:52,795 - werkzeug - INFO - 127.0.0.1 - - [30/Dec/2025 13:18:52] "GET /stream-grabar-gestiones HTTP/1.1" 200 -
+2025-12-30 13:18:54,022 - __main__ - INFO - Insertados 3 nuevos usuarios
+2025-12-30 13:18:54,022 - __main__ - INFO - Página 151 de users: 57 registros procesados, 3 nuevos.
+2025-12-30 13:18:54,022 - __main__ - INFO - Última página alcanzada para users
+2025-12-30 13:18:54,959 - __main__ - INFO - Página 190 de tickets: 100 registros procesados, 0 nuevos.
+2025-12-30 13:18:56,154 - __main__ - INFO - Página 191 de tickets: 100 registros procesados, 0 nuevos.
+2025-12-30 13:18:57,247 - __main__ - INFO - Página 192 de tickets: 100 registros procesados, 0 nuevos.
+2025-12-30 13:18:58,134 - __main__ - INFO - Página 193 de tickets: 100 registros procesados, 0 nuevos.
+2025-12-30 13:18:58,907 - __main__ - INFO - Página 194 de tickets: 100 registros procesados, 0 nuevos.
+2025-12-30 13:18:59,844 - __main__ - INFO - Página 195 de tickets: 100 registros procesados, 0 nuevos.
+2025-12-30 13:19:00,579 - __main__ - INFO - Página 196 de tickets: 100 registros procesados, 0 nuevos.
+2025-12-30 13:19:01,283 - __main__ - INFO - Página 197 de tickets: 100 registros procesados, 0 nuevos.
+2025-12-30 13:19:02,059 - __main__ - INFO - Página 198 de tickets: 100 registros procesados, 0 nuevos.
+2025-12-30 13:19:02,803 - __main__ - INFO - Página 199 de tickets: 100 registros procesados, 0 nuevos.
+2025-12-30 13:19:03,606 - __main__ - INFO - Página 200 de tickets: 100 registros procesados, 0 nuevos.
+2025-12-30 13:19:04,309 - __main__ - INFO - Página 201 de tickets: 100 registros procesados, 0 nuevos.
+2025-12-30 13:19:05,000 - __main__ - INFO - Página 202 de tickets: 100 registros procesados, 0 nuevos.
+2025-12-30 13:19:05,968 - __main__ - INFO - Página 203 de tickets: 100 registros procesados, 0 nuevos.
+2025-12-30 13:19:06,585 - __main__ - INFO - Página 204 de tickets: 100 registros procesados, 0 nuevos.
+2025-12-30 13:19:07,212 - __main__ - INFO - Página 205 de tickets: 100 registros procesados, 0 nuevos.
+2025-12-30 13:19:08,254 - __main__ - INFO - Página 206 de tickets: 100 registros procesados, 0 nuevos.
+2025-12-30 13:19:08,942 - __main__ - INFO - Página 207 de tickets: 100 registros procesados, 0 nuevos.
+2025-12-30 13:19:09,546 - __main__ - INFO - Página 208 de tickets: 100 registros procesados, 0 nuevos.
+2025-12-30 13:19:10,257 - __main__ - INFO - Página 209 de tickets: 100 registros procesados, 0 nuevos.
+2025-12-30 13:19:11,024 - __main__ - INFO - Página 210 de tickets: 100 registros procesados, 0 nuevos.
+2025-12-30 13:19:12,170 - __main__ - INFO - Página 211 de tickets: 100 registros procesados, 0 nuevos.
+2025-12-30 13:19:12,875 - __main__ - INFO - Página 212 de tickets: 100 registros procesados, 0 nuevos.
+2025-12-30 13:19:13,704 - __main__ - INFO - Página 213 de tickets: 100 registros procesados, 0 nuevos.
+2025-12-30 13:19:14,395 - __main__ - INFO - Página 214 de tickets: 100 registros procesados, 0 nuevos.
+2025-12-30 13:19:14,983 - __main__ - INFO - Página 215 de tickets: 100 registros procesados, 0 nuevos.
+2025-12-30 13:19:15,681 - __main__ - INFO - Página 216 de tickets: 100 registros procesados, 0 nuevos.
+2025-12-30 13:19:16,511 - __main__ - INFO - Página 217 de tickets: 100 registros procesados, 0 nuevos.
+2025-12-30 13:19:17,287 - __main__ - INFO - Página 218 de tickets: 100 registros procesados, 0 nuevos.
+2025-12-30 13:19:17,937 - __main__ - INFO - Página 219 de tickets: 100 registros procesados, 0 nuevos.
+2025-12-30 13:19:18,714 - __main__ - INFO - Página 220 de tickets: 100 registros procesados, 0 nuevos.
+2025-12-30 13:19:19,502 - __main__ - INFO - Página 221 de tickets: 100 registros procesados, 0 nuevos.
+2025-12-30 13:19:20,137 - __main__ - INFO - Página 222 de tickets: 100 registros procesados, 0 nuevos.
+2025-12-30 13:19:20,881 - __main__ - INFO - Página 223 de tickets: 100 registros procesados, 0 nuevos.
+2025-12-30 13:19:21,603 - __main__ - INFO - Página 224 de tickets: 100 registros procesados, 0 nuevos.
+2025-12-30 13:19:22,246 - __main__ - INFO - Página 225 de tickets: 100 registros procesados, 0 nuevos.
+2025-12-30 13:19:23,085 - __main__ - INFO - Página 226 de tickets: 100 registros procesados, 0 nuevos.
+2025-12-30 13:19:23,803 - __main__ - INFO - Página 227 de tickets: 100 registros procesados, 0 nuevos.
+2025-12-30 13:19:24,462 - __main__ - INFO - Página 228 de tickets: 100 registros procesados, 0 nuevos.
+2025-12-30 13:19:25,172 - __main__ - INFO - Página 229 de tickets: 100 registros procesados, 0 nuevos.
+2025-12-30 13:19:25,897 - __main__ - INFO - Página 230 de tickets: 100 registros procesados, 0 nuevos.
+2025-12-30 13:19:26,680 - __main__ - INFO - Página 231 de tickets: 100 registros procesados, 0 nuevos.
+2025-12-30 13:19:27,308 - __main__ - INFO - Página 232 de tickets: 100 registros procesados, 0 nuevos.
+2025-12-30 13:19:27,925 - __main__ - INFO - Página 233 de tickets: 100 registros procesados, 0 nuevos.
+2025-12-30 13:19:28,580 - __main__ - INFO - Página 234 de tickets: 100 registros procesados, 0 nuevos.
+2025-12-30 13:19:29,407 - __main__ - INFO - Página 235 de tickets: 100 registros procesados, 0 nuevos.
+2025-12-30 13:19:30,096 - __main__ - INFO - Página 236 de tickets: 100 registros procesados, 0 nuevos.
+2025-12-30 13:19:30,864 - __main__ - INFO - Página 237 de tickets: 100 registros procesados, 0 nuevos.
+2025-12-30 13:19:31,661 - __main__ - INFO - Página 238 de tickets: 100 registros procesados, 0 nuevos.
+2025-12-30 13:19:32,362 - __main__ - INFO - Página 239 de tickets: 100 registros procesados, 0 nuevos.
+2025-12-30 13:19:33,012 - __main__ - INFO - Página 240 de tickets: 100 registros procesados, 0 nuevos.
+2025-12-30 13:19:33,762 - __main__ - INFO - Página 241 de tickets: 100 registros procesados, 0 nuevos.
+2025-12-30 13:19:34,500 - __main__ - INFO - Página 242 de tickets: 100 registros procesados, 0 nuevos.
+2025-12-30 13:19:35,301 - __main__ - INFO - Página 243 de tickets: 100 registros procesados, 0 nuevos.
+2025-12-30 13:19:36,110 - __main__ - INFO - Página 244 de tickets: 100 registros procesados, 0 nuevos.
+2025-12-30 13:19:36,909 - __main__ - INFO - Página 245 de tickets: 100 registros procesados, 0 nuevos.
+2025-12-30 13:19:37,680 - __main__ - INFO - Página 246 de tickets: 100 registros procesados, 0 nuevos.
+2025-12-30 13:19:38,394 - __main__ - INFO - Página 247 de tickets: 100 registros procesados, 0 nuevos.
+2025-12-30 13:19:39,216 - __main__ - INFO - Página 248 de tickets: 100 registros procesados, 0 nuevos.
+2025-12-30 13:19:39,927 - __main__ - INFO - Página 249 de tickets: 100 registros procesados, 0 nuevos.
+2025-12-30 13:19:40,635 - __main__ - INFO - Página 250 de tickets: 100 registros procesados, 0 nuevos.
+2025-12-30 13:19:41,259 - __main__ - INFO - Página 251 de tickets: 100 registros procesados, 0 nuevos.
+2025-12-30 13:19:42,091 - __main__ - INFO - Página 252 de tickets: 100 registros procesados, 0 nuevos.
+2025-12-30 13:19:43,015 - __main__ - INFO - Página 253 de tickets: 100 registros procesados, 0 nuevos.
+2025-12-30 13:19:43,773 - __main__ - INFO - Página 254 de tickets: 99 registros procesados, 0 nuevos.
+2025-12-30 13:19:43,773 - __main__ - INFO - Última página alcanzada para tickets
+2025-12-30 13:25:17,004 - werkzeug - INFO - 127.0.0.1 - - [30/Dec/2025 13:25:17] "[32mGET /verificar-y-enviar-encuestas HTTP/1.1[0m" 302 -
+2025-12-30 13:25:17,015 - werkzeug - INFO - 127.0.0.1 - - [30/Dec/2025 13:25:17] "GET /progreso-enviar-encuestas HTTP/1.1" 200 -
+2025-12-30 13:25:17,076 - werkzeug - INFO - 127.0.0.1 - - [30/Dec/2025 13:25:17] "GET /stream-enviar-encuestas HTTP/1.1" 200 -
+2025-12-30 16:32:25,667 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://10.4.34.185:5000
+2025-12-30 16:32:25,668 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2025-12-30 16:32:29,983 - werkzeug - INFO - 127.0.0.1 - - [30/Dec/2025 16:32:29] "[32mGET /grabar-gestiones HTTP/1.1[0m" 302 -
+2025-12-30 16:32:29,998 - werkzeug - INFO - 127.0.0.1 - - [30/Dec/2025 16:32:29] "GET /progreso-grabar-gestiones HTTP/1.1" 200 -
+2025-12-30 16:32:30,115 - werkzeug - INFO - 127.0.0.1 - - [30/Dec/2025 16:32:30] "GET /stream-grabar-gestiones HTTP/1.1" 200 -
+2025-12-30 16:32:30,974 - __main__ - INFO - Página 151 de users: 57 registros procesados, 0 nuevos.
+2025-12-30 16:32:30,974 - __main__ - INFO - Última página alcanzada para users
+2025-12-30 16:32:31,696 - __main__ - INFO - Página 190 de tickets: 100 registros procesados, 0 nuevos.
+2025-12-30 16:32:32,260 - __main__ - INFO - Página 191 de tickets: 100 registros procesados, 0 nuevos.
+2025-12-30 16:32:32,869 - __main__ - INFO - Página 192 de tickets: 100 registros procesados, 0 nuevos.
+2025-12-30 16:32:33,635 - __main__ - INFO - Página 193 de tickets: 100 registros procesados, 0 nuevos.
+2025-12-30 16:32:34,257 - __main__ - INFO - Página 194 de tickets: 100 registros procesados, 0 nuevos.
+2025-12-30 16:32:34,849 - __main__ - INFO - Página 195 de tickets: 100 registros procesados, 0 nuevos.
+2025-12-30 16:32:35,502 - __main__ - INFO - Página 196 de tickets: 100 registros procesados, 0 nuevos.
+2025-12-30 16:32:36,162 - __main__ - INFO - Página 197 de tickets: 100 registros procesados, 0 nuevos.
+2025-12-30 16:32:36,834 - __main__ - INFO - Página 198 de tickets: 100 registros procesados, 0 nuevos.
+2025-12-30 16:32:37,608 - __main__ - INFO - Página 199 de tickets: 100 registros procesados, 0 nuevos.
+2025-12-30 16:32:38,272 - __main__ - INFO - Página 200 de tickets: 100 registros procesados, 0 nuevos.
+2025-12-30 16:32:38,889 - __main__ - INFO - Página 201 de tickets: 100 registros procesados, 0 nuevos.
+2025-12-30 16:32:39,507 - __main__ - INFO - Página 202 de tickets: 100 registros procesados, 0 nuevos.
+2025-12-30 16:32:40,196 - __main__ - INFO - Página 203 de tickets: 100 registros procesados, 0 nuevos.
+2025-12-30 16:32:40,872 - __main__ - INFO - Página 204 de tickets: 100 registros procesados, 0 nuevos.
+2025-12-30 16:32:41,518 - __main__ - INFO - Página 205 de tickets: 100 registros procesados, 0 nuevos.
+2025-12-30 16:32:42,145 - __main__ - INFO - Página 206 de tickets: 100 registros procesados, 0 nuevos.
+2025-12-30 16:32:42,834 - __main__ - INFO - Página 207 de tickets: 100 registros procesados, 0 nuevos.
+2025-12-30 16:32:43,471 - __main__ - INFO - Página 208 de tickets: 100 registros procesados, 0 nuevos.
+2025-12-30 16:32:44,098 - __main__ - INFO - Página 209 de tickets: 100 registros procesados, 0 nuevos.
+2025-12-30 16:32:44,732 - __main__ - INFO - Página 210 de tickets: 100 registros procesados, 0 nuevos.
+2025-12-30 16:32:45,434 - __main__ - INFO - Página 211 de tickets: 100 registros procesados, 0 nuevos.
+2025-12-30 16:32:46,004 - __main__ - INFO - Página 212 de tickets: 100 registros procesados, 0 nuevos.
+2025-12-30 16:32:46,721 - __main__ - INFO - Página 213 de tickets: 100 registros procesados, 0 nuevos.
+2025-12-30 16:32:47,488 - __main__ - INFO - Página 214 de tickets: 100 registros procesados, 0 nuevos.
+2025-12-30 16:32:48,112 - __main__ - INFO - Página 215 de tickets: 100 registros procesados, 0 nuevos.
+2025-12-30 16:32:48,845 - __main__ - INFO - Página 216 de tickets: 100 registros procesados, 0 nuevos.
+2025-12-30 16:32:49,483 - __main__ - INFO - Página 217 de tickets: 100 registros procesados, 0 nuevos.
+2025-12-30 16:32:50,126 - __main__ - INFO - Página 218 de tickets: 100 registros procesados, 0 nuevos.
+2025-12-30 16:32:50,792 - __main__ - INFO - Página 219 de tickets: 100 registros procesados, 0 nuevos.
+2025-12-30 16:32:52,009 - __main__ - INFO - Página 220 de tickets: 100 registros procesados, 0 nuevos.
+2025-12-30 16:32:52,652 - __main__ - INFO - Página 221 de tickets: 100 registros procesados, 0 nuevos.
+2025-12-30 16:32:53,381 - __main__ - INFO - Página 222 de tickets: 100 registros procesados, 0 nuevos.
+2025-12-30 16:32:54,041 - __main__ - INFO - Página 223 de tickets: 100 registros procesados, 0 nuevos.
+2025-12-30 16:32:54,736 - __main__ - INFO - Página 224 de tickets: 100 registros procesados, 0 nuevos.
+2025-12-30 16:32:55,358 - __main__ - INFO - Página 225 de tickets: 100 registros procesados, 0 nuevos.
+2025-12-30 16:32:56,077 - __main__ - INFO - Página 226 de tickets: 100 registros procesados, 0 nuevos.
+2025-12-30 16:32:56,756 - __main__ - INFO - Página 227 de tickets: 100 registros procesados, 0 nuevos.
+2025-12-30 16:32:57,329 - __main__ - INFO - Página 228 de tickets: 100 registros procesados, 0 nuevos.
+2025-12-30 16:32:58,038 - __main__ - INFO - Página 229 de tickets: 100 registros procesados, 0 nuevos.
+2025-12-30 16:32:58,712 - __main__ - INFO - Página 230 de tickets: 100 registros procesados, 0 nuevos.
+2025-12-30 16:32:59,420 - __main__ - INFO - Página 231 de tickets: 100 registros procesados, 0 nuevos.
+2025-12-30 16:33:00,120 - __main__ - INFO - Página 232 de tickets: 100 registros procesados, 0 nuevos.
+2025-12-30 16:33:00,823 - __main__ - INFO - Página 233 de tickets: 100 registros procesados, 0 nuevos.
+2025-12-30 16:33:01,433 - __main__ - INFO - Página 234 de tickets: 100 registros procesados, 0 nuevos.
+2025-12-30 16:33:02,069 - __main__ - INFO - Página 235 de tickets: 100 registros procesados, 0 nuevos.
+2025-12-30 16:33:02,680 - __main__ - INFO - Página 236 de tickets: 100 registros procesados, 0 nuevos.
+2025-12-30 16:33:03,304 - __main__ - INFO - Página 237 de tickets: 100 registros procesados, 0 nuevos.
+2025-12-30 16:33:03,949 - __main__ - INFO - Página 238 de tickets: 100 registros procesados, 0 nuevos.
+2025-12-30 16:33:04,555 - __main__ - INFO - Página 239 de tickets: 100 registros procesados, 0 nuevos.
+2025-12-30 16:33:05,154 - __main__ - INFO - Página 240 de tickets: 100 registros procesados, 0 nuevos.
+2025-12-30 16:33:05,784 - __main__ - INFO - Página 241 de tickets: 100 registros procesados, 0 nuevos.
+2025-12-30 16:33:06,553 - __main__ - INFO - Página 242 de tickets: 100 registros procesados, 0 nuevos.
+2025-12-30 16:33:07,196 - __main__ - INFO - Página 243 de tickets: 100 registros procesados, 0 nuevos.
+2025-12-30 16:33:07,896 - __main__ - INFO - Página 244 de tickets: 100 registros procesados, 0 nuevos.
+2025-12-30 16:33:08,576 - __main__ - INFO - Página 245 de tickets: 100 registros procesados, 0 nuevos.
+2025-12-30 16:33:09,324 - __main__ - INFO - Página 246 de tickets: 100 registros procesados, 0 nuevos.
+2025-12-30 16:33:09,933 - __main__ - INFO - Página 247 de tickets: 100 registros procesados, 0 nuevos.
+2025-12-30 16:33:10,517 - __main__ - INFO - Página 248 de tickets: 100 registros procesados, 0 nuevos.
+2025-12-30 16:33:11,107 - __main__ - INFO - Página 249 de tickets: 100 registros procesados, 0 nuevos.
+2025-12-30 16:33:11,895 - __main__ - INFO - Página 250 de tickets: 100 registros procesados, 0 nuevos.
+2025-12-30 16:33:12,565 - __main__ - INFO - Página 251 de tickets: 100 registros procesados, 0 nuevos.
+2025-12-30 16:33:13,203 - __main__ - INFO - Página 252 de tickets: 100 registros procesados, 0 nuevos.
+2025-12-30 16:33:13,913 - __main__ - INFO - Página 253 de tickets: 100 registros procesados, 0 nuevos.
+2025-12-30 16:33:14,722 - __main__ - INFO - Insertadas 2 nuevas gestiones
+2025-12-30 16:33:14,723 - __main__ - INFO - Página 254 de tickets: 100 registros procesados, 2 nuevos.
+2025-12-30 16:33:15,463 - __main__ - INFO - Insertadas 1 nuevas gestiones
+2025-12-30 16:33:15,464 - __main__ - INFO - Página 255 de tickets: 5 registros procesados, 1 nuevos.
+2025-12-30 16:33:15,464 - __main__ - INFO - Última página alcanzada para tickets
+2025-12-30 16:33:18,743 - werkzeug - INFO - 127.0.0.1 - - [30/Dec/2025 16:33:18] "[32mGET /verificar-y-enviar-encuestas HTTP/1.1[0m" 302 -
+2025-12-30 16:33:18,751 - werkzeug - INFO - 127.0.0.1 - - [30/Dec/2025 16:33:18] "GET /progreso-enviar-encuestas HTTP/1.1" 200 -
+2025-12-30 16:33:18,807 - werkzeug - INFO - 127.0.0.1 - - [30/Dec/2025 16:33:18] "GET /stream-enviar-encuestas HTTP/1.1" 200 -
+2025-12-30 16:33:23,566 - __main__ - INFO - Encuesta enviada exitosamente a ornela.pezzini@nobis.com.ar para gestión 132531
+2025-12-30 16:33:29,503 - __main__ - INFO - Encuesta enviada exitosamente a ana.camacho@nobis.com.ar para gestión 132533
+2025-12-30 16:33:35,529 - __main__ - INFO - Encuesta enviada exitosamente a marlene.castillo@nobis.com.ar para gestión 132539
+2025-12-30 17:14:56,769 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://10.4.34.185:5000
+2025-12-30 17:14:56,769 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2025-12-30 17:15:08,663 - werkzeug - INFO - 127.0.0.1 - - [30/Dec/2025 17:15:08] "GET /gracias HTTP/1.1" 200 -
+2025-12-30 17:24:53,556 - werkzeug - INFO - 127.0.0.1 - - [30/Dec/2025 17:24:53] "GET /gracias HTTP/1.1" 200 -
+2025-12-30 17:24:53,660 - werkzeug - INFO - 127.0.0.1 - - [30/Dec/2025 17:24:53] "GET /favicon.ico HTTP/1.1" 200 -
+2025-12-30 17:25:06,505 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://10.4.34.185:5000
+2025-12-30 17:25:06,505 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2025-12-30 17:25:22,415 - werkzeug - INFO - 127.0.0.1 - - [30/Dec/2025 17:25:22] "GET /gracias HTTP/1.1" 200 -
+2025-12-30 17:25:22,483 - werkzeug - INFO - 127.0.0.1 - - [30/Dec/2025 17:25:22] "[36mGET /favicon.ico HTTP/1.1[0m" 304 -
+2025-12-30 17:25:27,957 - werkzeug - INFO - 10.4.34.185 - - [30/Dec/2025 17:25:27] "GET /gracias HTTP/1.1" 200 -
+2025-12-30 17:25:28,116 - werkzeug - INFO - 10.4.34.185 - - [30/Dec/2025 17:25:28] "GET /favicon.ico HTTP/1.1" 200 -
+2025-12-30 17:25:38,772 - werkzeug - INFO - 10.4.34.252 - - [30/Dec/2025 17:25:38] "GET /gracias HTTP/1.1" 200 -
+2025-12-30 17:25:39,254 - werkzeug - INFO - 10.4.34.252 - - [30/Dec/2025 17:25:39] "GET /favicon.ico HTTP/1.1" 200 -
+2025-12-30 17:32:06,702 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://10.4.34.185:5000
+2025-12-30 17:32:06,702 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2025-12-30 17:32:08,969 - werkzeug - INFO - 10.4.34.185 - - [30/Dec/2025 17:32:08] "GET /gracias HTTP/1.1" 200 -
+2025-12-30 17:32:09,083 - werkzeug - INFO - 10.4.34.185 - - [30/Dec/2025 17:32:09] "[36mGET /favicon.ico HTTP/1.1[0m" 304 -
+2025-12-30 17:32:49,942 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://10.4.34.185:5000
+2025-12-30 17:32:49,943 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2025-12-30 17:32:59,469 - werkzeug - INFO - 10.4.34.185 - - [30/Dec/2025 17:32:59] "GET /gracias HTTP/1.1" 200 -
+2025-12-30 17:32:59,547 - werkzeug - INFO - 10.4.34.185 - - [30/Dec/2025 17:32:59] "[36mGET /favicon.ico HTTP/1.1[0m" 304 -
+2025-12-30 17:35:43,300 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://10.4.34.185:5000
+2025-12-30 17:35:43,301 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2025-12-30 17:35:45,115 - werkzeug - INFO - 10.4.34.185 - - [30/Dec/2025 17:35:45] "GET /gracias HTTP/1.1" 200 -
+2025-12-30 17:35:45,192 - werkzeug - INFO - 10.4.34.185 - - [30/Dec/2025 17:35:45] "[36mGET /favicon.ico HTTP/1.1[0m" 304 -
+2025-12-30 17:53:18,976 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://10.4.34.185:5000
+2025-12-30 17:53:18,977 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2025-12-30 17:53:24,193 - werkzeug - INFO - 10.4.34.185 - - [30/Dec/2025 17:53:24] "GET /gracias HTTP/1.1" 200 -
+2025-12-30 17:53:24,267 - werkzeug - INFO - 10.4.34.185 - - [30/Dec/2025 17:53:24] "GET /static/logo_operaciones.png HTTP/1.1" 200 -
+2025-12-30 17:53:24,322 - werkzeug - INFO - 10.4.34.185 - - [30/Dec/2025 17:53:24] "[36mGET /favicon.ico HTTP/1.1[0m" 304 -
+2026-01-02 09:35:27,205 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.100.6:5000
+2026-01-02 09:35:27,206 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2026-01-02 09:35:30,580 - werkzeug - INFO - 127.0.0.1 - - [02/Jan/2026 09:35:30] "[32mGET /grabar-gestiones HTTP/1.1[0m" 302 -
+2026-01-02 09:35:30,622 - werkzeug - INFO - 127.0.0.1 - - [02/Jan/2026 09:35:30] "GET /progreso-grabar-gestiones HTTP/1.1" 200 -
+2026-01-02 09:35:30,834 - werkzeug - INFO - 127.0.0.1 - - [02/Jan/2026 09:35:30] "GET /stream-grabar-gestiones HTTP/1.1" 200 -
+2026-01-02 09:35:34,081 - __main__ - INFO - Insertados 1 nuevos usuarios
+2026-01-02 09:35:34,082 - __main__ - INFO - Página 151 de users: 58 registros procesados, 1 nuevos.
+2026-01-02 09:35:34,082 - __main__ - INFO - Última página alcanzada para users
+2026-01-02 09:35:35,443 - __main__ - INFO - Página 190 de tickets: 100 registros procesados, 0 nuevos.
+2026-01-02 09:35:36,618 - __main__ - INFO - Página 191 de tickets: 100 registros procesados, 0 nuevos.
+2026-01-02 09:35:37,938 - __main__ - INFO - Página 192 de tickets: 100 registros procesados, 0 nuevos.
+2026-01-02 09:35:39,078 - __main__ - INFO - Página 193 de tickets: 100 registros procesados, 0 nuevos.
+2026-01-02 09:35:40,345 - __main__ - INFO - Página 194 de tickets: 100 registros procesados, 0 nuevos.
+2026-01-02 09:35:41,560 - __main__ - INFO - Página 195 de tickets: 100 registros procesados, 0 nuevos.
+2026-01-02 09:35:42,799 - __main__ - INFO - Página 196 de tickets: 100 registros procesados, 0 nuevos.
+2026-01-02 09:35:44,314 - __main__ - INFO - Página 197 de tickets: 100 registros procesados, 0 nuevos.
+2026-01-02 09:35:45,514 - __main__ - INFO - Página 198 de tickets: 100 registros procesados, 0 nuevos.
+2026-01-02 09:35:46,765 - __main__ - INFO - Página 199 de tickets: 100 registros procesados, 0 nuevos.
+2026-01-02 09:35:48,025 - __main__ - INFO - Página 200 de tickets: 100 registros procesados, 0 nuevos.
+2026-01-02 09:35:49,166 - __main__ - INFO - Página 201 de tickets: 100 registros procesados, 0 nuevos.
+2026-01-02 09:35:50,538 - __main__ - INFO - Página 202 de tickets: 100 registros procesados, 0 nuevos.
+2026-01-02 09:35:51,744 - __main__ - INFO - Página 203 de tickets: 100 registros procesados, 0 nuevos.
+2026-01-02 09:35:52,924 - __main__ - INFO - Página 204 de tickets: 100 registros procesados, 0 nuevos.
+2026-01-02 09:35:54,137 - __main__ - INFO - Página 205 de tickets: 100 registros procesados, 0 nuevos.
+2026-01-02 09:35:55,433 - __main__ - INFO - Página 206 de tickets: 100 registros procesados, 0 nuevos.
+2026-01-02 09:35:56,620 - __main__ - INFO - Página 207 de tickets: 100 registros procesados, 0 nuevos.
+2026-01-02 09:35:57,851 - __main__ - INFO - Página 208 de tickets: 100 registros procesados, 0 nuevos.
+2026-01-02 09:35:58,950 - __main__ - INFO - Página 209 de tickets: 100 registros procesados, 0 nuevos.
+2026-01-02 09:36:00,200 - __main__ - INFO - Página 210 de tickets: 100 registros procesados, 0 nuevos.
+2026-01-02 09:36:01,380 - __main__ - INFO - Página 211 de tickets: 100 registros procesados, 0 nuevos.
+2026-01-02 09:36:02,629 - __main__ - INFO - Página 212 de tickets: 100 registros procesados, 0 nuevos.
+2026-01-02 09:36:04,007 - __main__ - INFO - Página 213 de tickets: 100 registros procesados, 0 nuevos.
+2026-01-02 09:36:05,220 - __main__ - INFO - Página 214 de tickets: 100 registros procesados, 0 nuevos.
+2026-01-02 09:36:06,550 - __main__ - INFO - Página 215 de tickets: 100 registros procesados, 0 nuevos.
+2026-01-02 09:36:07,784 - __main__ - INFO - Página 216 de tickets: 100 registros procesados, 0 nuevos.
+2026-01-02 09:36:09,138 - __main__ - INFO - Página 217 de tickets: 100 registros procesados, 0 nuevos.
+2026-01-02 09:36:10,466 - __main__ - INFO - Página 218 de tickets: 100 registros procesados, 0 nuevos.
+2026-01-02 09:36:11,632 - __main__ - INFO - Página 219 de tickets: 100 registros procesados, 0 nuevos.
+2026-01-02 09:36:12,877 - __main__ - INFO - Página 220 de tickets: 100 registros procesados, 0 nuevos.
+2026-01-02 09:36:14,348 - __main__ - INFO - Página 221 de tickets: 100 registros procesados, 0 nuevos.
+2026-01-02 09:36:15,473 - __main__ - INFO - Página 222 de tickets: 100 registros procesados, 0 nuevos.
+2026-01-02 09:36:16,808 - __main__ - INFO - Página 223 de tickets: 100 registros procesados, 0 nuevos.
+2026-01-02 09:36:17,973 - __main__ - INFO - Página 224 de tickets: 100 registros procesados, 0 nuevos.
+2026-01-02 09:36:19,235 - __main__ - INFO - Página 225 de tickets: 100 registros procesados, 0 nuevos.
+2026-01-02 09:36:20,405 - __main__ - INFO - Página 226 de tickets: 100 registros procesados, 0 nuevos.
+2026-01-02 09:36:21,691 - __main__ - INFO - Página 227 de tickets: 100 registros procesados, 0 nuevos.
+2026-01-02 09:36:22,959 - __main__ - INFO - Página 228 de tickets: 100 registros procesados, 0 nuevos.
+2026-01-02 09:36:24,187 - __main__ - INFO - Página 229 de tickets: 100 registros procesados, 0 nuevos.
+2026-01-02 09:36:25,534 - __main__ - INFO - Página 230 de tickets: 100 registros procesados, 0 nuevos.
+2026-01-02 09:36:26,749 - __main__ - INFO - Página 231 de tickets: 100 registros procesados, 0 nuevos.
+2026-01-02 09:36:27,977 - __main__ - INFO - Página 232 de tickets: 100 registros procesados, 0 nuevos.
+2026-01-02 09:36:29,346 - __main__ - INFO - Página 233 de tickets: 100 registros procesados, 0 nuevos.
+2026-01-02 09:36:30,558 - __main__ - INFO - Página 234 de tickets: 100 registros procesados, 0 nuevos.
+2026-01-02 09:36:31,863 - __main__ - INFO - Página 235 de tickets: 100 registros procesados, 0 nuevos.
+2026-01-02 09:36:33,250 - __main__ - INFO - Página 236 de tickets: 100 registros procesados, 0 nuevos.
+2026-01-02 09:36:34,407 - __main__ - INFO - Página 237 de tickets: 100 registros procesados, 0 nuevos.
+2026-01-02 09:36:35,570 - __main__ - INFO - Página 238 de tickets: 100 registros procesados, 0 nuevos.
+2026-01-02 09:36:36,868 - __main__ - INFO - Página 239 de tickets: 100 registros procesados, 0 nuevos.
+2026-01-02 09:36:38,102 - __main__ - INFO - Página 240 de tickets: 100 registros procesados, 0 nuevos.
+2026-01-02 09:36:39,420 - __main__ - INFO - Página 241 de tickets: 100 registros procesados, 0 nuevos.
+2026-01-02 09:36:40,678 - __main__ - INFO - Página 242 de tickets: 100 registros procesados, 0 nuevos.
+2026-01-02 09:36:41,902 - __main__ - INFO - Página 243 de tickets: 100 registros procesados, 0 nuevos.
+2026-01-02 09:36:43,180 - __main__ - INFO - Página 244 de tickets: 100 registros procesados, 0 nuevos.
+2026-01-02 09:36:44,416 - __main__ - INFO - Página 245 de tickets: 100 registros procesados, 0 nuevos.
+2026-01-02 09:36:45,616 - __main__ - INFO - Página 246 de tickets: 100 registros procesados, 0 nuevos.
+2026-01-02 09:36:46,968 - __main__ - INFO - Página 247 de tickets: 100 registros procesados, 0 nuevos.
+2026-01-02 09:36:48,327 - __main__ - INFO - Página 248 de tickets: 100 registros procesados, 0 nuevos.
+2026-01-02 09:36:49,603 - __main__ - INFO - Página 249 de tickets: 100 registros procesados, 0 nuevos.
+2026-01-02 09:36:50,789 - __main__ - INFO - Página 250 de tickets: 100 registros procesados, 0 nuevos.
+2026-01-02 09:36:52,026 - __main__ - INFO - Página 251 de tickets: 100 registros procesados, 0 nuevos.
+2026-01-02 09:36:53,240 - __main__ - INFO - Página 252 de tickets: 100 registros procesados, 0 nuevos.
+2026-01-02 09:36:54,596 - __main__ - INFO - Página 253 de tickets: 100 registros procesados, 0 nuevos.
+2026-01-02 09:36:55,803 - __main__ - INFO - Página 254 de tickets: 100 registros procesados, 0 nuevos.
+2026-01-02 09:36:56,885 - __main__ - INFO - Página 255 de tickets: 14 registros procesados, 0 nuevos.
+2026-01-02 09:36:56,886 - __main__ - INFO - Última página alcanzada para tickets
+2026-01-02 11:21:14,497 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.100.6:5000
+2026-01-02 11:21:14,498 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2026-01-02 11:21:19,086 - werkzeug - INFO - 127.0.0.1 - - [02/Jan/2026 11:21:19] "[32mGET /grabar-gestiones HTTP/1.1[0m" 302 -
+2026-01-02 11:21:19,135 - werkzeug - INFO - 127.0.0.1 - - [02/Jan/2026 11:21:19] "GET /progreso-grabar-gestiones HTTP/1.1" 200 -
+2026-01-02 11:21:19,369 - werkzeug - INFO - 127.0.0.1 - - [02/Jan/2026 11:21:19] "GET /stream-grabar-gestiones HTTP/1.1" 200 -
+2026-01-02 11:21:21,096 - __main__ - INFO - Página 151 de users: 58 registros procesados, 0 nuevos.
+2026-01-02 11:21:21,097 - __main__ - INFO - Última página alcanzada para users
+2026-01-02 11:21:22,005 - __main__ - INFO - Página 190 de tickets: 100 registros procesados, 0 nuevos.
+2026-01-02 11:21:22,786 - __main__ - INFO - Página 191 de tickets: 100 registros procesados, 0 nuevos.
+2026-01-02 11:21:23,652 - __main__ - INFO - Página 192 de tickets: 100 registros procesados, 0 nuevos.
+2026-01-02 11:21:24,462 - __main__ - INFO - Página 193 de tickets: 100 registros procesados, 0 nuevos.
+2026-01-02 11:21:25,378 - __main__ - INFO - Página 194 de tickets: 100 registros procesados, 0 nuevos.
+2026-01-02 11:21:26,299 - __main__ - INFO - Página 195 de tickets: 100 registros procesados, 0 nuevos.
+2026-01-02 11:21:27,157 - __main__ - INFO - Página 196 de tickets: 100 registros procesados, 0 nuevos.
+2026-01-02 11:21:28,020 - __main__ - INFO - Página 197 de tickets: 100 registros procesados, 0 nuevos.
+2026-01-02 11:21:28,870 - __main__ - INFO - Página 198 de tickets: 100 registros procesados, 0 nuevos.
+2026-01-02 11:21:29,818 - __main__ - INFO - Página 199 de tickets: 100 registros procesados, 0 nuevos.
+2026-01-02 11:21:30,671 - __main__ - INFO - Página 200 de tickets: 100 registros procesados, 0 nuevos.
+2026-01-02 11:21:31,478 - __main__ - INFO - Página 201 de tickets: 100 registros procesados, 0 nuevos.
+2026-01-02 11:21:32,378 - __main__ - INFO - Página 202 de tickets: 100 registros procesados, 0 nuevos.
+2026-01-02 11:21:33,305 - __main__ - INFO - Página 203 de tickets: 100 registros procesados, 0 nuevos.
+2026-01-02 11:21:34,091 - __main__ - INFO - Página 204 de tickets: 100 registros procesados, 0 nuevos.
+2026-01-02 11:21:34,944 - __main__ - INFO - Página 205 de tickets: 100 registros procesados, 0 nuevos.
+2026-01-02 11:21:35,741 - __main__ - INFO - Página 206 de tickets: 100 registros procesados, 0 nuevos.
+2026-01-02 11:21:36,688 - __main__ - INFO - Página 207 de tickets: 100 registros procesados, 0 nuevos.
+2026-01-02 11:21:37,571 - __main__ - INFO - Página 208 de tickets: 100 registros procesados, 0 nuevos.
+2026-01-02 11:21:38,446 - __main__ - INFO - Página 209 de tickets: 100 registros procesados, 0 nuevos.
+2026-01-02 11:21:39,249 - __main__ - INFO - Página 210 de tickets: 100 registros procesados, 0 nuevos.
+2026-01-02 11:21:40,062 - __main__ - INFO - Página 211 de tickets: 100 registros procesados, 0 nuevos.
+2026-01-02 11:21:40,906 - __main__ - INFO - Página 212 de tickets: 100 registros procesados, 0 nuevos.
+2026-01-02 11:21:41,775 - __main__ - INFO - Página 213 de tickets: 100 registros procesados, 0 nuevos.
+2026-01-02 11:21:42,630 - __main__ - INFO - Página 214 de tickets: 100 registros procesados, 0 nuevos.
+2026-01-02 11:21:43,481 - __main__ - INFO - Página 215 de tickets: 100 registros procesados, 0 nuevos.
+2026-01-02 11:21:44,456 - __main__ - INFO - Página 216 de tickets: 100 registros procesados, 0 nuevos.
+2026-01-02 11:21:45,360 - __main__ - INFO - Página 217 de tickets: 100 registros procesados, 0 nuevos.
+2026-01-02 11:21:46,162 - __main__ - INFO - Página 218 de tickets: 100 registros procesados, 0 nuevos.
+2026-01-02 11:21:46,992 - __main__ - INFO - Página 219 de tickets: 100 registros procesados, 0 nuevos.
+2026-01-02 11:21:48,114 - __main__ - INFO - Página 220 de tickets: 100 registros procesados, 0 nuevos.
+2026-01-02 11:21:49,057 - __main__ - INFO - Página 221 de tickets: 100 registros procesados, 0 nuevos.
+2026-01-02 11:21:50,023 - __main__ - INFO - Página 222 de tickets: 100 registros procesados, 0 nuevos.
+2026-01-02 11:21:50,866 - __main__ - INFO - Página 223 de tickets: 100 registros procesados, 0 nuevos.
+2026-01-02 11:21:51,691 - __main__ - INFO - Página 224 de tickets: 100 registros procesados, 0 nuevos.
+2026-01-02 11:21:52,538 - __main__ - INFO - Página 225 de tickets: 100 registros procesados, 0 nuevos.
+2026-01-02 11:21:53,371 - __main__ - INFO - Página 226 de tickets: 100 registros procesados, 0 nuevos.
+2026-01-02 11:21:54,168 - __main__ - INFO - Página 227 de tickets: 100 registros procesados, 0 nuevos.
+2026-01-02 11:21:55,077 - __main__ - INFO - Página 228 de tickets: 100 registros procesados, 0 nuevos.
+2026-01-02 11:21:55,917 - __main__ - INFO - Página 229 de tickets: 100 registros procesados, 0 nuevos.
+2026-01-02 11:21:56,733 - __main__ - INFO - Página 230 de tickets: 100 registros procesados, 0 nuevos.
+2026-01-02 11:21:57,595 - __main__ - INFO - Página 231 de tickets: 100 registros procesados, 0 nuevos.
+2026-01-02 11:21:58,480 - __main__ - INFO - Página 232 de tickets: 100 registros procesados, 0 nuevos.
+2026-01-02 11:21:59,379 - __main__ - INFO - Página 233 de tickets: 100 registros procesados, 0 nuevos.
+2026-01-02 11:22:00,245 - __main__ - INFO - Página 234 de tickets: 100 registros procesados, 0 nuevos.
+2026-01-02 11:22:01,103 - __main__ - INFO - Página 235 de tickets: 100 registros procesados, 0 nuevos.
+2026-01-02 11:22:01,950 - __main__ - INFO - Página 236 de tickets: 100 registros procesados, 0 nuevos.
+2026-01-02 11:22:02,808 - __main__ - INFO - Página 237 de tickets: 100 registros procesados, 0 nuevos.
+2026-01-02 11:22:03,715 - __main__ - INFO - Página 238 de tickets: 100 registros procesados, 0 nuevos.
+2026-01-02 11:22:04,565 - __main__ - INFO - Página 239 de tickets: 100 registros procesados, 0 nuevos.
+2026-01-02 11:22:05,513 - __main__ - INFO - Página 240 de tickets: 100 registros procesados, 0 nuevos.
+2026-01-02 11:22:06,344 - __main__ - INFO - Página 241 de tickets: 100 registros procesados, 0 nuevos.
+2026-01-02 11:22:07,314 - __main__ - INFO - Página 242 de tickets: 100 registros procesados, 0 nuevos.
+2026-01-02 11:22:08,161 - __main__ - INFO - Página 243 de tickets: 100 registros procesados, 0 nuevos.
+2026-01-02 11:22:09,008 - __main__ - INFO - Página 244 de tickets: 100 registros procesados, 0 nuevos.
+2026-01-02 11:22:09,830 - __main__ - INFO - Página 245 de tickets: 100 registros procesados, 0 nuevos.
+2026-01-02 11:22:10,671 - __main__ - INFO - Página 246 de tickets: 100 registros procesados, 0 nuevos.
+2026-01-02 11:22:11,605 - __main__ - INFO - Página 247 de tickets: 100 registros procesados, 0 nuevos.
+2026-01-02 11:22:12,473 - __main__ - INFO - Página 248 de tickets: 100 registros procesados, 0 nuevos.
+2026-01-02 11:22:13,416 - __main__ - INFO - Página 249 de tickets: 100 registros procesados, 0 nuevos.
+2026-01-02 11:22:14,244 - __main__ - INFO - Página 250 de tickets: 100 registros procesados, 0 nuevos.
+2026-01-02 11:22:15,215 - __main__ - INFO - Página 251 de tickets: 100 registros procesados, 0 nuevos.
+2026-01-02 11:22:16,193 - __main__ - INFO - Página 252 de tickets: 100 registros procesados, 0 nuevos.
+2026-01-02 11:22:17,020 - __main__ - INFO - Página 253 de tickets: 100 registros procesados, 0 nuevos.
+2026-01-02 11:22:17,914 - __main__ - INFO - Página 254 de tickets: 100 registros procesados, 0 nuevos.
+2026-01-02 11:22:19,767 - __main__ - INFO - Insertadas 2 nuevas gestiones
+2026-01-02 11:22:19,768 - __main__ - INFO - Página 255 de tickets: 17 registros procesados, 2 nuevos.
+2026-01-02 11:22:19,768 - __main__ - INFO - Última página alcanzada para tickets
+2026-01-02 11:23:12,845 - werkzeug - INFO - 127.0.0.1 - - [02/Jan/2026 11:23:12] "[32mGET /verificar-y-enviar-encuestas HTTP/1.1[0m" 302 -
+2026-01-02 11:23:12,866 - werkzeug - INFO - 127.0.0.1 - - [02/Jan/2026 11:23:12] "GET /progreso-enviar-encuestas HTTP/1.1" 200 -
+2026-01-02 11:23:12,942 - werkzeug - INFO - 127.0.0.1 - - [02/Jan/2026 11:23:12] "GET /stream-enviar-encuestas HTTP/1.1" 200 -
+2026-01-02 11:23:16,127 - __main__ - INFO - Encuesta enviada exitosamente a miyen.medina@nobis.com.ar para gestión 132563
+2026-01-02 11:23:19,419 - __main__ - INFO - Encuesta enviada exitosamente a agostina.loza@nobis.com.ar para gestión 132566
+2026-01-02 13:07:32,852 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.100.6:5000
+2026-01-02 13:07:32,853 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2026-01-02 13:07:37,946 - werkzeug - INFO - 127.0.0.1 - - [02/Jan/2026 13:07:37] "[32mGET /grabar-gestiones HTTP/1.1[0m" 302 -
+2026-01-02 13:07:37,967 - werkzeug - INFO - 127.0.0.1 - - [02/Jan/2026 13:07:37] "GET /progreso-grabar-gestiones HTTP/1.1" 200 -
+2026-01-02 13:07:38,139 - werkzeug - INFO - 127.0.0.1 - - [02/Jan/2026 13:07:38] "GET /stream-grabar-gestiones HTTP/1.1" 200 -
+2026-01-02 13:07:41,028 - __main__ - INFO - Insertados 16 nuevos usuarios
+2026-01-02 13:07:41,029 - __main__ - INFO - Página 151 de users: 74 registros procesados, 16 nuevos.
+2026-01-02 13:07:41,029 - __main__ - INFO - Última página alcanzada para users
+2026-01-02 13:07:41,997 - __main__ - INFO - Página 190 de tickets: 100 registros procesados, 0 nuevos.
+2026-01-02 13:07:43,036 - __main__ - INFO - Página 191 de tickets: 100 registros procesados, 0 nuevos.
+2026-01-02 13:07:44,007 - __main__ - INFO - Página 192 de tickets: 100 registros procesados, 0 nuevos.
+2026-01-02 13:07:44,958 - __main__ - INFO - Página 193 de tickets: 100 registros procesados, 0 nuevos.
+2026-01-02 13:07:46,024 - __main__ - INFO - Página 194 de tickets: 100 registros procesados, 0 nuevos.
+2026-01-02 13:07:46,895 - __main__ - INFO - Página 195 de tickets: 100 registros procesados, 0 nuevos.
+2026-01-02 13:07:47,884 - __main__ - INFO - Página 196 de tickets: 100 registros procesados, 0 nuevos.
+2026-01-02 13:07:48,847 - __main__ - INFO - Página 197 de tickets: 100 registros procesados, 0 nuevos.
+2026-01-02 13:07:49,824 - __main__ - INFO - Página 198 de tickets: 100 registros procesados, 0 nuevos.
+2026-01-02 13:07:50,688 - __main__ - INFO - Página 199 de tickets: 100 registros procesados, 0 nuevos.
+2026-01-02 13:07:51,710 - __main__ - INFO - Página 200 de tickets: 100 registros procesados, 0 nuevos.
+2026-01-02 13:07:52,713 - __main__ - INFO - Página 201 de tickets: 100 registros procesados, 0 nuevos.
+2026-01-02 13:07:53,666 - __main__ - INFO - Página 202 de tickets: 100 registros procesados, 0 nuevos.
+2026-01-02 13:07:54,563 - __main__ - INFO - Página 203 de tickets: 100 registros procesados, 0 nuevos.
+2026-01-02 13:07:55,603 - __main__ - INFO - Página 204 de tickets: 100 registros procesados, 0 nuevos.
+2026-01-02 13:07:56,473 - __main__ - INFO - Página 205 de tickets: 100 registros procesados, 0 nuevos.
+2026-01-02 13:07:57,382 - __main__ - INFO - Página 206 de tickets: 100 registros procesados, 0 nuevos.
+2026-01-02 13:07:58,354 - __main__ - INFO - Página 207 de tickets: 100 registros procesados, 0 nuevos.
+2026-01-02 13:07:59,212 - __main__ - INFO - Página 208 de tickets: 100 registros procesados, 0 nuevos.
+2026-01-02 13:08:00,129 - __main__ - INFO - Página 209 de tickets: 100 registros procesados, 0 nuevos.
+2026-01-02 13:08:01,121 - __main__ - INFO - Página 210 de tickets: 100 registros procesados, 0 nuevos.
+2026-01-02 13:08:02,113 - __main__ - INFO - Página 211 de tickets: 100 registros procesados, 0 nuevos.
+2026-01-02 13:08:03,081 - __main__ - INFO - Página 212 de tickets: 100 registros procesados, 0 nuevos.
+2026-01-02 13:08:04,031 - __main__ - INFO - Página 213 de tickets: 100 registros procesados, 0 nuevos.
+2026-01-02 13:08:05,011 - __main__ - INFO - Página 214 de tickets: 100 registros procesados, 0 nuevos.
+2026-01-02 13:08:05,951 - __main__ - INFO - Página 215 de tickets: 100 registros procesados, 0 nuevos.
+2026-01-02 13:08:06,831 - __main__ - INFO - Página 216 de tickets: 100 registros procesados, 0 nuevos.
+2026-01-02 13:08:07,742 - __main__ - INFO - Página 217 de tickets: 100 registros procesados, 0 nuevos.
+2026-01-02 13:08:08,714 - __main__ - INFO - Página 218 de tickets: 100 registros procesados, 0 nuevos.
+2026-01-02 13:08:09,690 - __main__ - INFO - Página 219 de tickets: 100 registros procesados, 0 nuevos.
+2026-01-02 13:08:10,599 - __main__ - INFO - Página 220 de tickets: 100 registros procesados, 0 nuevos.
+2026-01-02 13:08:11,529 - __main__ - INFO - Página 221 de tickets: 100 registros procesados, 0 nuevos.
+2026-01-02 13:08:12,531 - __main__ - INFO - Página 222 de tickets: 100 registros procesados, 0 nuevos.
+2026-01-02 13:08:13,729 - __main__ - INFO - Página 223 de tickets: 100 registros procesados, 0 nuevos.
+2026-01-02 13:08:14,757 - __main__ - INFO - Página 224 de tickets: 100 registros procesados, 0 nuevos.
+2026-01-02 13:08:15,628 - __main__ - INFO - Página 225 de tickets: 100 registros procesados, 0 nuevos.
+2026-01-02 13:08:16,628 - __main__ - INFO - Página 226 de tickets: 100 registros procesados, 0 nuevos.
+2026-01-02 13:08:17,599 - __main__ - INFO - Página 227 de tickets: 100 registros procesados, 0 nuevos.
+2026-01-02 13:08:18,646 - __main__ - INFO - Página 228 de tickets: 100 registros procesados, 0 nuevos.
+2026-01-02 13:08:19,618 - __main__ - INFO - Página 229 de tickets: 100 registros procesados, 0 nuevos.
+2026-01-02 13:08:20,545 - __main__ - INFO - Página 230 de tickets: 100 registros procesados, 0 nuevos.
+2026-01-02 13:08:21,459 - __main__ - INFO - Página 231 de tickets: 100 registros procesados, 0 nuevos.
+2026-01-02 13:08:22,507 - __main__ - INFO - Página 232 de tickets: 100 registros procesados, 0 nuevos.
+2026-01-02 13:08:23,575 - __main__ - INFO - Página 233 de tickets: 100 registros procesados, 0 nuevos.
+2026-01-02 13:08:24,665 - __main__ - INFO - Página 234 de tickets: 100 registros procesados, 0 nuevos.
+2026-01-02 13:08:25,766 - __main__ - INFO - Página 235 de tickets: 100 registros procesados, 0 nuevos.
+2026-01-02 13:08:26,736 - __main__ - INFO - Página 236 de tickets: 100 registros procesados, 0 nuevos.
+2026-01-02 13:08:27,617 - __main__ - INFO - Página 237 de tickets: 100 registros procesados, 0 nuevos.
+2026-01-02 13:08:28,632 - __main__ - INFO - Página 238 de tickets: 100 registros procesados, 0 nuevos.
+2026-01-02 13:08:29,624 - __main__ - INFO - Página 239 de tickets: 100 registros procesados, 0 nuevos.
+2026-01-02 13:08:30,567 - __main__ - INFO - Página 240 de tickets: 100 registros procesados, 0 nuevos.
+2026-01-02 13:08:31,589 - __main__ - INFO - Página 241 de tickets: 100 registros procesados, 0 nuevos.
+2026-01-02 13:08:32,677 - __main__ - INFO - Página 242 de tickets: 100 registros procesados, 0 nuevos.
+2026-01-02 13:08:33,636 - __main__ - INFO - Página 243 de tickets: 100 registros procesados, 0 nuevos.
+2026-01-02 13:08:34,464 - __main__ - INFO - Página 244 de tickets: 100 registros procesados, 0 nuevos.
+2026-01-02 13:08:35,426 - __main__ - INFO - Página 245 de tickets: 100 registros procesados, 0 nuevos.
+2026-01-02 13:08:36,412 - __main__ - INFO - Página 246 de tickets: 100 registros procesados, 0 nuevos.
+2026-01-02 13:08:37,318 - __main__ - INFO - Página 247 de tickets: 100 registros procesados, 0 nuevos.
+2026-01-02 13:08:38,373 - __main__ - INFO - Página 248 de tickets: 100 registros procesados, 0 nuevos.
+2026-01-02 13:08:39,313 - __main__ - INFO - Página 249 de tickets: 100 registros procesados, 0 nuevos.
+2026-01-02 13:08:40,293 - __main__ - INFO - Página 250 de tickets: 100 registros procesados, 0 nuevos.
+2026-01-02 13:08:41,357 - __main__ - INFO - Página 251 de tickets: 100 registros procesados, 0 nuevos.
+2026-01-02 13:08:42,313 - __main__ - INFO - Página 252 de tickets: 100 registros procesados, 0 nuevos.
+2026-01-02 13:08:43,222 - __main__ - INFO - Página 253 de tickets: 100 registros procesados, 0 nuevos.
+2026-01-02 13:08:44,131 - __main__ - INFO - Página 254 de tickets: 100 registros procesados, 0 nuevos.
+2026-01-02 13:08:45,392 - __main__ - INFO - Insertadas 1 nuevas gestiones
+2026-01-02 13:08:45,392 - __main__ - INFO - Página 255 de tickets: 23 registros procesados, 1 nuevos.
+2026-01-02 13:08:45,392 - __main__ - INFO - Última página alcanzada para tickets
+2026-01-02 13:09:03,872 - werkzeug - INFO - 127.0.0.1 - - [02/Jan/2026 13:09:03] "[32mGET /verificar-y-enviar-encuestas HTTP/1.1[0m" 302 -
+2026-01-02 13:09:03,882 - werkzeug - INFO - 127.0.0.1 - - [02/Jan/2026 13:09:03] "GET /progreso-enviar-encuestas HTTP/1.1" 200 -
+2026-01-02 13:09:03,931 - werkzeug - INFO - 127.0.0.1 - - [02/Jan/2026 13:09:03] "GET /stream-enviar-encuestas HTTP/1.1" 200 -
+2026-01-02 13:09:07,084 - __main__ - INFO - Encuesta enviada exitosamente a ornela.pezzini@nobis.com.ar para gestión 132581
+2026-01-02 13:09:18,623 - werkzeug - INFO - 127.0.0.1 - - [02/Jan/2026 13:09:18] "GET /gracias HTTP/1.1" 200 -
+2026-01-02 13:09:18,703 - werkzeug - INFO - 127.0.0.1 - - [02/Jan/2026 13:09:18] "GET /static/logo_operaciones.png HTTP/1.1" 200 -
+2026-01-02 13:11:39,829 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.100.6:5000
+2026-01-02 13:11:39,829 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2026-01-02 13:11:42,558 - werkzeug - INFO - 127.0.0.1 - - [02/Jan/2026 13:11:42] "GET /gracias HTTP/1.1" 200 -
+2026-01-02 13:11:42,639 - werkzeug - INFO - 127.0.0.1 - - [02/Jan/2026 13:11:42] "[36mGET /static/logo_operaciones.png HTTP/1.1[0m" 304 -
+2026-01-02 13:11:42,668 - werkzeug - INFO - 127.0.0.1 - - [02/Jan/2026 13:11:42] "[36mGET /favicon.ico HTTP/1.1[0m" 304 -
+2026-01-02 14:59:34,750 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.100.6:5000
+2026-01-02 14:59:34,751 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2026-01-02 14:59:38,908 - werkzeug - INFO - 127.0.0.1 - - [02/Jan/2026 14:59:38] "[32mGET /grabar-gestiones HTTP/1.1[0m" 302 -
+2026-01-02 14:59:38,942 - werkzeug - INFO - 127.0.0.1 - - [02/Jan/2026 14:59:38] "GET /progreso-grabar-gestiones HTTP/1.1" 200 -
+2026-01-02 14:59:39,101 - werkzeug - INFO - 127.0.0.1 - - [02/Jan/2026 14:59:39] "GET /stream-grabar-gestiones HTTP/1.1" 200 -
+2026-01-02 14:59:41,256 - __main__ - INFO - Página 151 de users: 74 registros procesados, 0 nuevos.
+2026-01-02 14:59:41,257 - __main__ - INFO - Última página alcanzada para users
+2026-01-02 14:59:42,245 - __main__ - INFO - Página 190 de tickets: 100 registros procesados, 0 nuevos.
+2026-01-02 14:59:43,247 - __main__ - INFO - Página 191 de tickets: 100 registros procesados, 0 nuevos.
+2026-01-02 14:59:44,404 - __main__ - INFO - Página 192 de tickets: 100 registros procesados, 0 nuevos.
+2026-01-02 14:59:45,457 - __main__ - INFO - Página 193 de tickets: 100 registros procesados, 0 nuevos.
+2026-01-02 14:59:46,489 - __main__ - INFO - Página 194 de tickets: 100 registros procesados, 0 nuevos.
+2026-01-02 14:59:47,448 - __main__ - INFO - Página 195 de tickets: 100 registros procesados, 0 nuevos.
+2026-01-02 14:59:48,338 - __main__ - INFO - Página 196 de tickets: 100 registros procesados, 0 nuevos.
+2026-01-02 14:59:49,318 - __main__ - INFO - Página 197 de tickets: 100 registros procesados, 0 nuevos.
+2026-01-02 14:59:50,226 - __main__ - INFO - Página 198 de tickets: 100 registros procesados, 0 nuevos.
+2026-01-02 14:59:51,201 - __main__ - INFO - Página 199 de tickets: 100 registros procesados, 0 nuevos.
+2026-01-02 14:59:52,147 - __main__ - INFO - Página 200 de tickets: 100 registros procesados, 0 nuevos.
+2026-01-02 14:59:53,096 - __main__ - INFO - Página 201 de tickets: 100 registros procesados, 0 nuevos.
+2026-01-02 14:59:54,027 - __main__ - INFO - Página 202 de tickets: 100 registros procesados, 0 nuevos.
+2026-01-02 14:59:55,028 - __main__ - INFO - Página 203 de tickets: 100 registros procesados, 0 nuevos.
+2026-01-02 14:59:55,912 - __main__ - INFO - Página 204 de tickets: 100 registros procesados, 0 nuevos.
+2026-01-02 14:59:56,886 - __main__ - INFO - Página 205 de tickets: 100 registros procesados, 0 nuevos.
+2026-01-02 14:59:57,865 - __main__ - INFO - Página 206 de tickets: 100 registros procesados, 0 nuevos.
+2026-01-02 14:59:58,942 - __main__ - INFO - Página 207 de tickets: 100 registros procesados, 0 nuevos.
+2026-01-02 14:59:59,879 - __main__ - INFO - Página 208 de tickets: 100 registros procesados, 0 nuevos.
+2026-01-02 15:00:00,896 - __main__ - INFO - Página 209 de tickets: 100 registros procesados, 0 nuevos.
+2026-01-02 15:00:01,756 - __main__ - INFO - Página 210 de tickets: 100 registros procesados, 0 nuevos.
+2026-01-02 15:00:02,726 - __main__ - INFO - Página 211 de tickets: 100 registros procesados, 0 nuevos.
+2026-01-02 15:00:03,684 - __main__ - INFO - Página 212 de tickets: 100 registros procesados, 0 nuevos.
+2026-01-02 15:00:04,675 - __main__ - INFO - Página 213 de tickets: 100 registros procesados, 0 nuevos.
+2026-01-02 15:00:05,870 - __main__ - INFO - Página 214 de tickets: 100 registros procesados, 0 nuevos.
+2026-01-02 15:00:06,820 - __main__ - INFO - Página 215 de tickets: 100 registros procesados, 0 nuevos.
+2026-01-02 15:00:07,844 - __main__ - INFO - Página 216 de tickets: 100 registros procesados, 0 nuevos.
+2026-01-02 15:00:08,773 - __main__ - INFO - Página 217 de tickets: 100 registros procesados, 0 nuevos.
+2026-01-02 15:00:09,784 - __main__ - INFO - Página 218 de tickets: 100 registros procesados, 0 nuevos.
+2026-01-02 15:00:10,655 - __main__ - INFO - Página 219 de tickets: 100 registros procesados, 0 nuevos.
+2026-01-02 15:00:11,612 - __main__ - INFO - Página 220 de tickets: 100 registros procesados, 0 nuevos.
+2026-01-02 15:00:12,604 - __main__ - INFO - Página 221 de tickets: 100 registros procesados, 0 nuevos.
+2026-01-02 15:00:13,495 - __main__ - INFO - Página 222 de tickets: 100 registros procesados, 0 nuevos.
+2026-01-02 15:00:14,432 - __main__ - INFO - Página 223 de tickets: 100 registros procesados, 0 nuevos.
+2026-01-02 15:00:15,562 - __main__ - INFO - Página 224 de tickets: 100 registros procesados, 0 nuevos.
+2026-01-02 15:00:16,478 - __main__ - INFO - Página 225 de tickets: 100 registros procesados, 0 nuevos.
+2026-01-02 15:00:17,455 - __main__ - INFO - Página 226 de tickets: 100 registros procesados, 0 nuevos.
+2026-01-02 15:00:18,510 - __main__ - INFO - Página 227 de tickets: 100 registros procesados, 0 nuevos.
+2026-01-02 15:00:19,513 - __main__ - INFO - Página 228 de tickets: 100 registros procesados, 0 nuevos.
+2026-01-02 15:00:20,452 - __main__ - INFO - Página 229 de tickets: 100 registros procesados, 0 nuevos.
+2026-01-02 15:00:21,496 - __main__ - INFO - Página 230 de tickets: 100 registros procesados, 0 nuevos.
+2026-01-02 15:00:22,501 - __main__ - INFO - Página 231 de tickets: 100 registros procesados, 0 nuevos.
+2026-01-02 15:00:23,634 - __main__ - INFO - Página 232 de tickets: 100 registros procesados, 0 nuevos.
+2026-01-02 15:00:24,673 - __main__ - INFO - Página 233 de tickets: 100 registros procesados, 0 nuevos.
+2026-01-02 15:00:25,662 - __main__ - INFO - Página 234 de tickets: 100 registros procesados, 0 nuevos.
+2026-01-02 15:00:26,642 - __main__ - INFO - Página 235 de tickets: 100 registros procesados, 0 nuevos.
+2026-01-02 15:00:27,676 - __main__ - INFO - Página 236 de tickets: 100 registros procesados, 0 nuevos.
+2026-01-02 15:00:28,853 - __main__ - INFO - Página 237 de tickets: 100 registros procesados, 0 nuevos.
+2026-01-02 15:00:29,807 - __main__ - INFO - Página 238 de tickets: 100 registros procesados, 0 nuevos.
+2026-01-02 15:00:30,834 - __main__ - INFO - Página 239 de tickets: 100 registros procesados, 0 nuevos.
+2026-01-02 15:00:31,925 - __main__ - INFO - Página 240 de tickets: 100 registros procesados, 0 nuevos.
+2026-01-02 15:00:32,998 - __main__ - INFO - Página 241 de tickets: 100 registros procesados, 0 nuevos.
+2026-01-02 15:00:33,988 - __main__ - INFO - Página 242 de tickets: 100 registros procesados, 0 nuevos.
+2026-01-02 15:00:34,969 - __main__ - INFO - Página 243 de tickets: 100 registros procesados, 0 nuevos.
+2026-01-02 15:00:36,038 - __main__ - INFO - Página 244 de tickets: 100 registros procesados, 0 nuevos.
+2026-01-02 15:00:36,887 - __main__ - INFO - Página 245 de tickets: 100 registros procesados, 0 nuevos.
+2026-01-02 15:00:37,860 - __main__ - INFO - Página 246 de tickets: 100 registros procesados, 0 nuevos.
+2026-01-02 15:00:38,793 - __main__ - INFO - Página 247 de tickets: 100 registros procesados, 0 nuevos.
+2026-01-02 15:00:39,775 - __main__ - INFO - Página 248 de tickets: 100 registros procesados, 0 nuevos.
+2026-01-02 15:00:40,956 - __main__ - INFO - Página 249 de tickets: 100 registros procesados, 0 nuevos.
+2026-01-02 15:00:41,908 - __main__ - INFO - Página 250 de tickets: 100 registros procesados, 0 nuevos.
+2026-01-02 15:00:43,032 - __main__ - INFO - Página 251 de tickets: 100 registros procesados, 0 nuevos.
+2026-01-02 15:00:44,037 - __main__ - INFO - Página 252 de tickets: 100 registros procesados, 0 nuevos.
+2026-01-02 15:00:45,374 - __main__ - INFO - Insertadas 1 nuevas gestiones
+2026-01-02 15:00:45,376 - __main__ - INFO - Página 253 de tickets: 100 registros procesados, 1 nuevos.
+2026-01-02 15:00:46,557 - __main__ - INFO - Página 254 de tickets: 100 registros procesados, 0 nuevos.
+2026-01-02 15:00:47,934 - __main__ - INFO - Insertadas 3 nuevas gestiones
+2026-01-02 15:00:47,935 - __main__ - INFO - Página 255 de tickets: 26 registros procesados, 3 nuevos.
+2026-01-02 15:00:47,936 - __main__ - INFO - Última página alcanzada para tickets
+2026-01-02 15:02:37,027 - werkzeug - INFO - 127.0.0.1 - - [02/Jan/2026 15:02:37] "[32mGET /verificar-y-enviar-encuestas HTTP/1.1[0m" 302 -
+2026-01-02 15:02:37,048 - werkzeug - INFO - 127.0.0.1 - - [02/Jan/2026 15:02:37] "GET /progreso-enviar-encuestas HTTP/1.1" 200 -
+2026-01-02 15:02:37,122 - werkzeug - INFO - 127.0.0.1 - - [02/Jan/2026 15:02:37] "GET /stream-enviar-encuestas HTTP/1.1" 200 -
+2026-01-02 15:02:39,390 - __main__ - INFO - Encuesta enviada exitosamente a julieta.litman@nobis.com.ar para gestión 132170
+2026-01-02 15:02:43,759 - __main__ - INFO - Encuesta enviada exitosamente a facundo.reales@nobis.com.ar para gestión 132589
+2026-01-02 15:02:48,220 - __main__ - INFO - Encuesta enviada exitosamente a bryan.saavedra@nobis.com.ar para gestión 132596
+2026-01-02 15:02:51,589 - __main__ - INFO - Encuesta enviada exitosamente a aldana.ocampo@nobis.com.ar para gestión 132598
+2026-01-02 17:11:22,870 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.100.6:5000
+2026-01-02 17:11:22,871 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2026-01-05 10:55:13,020 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.100.6:5000
+2026-01-05 10:55:13,022 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2026-01-05 10:55:20,098 - werkzeug - INFO - 127.0.0.1 - - [05/Jan/2026 10:55:20] "[32mGET /grabar-gestiones HTTP/1.1[0m" 302 -
+2026-01-05 10:55:20,126 - werkzeug - INFO - 127.0.0.1 - - [05/Jan/2026 10:55:20] "GET /progreso-grabar-gestiones HTTP/1.1" 200 -
+2026-01-05 10:55:20,276 - werkzeug - INFO - 127.0.0.1 - - [05/Jan/2026 10:55:20] "GET /stream-grabar-gestiones HTTP/1.1" 200 -
+2026-01-05 10:55:23,109 - __main__ - INFO - Insertados 1 nuevos usuarios
+2026-01-05 10:55:23,110 - __main__ - INFO - Página 151 de users: 75 registros procesados, 1 nuevos.
+2026-01-05 10:55:23,111 - __main__ - INFO - Última página alcanzada para users
+2026-01-05 10:55:24,227 - werkzeug - INFO - 127.0.0.1 - - [05/Jan/2026 10:55:24] "GET /gracias HTTP/1.1" 200 -
+2026-01-05 10:55:24,383 - __main__ - INFO - Página 190 de tickets: 100 registros procesados, 0 nuevos.
+2026-01-05 10:55:24,404 - werkzeug - INFO - 127.0.0.1 - - [05/Jan/2026 10:55:24] "[36mGET /static/logo_operaciones.png HTTP/1.1[0m" 304 -
+2026-01-05 10:55:25,543 - __main__ - INFO - Página 191 de tickets: 100 registros procesados, 0 nuevos.
+2026-01-05 10:55:26,822 - __main__ - INFO - Página 192 de tickets: 100 registros procesados, 0 nuevos.
+2026-01-05 10:55:27,262 - werkzeug - INFO - 127.0.0.1 - - [05/Jan/2026 10:55:27] "[33mGET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1[0m" 404 -
+2026-01-05 10:55:27,943 - __main__ - INFO - Página 193 de tickets: 100 registros procesados, 0 nuevos.
+2026-01-05 10:55:29,125 - __main__ - INFO - Página 194 de tickets: 100 registros procesados, 0 nuevos.
+2026-01-05 10:55:30,313 - __main__ - INFO - Página 195 de tickets: 100 registros procesados, 0 nuevos.
+2026-01-05 10:55:31,492 - __main__ - INFO - Página 196 de tickets: 100 registros procesados, 0 nuevos.
+2026-01-05 10:55:32,854 - __main__ - INFO - Página 197 de tickets: 100 registros procesados, 0 nuevos.
+2026-01-05 10:55:34,162 - __main__ - INFO - Página 198 de tickets: 100 registros procesados, 0 nuevos.
+2026-01-05 10:55:35,511 - __main__ - INFO - Página 199 de tickets: 100 registros procesados, 0 nuevos.
+2026-01-05 10:55:36,923 - __main__ - INFO - Página 200 de tickets: 100 registros procesados, 0 nuevos.
+2026-01-05 10:55:38,110 - __main__ - INFO - Página 201 de tickets: 100 registros procesados, 0 nuevos.
+2026-01-05 10:55:39,373 - __main__ - INFO - Página 202 de tickets: 100 registros procesados, 0 nuevos.
+2026-01-05 10:55:40,590 - __main__ - INFO - Página 203 de tickets: 100 registros procesados, 0 nuevos.
+2026-01-05 10:55:41,760 - __main__ - INFO - Página 204 de tickets: 100 registros procesados, 0 nuevos.
+2026-01-05 10:55:42,886 - __main__ - INFO - Página 205 de tickets: 100 registros procesados, 0 nuevos.
+2026-01-05 10:55:43,980 - __main__ - INFO - Página 206 de tickets: 100 registros procesados, 0 nuevos.
+2026-01-05 10:55:45,270 - __main__ - INFO - Página 207 de tickets: 100 registros procesados, 0 nuevos.
+2026-01-05 10:55:46,351 - __main__ - INFO - Página 208 de tickets: 100 registros procesados, 0 nuevos.
+2026-01-05 10:55:47,422 - __main__ - INFO - Página 209 de tickets: 100 registros procesados, 0 nuevos.
+2026-01-05 10:55:48,677 - __main__ - INFO - Página 210 de tickets: 100 registros procesados, 0 nuevos.
+2026-01-05 10:55:49,978 - __main__ - INFO - Página 211 de tickets: 100 registros procesados, 0 nuevos.
+2026-01-05 10:55:51,129 - __main__ - INFO - Página 212 de tickets: 100 registros procesados, 0 nuevos.
+2026-01-05 10:55:52,297 - __main__ - INFO - Página 213 de tickets: 100 registros procesados, 0 nuevos.
+2026-01-05 10:55:53,518 - __main__ - INFO - Página 214 de tickets: 100 registros procesados, 0 nuevos.
+2026-01-05 10:55:54,646 - __main__ - INFO - Página 215 de tickets: 100 registros procesados, 0 nuevos.
+2026-01-05 10:55:56,009 - __main__ - INFO - Página 216 de tickets: 100 registros procesados, 0 nuevos.
+2026-01-05 10:55:57,286 - __main__ - INFO - Página 217 de tickets: 100 registros procesados, 0 nuevos.
+2026-01-05 10:55:58,622 - __main__ - INFO - Página 218 de tickets: 100 registros procesados, 0 nuevos.
+2026-01-05 10:55:59,819 - __main__ - INFO - Página 219 de tickets: 100 registros procesados, 0 nuevos.
+2026-01-05 10:56:01,024 - __main__ - INFO - Página 220 de tickets: 100 registros procesados, 0 nuevos.
+2026-01-05 10:56:02,344 - __main__ - INFO - Página 221 de tickets: 100 registros procesados, 0 nuevos.
+2026-01-05 10:56:03,665 - __main__ - INFO - Página 222 de tickets: 100 registros procesados, 0 nuevos.
+2026-01-05 10:56:04,855 - __main__ - INFO - Página 223 de tickets: 100 registros procesados, 0 nuevos.
+2026-01-05 10:56:06,047 - __main__ - INFO - Página 224 de tickets: 100 registros procesados, 0 nuevos.
+2026-01-05 10:56:07,144 - __main__ - INFO - Página 225 de tickets: 100 registros procesados, 0 nuevos.
+2026-01-05 10:56:08,487 - __main__ - INFO - Página 226 de tickets: 100 registros procesados, 0 nuevos.
+2026-01-05 10:56:09,723 - __main__ - INFO - Página 227 de tickets: 100 registros procesados, 0 nuevos.
+2026-01-05 10:56:10,946 - __main__ - INFO - Página 228 de tickets: 100 registros procesados, 0 nuevos.
+2026-01-05 10:56:12,125 - __main__ - INFO - Página 229 de tickets: 100 registros procesados, 0 nuevos.
+2026-01-05 10:56:13,522 - __main__ - INFO - Página 230 de tickets: 100 registros procesados, 0 nuevos.
+2026-01-05 10:56:14,923 - __main__ - INFO - Página 231 de tickets: 100 registros procesados, 0 nuevos.
+2026-01-05 10:56:16,238 - __main__ - INFO - Página 232 de tickets: 100 registros procesados, 0 nuevos.
+2026-01-05 10:56:17,422 - __main__ - INFO - Página 233 de tickets: 100 registros procesados, 0 nuevos.
+2026-01-05 10:56:18,559 - __main__ - INFO - Página 234 de tickets: 100 registros procesados, 0 nuevos.
+2026-01-05 10:56:19,851 - __main__ - INFO - Página 235 de tickets: 100 registros procesados, 0 nuevos.
+2026-01-05 10:56:21,146 - __main__ - INFO - Página 236 de tickets: 100 registros procesados, 0 nuevos.
+2026-01-05 10:56:22,305 - __main__ - INFO - Página 237 de tickets: 100 registros procesados, 0 nuevos.
+2026-01-05 10:56:23,511 - __main__ - INFO - Página 238 de tickets: 100 registros procesados, 0 nuevos.
+2026-01-05 10:56:24,740 - __main__ - INFO - Página 239 de tickets: 100 registros procesados, 0 nuevos.
+2026-01-05 10:56:25,965 - __main__ - INFO - Página 240 de tickets: 100 registros procesados, 0 nuevos.
+2026-01-05 10:56:27,118 - __main__ - INFO - Página 241 de tickets: 100 registros procesados, 0 nuevos.
+2026-01-05 10:56:28,227 - __main__ - INFO - Página 242 de tickets: 100 registros procesados, 0 nuevos.
+2026-01-05 10:56:29,289 - __main__ - INFO - Página 243 de tickets: 100 registros procesados, 0 nuevos.
+2026-01-05 10:56:30,466 - __main__ - INFO - Página 244 de tickets: 100 registros procesados, 0 nuevos.
+2026-01-05 10:56:31,647 - __main__ - INFO - Página 245 de tickets: 100 registros procesados, 0 nuevos.
+2026-01-05 10:56:32,867 - __main__ - INFO - Página 246 de tickets: 100 registros procesados, 0 nuevos.
+2026-01-05 10:56:34,097 - __main__ - INFO - Página 247 de tickets: 100 registros procesados, 0 nuevos.
+2026-01-05 10:56:35,202 - __main__ - INFO - Página 248 de tickets: 100 registros procesados, 0 nuevos.
+2026-01-05 10:56:36,508 - __main__ - INFO - Página 249 de tickets: 100 registros procesados, 0 nuevos.
+2026-01-05 10:56:37,638 - __main__ - INFO - Página 250 de tickets: 100 registros procesados, 0 nuevos.
+2026-01-05 10:56:38,818 - __main__ - INFO - Página 251 de tickets: 100 registros procesados, 0 nuevos.
+2026-01-05 10:56:39,967 - __main__ - INFO - Página 252 de tickets: 100 registros procesados, 0 nuevos.
+2026-01-05 10:56:41,077 - __main__ - INFO - Página 253 de tickets: 100 registros procesados, 0 nuevos.
+2026-01-05 10:56:42,296 - __main__ - INFO - Página 254 de tickets: 100 registros procesados, 0 nuevos.
+2026-01-05 10:56:44,163 - __main__ - INFO - Insertadas 3 nuevas gestiones
+2026-01-05 10:56:44,164 - __main__ - INFO - Página 255 de tickets: 49 registros procesados, 3 nuevos.
+2026-01-05 10:56:44,165 - __main__ - INFO - Última página alcanzada para tickets
+2026-01-05 10:56:56,442 - werkzeug - INFO - 127.0.0.1 - - [05/Jan/2026 10:56:56] "[32mGET /verificar-y-enviar-encuestas HTTP/1.1[0m" 302 -
+2026-01-05 10:56:56,460 - werkzeug - INFO - 127.0.0.1 - - [05/Jan/2026 10:56:56] "GET /progreso-enviar-encuestas HTTP/1.1" 200 -
+2026-01-05 10:56:56,535 - werkzeug - INFO - 127.0.0.1 - - [05/Jan/2026 10:56:56] "GET /stream-enviar-encuestas HTTP/1.1" 200 -
+2026-01-05 10:57:03,889 - __main__ - INFO - Encuesta enviada exitosamente a yohana.nieto@nobis.com.ar para gestión 132604
+2026-01-05 10:57:11,051 - __main__ - INFO - Encuesta enviada exitosamente a fernando.marmo@nobis.com.ar para gestión 132620
+2026-01-05 10:57:17,889 - __main__ - INFO - Encuesta enviada exitosamente a agustina.flores@nobis.com.ar para gestión 132646
