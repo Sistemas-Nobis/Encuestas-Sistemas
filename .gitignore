@@ -6,3 +6,4 @@ notas.txt
 *.log.*
 migrations/
 notas.txt
+backup/

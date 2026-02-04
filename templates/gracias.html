@@ -6,201 +6,280 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <style>
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body { height: 100%; overflow: hidden; font-family: system-ui, -apple-system, "Segoe UI", sans-serif; }
 
-    body, html {
-      height: 100%;
+    /* ====== VIDEO BACKGROUND ====== */
+    .video-bg {
+      position: fixed;
+      inset: 0;
+      z-index: 0;
       overflow: hidden;
-      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: #000;
     }
 
-    /* Fondo veraniego */
-    .bg {
-      position: relative;
-      width: 100%;
-      height: 100%;
-      background: linear-gradient(to top, #A2C617, #13A538);
-      display: flex;
+    /* Técnica: iframe grande para cubrir 16:9 en cualquier pantalla */
+    .video-bg iframe {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 120vw;
+      height: 120vh;
+      transform: translate(-50%, -50%);
+      border: 0;
+      pointer-events: none; /* evita clics sobre el video */
+    }
+
+    /* Overlay para mejorar contraste */
+    .overlay {
+      position: fixed;
+      inset: 0;
+      z-index: 1;
+      /*background: radial-gradient(circle at 20% 20%, rgba(255,255,255,0.10), transparent 45%),
+                  radial-gradient(circle at 80% 80%, rgba(0,0,0,0.45), transparent 55%),
+                  linear-gradient(to bottom, rgba(0,0,0,0.35), rgba(0,0,0,0.60));*/
+    }
+
+    /* ====== MODAL ====== */
+    .modal-backdrop {
+      position: fixed;
+      inset: 0;
+      z-index: 2;
+      display: none;
       align-items: center;
       justify-content: center;
-      text-align: center;
-      color: #fff;
-      padding: 1.5rem;
+      padding: 24px;
+      background: rgba(0,0,0,0.55);
+      backdrop-filter: blur(6px);
     }
 
-    /* Capa ligera para mejorar contraste del texto */
-    .bg::before {
+    .modal {
+      width: min(720px, 92vw);
+      border-radius: 22px;
+      background: rgba(255,255,255,0.10);
+      border: 1px solid rgba(255,255,255,0.18);
+      box-shadow: 0 18px 50px rgba(0,0,0,0.45);
+      padding: 34px 30px;
+      color: #fff;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .modal::before {
       content: "";
       position: absolute;
-      inset: 0;
-      background: radial-gradient(circle at 10% 20%, rgba(255,255,255,0.20), transparent 50%),
-                  radial-gradient(circle at 80% 80%, rgba(0,0,0,0.15), transparent 55%);
+      inset: -2px;
+      background: radial-gradient(circle at 30% 20%, rgba(255,255,255,0.18), transparent 45%),
+                  radial-gradient(circle at 70% 80%, rgba(19,165,56,0.20), transparent 55%);
       pointer-events: none;
+      z-index: 0;
     }
 
-    .content {
+    .modal-content {
       position: relative;
-      z-index: 2;
-      max-width: 600px;
-      /*background: rgba(0, 0, 0, 0.7);*/
-      backdrop-filter: blur(10px);
-      padding: 40px;
-      border-radius: 20px;
-      text-align: center;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-      border: 1px solid rgba(255,255,255,0.1);
-    }
-
-    .content h1 {
-      font-size: clamp(2rem, 3vw, 2.8rem);
-      margin-bottom: 0.5rem;
-      text-shadow: 0 3px 10px rgba(0,0,0,0.4);
-    }
-
-    .content p {
-      font-size: 1rem;
-      opacity: 0.95;
-      text-shadow: 0 2px 6px rgba(0,0,0,0.4);
-    }
-
-    .brand-tag {
-      margin-top: 1rem;
-      font-weight: 600;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      font-size: 0.8rem;
-      opacity: 0.9;
-    }
-
-    /* Contenedor de los elementos saltarines */
-    .summer-layer {
-      position: absolute;
-      inset: 0;
-      overflow: hidden;
-      pointer-events: none; /* para no interferir con clicks */
       z-index: 1;
     }
 
-    .item {
-      position: absolute;
-      bottom: -15%;  /* arrancan escondidos abajo */
-      font-size: 2.5rem;
-      transform-origin: center;
+    .modal h1 {
+      font-size: clamp(2rem, 3.2vw, 3rem);
+      line-height: 1.05;
+      margin-bottom: 10px;
+      text-shadow: 0 3px 12px rgba(0,0,0,0.45);
+    }
+
+    .modal p {
+      font-size: 1.05rem;
+      opacity: 0.95;
+      line-height: 1.55;
+      text-shadow: 0 2px 8px rgba(0,0,0,0.40);
+    }
+
+    .brand-tag {
+      margin-top: 14px;
+      font-weight: 650;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      font-size: 0.82rem;
+      opacity: 0.92;
+    }
+
+    .logo-wrap {
+      margin-top: 18px;
+      display: flex;
+      justify-content: center;
+    }
+
+    .logo-wrap img {
+      width: min(220px, 62vw);
+      height: auto;
+      opacity: 0.98;
+      filter: drop-shadow(0 10px 18px rgba(0,0,0,0.35));
+    }
+
+    /* Animación de entrada */
+    .modal-backdrop.show { display: flex; }
+    .modal {
+      transform: translateY(18px) scale(0.985);
       opacity: 0;
-      animation: jumpUp 4s ease-in-out forwards;
+      animation: modalIn 520ms ease-out forwards;
     }
 
-    @keyframes jumpUp {
-      0% {
-        transform: translateY(0) scale(0.8) rotate(0deg);
-        opacity: 0;
-      }
-      10% {
+    @keyframes modalIn {
+      to {
+        transform: translateY(0) scale(1);
         opacity: 1;
-      }
-      35% {
-        transform: translateY(-45vh) scale(1.1) rotate(15deg);
-        opacity: 1;
-      }
-      60% {
-        transform: translateY(0) scale(1) rotate(0deg);
-        opacity: 1;
-      }
-      100% {
-        transform: translateY(15vh) scale(0.9) rotate(-10deg);
-        opacity: 0;
       }
     }
 
-    /* Responsive: un poco más chicos en móviles */
-    @media (max-width: 600px) {
-      .item {
-        font-size: 2rem;
+    /* Botón opcional para cerrar (lo podés sacar si no querés cierre) */
+    .close-btn {
+      position: absolute;
+      top: 12px;
+      right: 12px;
+      z-index: 2;
+      width: 42px;
+      height: 42px;
+      border-radius: 12px;
+      border: 1px solid rgba(255,255,255,0.22);
+      background: rgba(0,0,0,0.20);
+      color: #fff;
+      cursor: pointer;
+      font-size: 20px;
+      line-height: 42px;
+    }
+    .close-btn:hover { background: rgba(0,0,0,0.35); }
+
+    /* Mobile: ajusta iframe para evitar recortes raros */
+    @media (max-width: 680px) {
+      .video-bg iframe {
+        width: 220vw;
+        height: 220vh;
       }
+      .modal { padding: 28px 22px; }
     }
   </style>
 </head>
+
 <body>
 
-  <div class="bg">
-    <div class="summer-layer" id="summer-layer"></div>
+  <!-- VIDEO BACKGROUND -->
+  <div class="video-bg">
+    <!-- Cambiá VIDEO_ID por el id del video que quieras -->
+    <div id="yt-player"></div>
+  </div>
 
-    <div class="content">
-      <h1>¡Gracias por responder nuestra encuesta!</h1>
-      <p>
-        Te deseamos un <strong>excelente comienzo de año</strong>.
-      </p>
-      <p class="brand-tag">
-        Equipo de Sistemas - <span>Nobis Medical</span>
-      </p>
-    </div>
+  <!-- Overlay -->
+  <div class="overlay"></div>
 
-    <div>
-        <img src="{{ url_for('static', filename='logo_operaciones.png') }}" alt="Nobis Medical" style="position: absolute; bottom: 10px; right: 10px; width: 150px; opacity: 1; margin: 15px;">
+  <!-- MODAL -->
+  <div class="modal-backdrop" id="thankModal">
+    <div class="modal" role="dialog" aria-modal="true" aria-labelledby="title">
+      <button class="close-btn" id="closeModal" aria-label="Cerrar">✕</button>
+
+      <div class="modal-content">
+        <h1 id="title">¡Gracias por responder nuestra encuesta!</h1>
+        <!--<p>Te deseamos un <strong>excelente comienzo de año</strong>.</p>-->
+
+        <p class="brand-tag">
+          Equipo de Sistemas - <span>Nobis Medical</span>
+        </p>
+
+        <!-- ✅ Logo de Operaciones dentro del modal -->
+        <div class="logo-wrap">
+          <img src="{{ url_for('static', filename='logo_operaciones.png') }}" alt="Operaciones - Nobis Medical">
+        </div>
+      </div>
     </div>
   </div>
 
+  <!-- YouTube IFrame API -->
   <script>
-    // Elementos veraniegos (podés cambiar emojis por imágenes)
-    const SUMMER_ICONS = [
-      "🛟", // salvavidas
-      "🏖️", // playa
-      "😎", // cara con lentes
-      "🌊",  // ola
-      "🧉", // Mate
-      "🤖", // Robot
-      "🌞",  // sol
-      "🦫"  // castor
-    ];
+    // ===== CONFIG =====
+    const VIDEO_ID = "_mzCKSJwlY4";
+    const SHOW_MODAL_AFTER_SECONDS = 4.5;
 
-    const layer = document.getElementById("summer-layer");
+    // ===== MODAL =====
+    const modal = document.getElementById("thankModal");
+    const closeBtn = document.getElementById("closeModal");
 
-    function createJumpingItem() {
-      const el = document.createElement("div");
-      el.classList.add("item");
+    function openModal() {
+      modal.classList.add("show");
+    }
+    function closeModal() {
+      modal.classList.remove("show");
+      modal.style.display = "none"; // por si querés que no vuelva a mostrarse
+    }
+    closeBtn.addEventListener("click", closeModal);
+    modal.addEventListener("click", (e) => {
+      if (e.target === modal) closeModal();
+    });
 
-      // Elegimos un icono aleatorio
-      const icon = SUMMER_ICONS[Math.floor(Math.random() * SUMMER_ICONS.length)];
-      el.textContent = icon;
+    // ===== YOUTUBE API LOAD =====
+    let player;
+    let modalShown = false;
+    let modalTimer = null;
 
-      // Posición horizontal aleatoria
-      const left = Math.random() * 100;
-      el.style.left = `${left}%`;
+    function loadYouTubeAPI() {
+      const tag = document.createElement("script");
+      tag.src = "https://www.youtube.com/iframe_api";
+      document.head.appendChild(tag);
+    }
 
-      // Pequeñas variaciones de tamaño
-      const sizeFactor = 0.8 + Math.random() * 1.6; // 0.8–2.4
-      el.style.fontSize = `${2.5 * sizeFactor}rem`;
+    window.onYouTubeIframeAPIReady = function () {
+      player = new YT.Player("yt-player", {
+        videoId: VIDEO_ID,
+        playerVars: {
+          autoplay: 1,
+          controls: 0,
+          disablekb: 1,
+          fs: 0,
+          modestbranding: 1,
+          rel: 0,
+          playsinline: 1,
+          mute: 1,
+          loop: 0,
+          iv_load_policy: 3
+        },
+        events: {
+          onReady: (event) => {
+            // Arranca mute + play
+            try {
+              event.target.mute();
+              event.target.playVideo();
+            } catch (e) {}
+          },
+          onStateChange: (event) => {
+            // Cuando el video realmente empieza (PLAYING), arrancamos el timer de 3s
+            if (event.data === YT.PlayerState.PLAYING && !modalShown) {
+              modalShown = true;
 
-      // Ligera variación de duración para que no sea tan robótico
-      const duration = 2.5 + Math.random() * 2; // 2.5–5.5s
-      el.style.animationDuration = `${duration}s`;
+              if (modalTimer) clearTimeout(modalTimer);
+              modalTimer = setTimeout(() => {
+                openModal();
+              }, SHOW_MODAL_AFTER_SECONDS * 1000);
+            }
 
-      layer.appendChild(el);
-
-      // Remover el elemento cuando termina la animación
-      el.addEventListener("animationend", () => {
-        el.remove();
+            // Si el video termina, lo pausamos (o podrías reiniciarlo si querés)
+            if (event.data === YT.PlayerState.ENDED) {
+              try { event.target.stopVideo(); } catch (e) {}
+            }
+          }
+        }
       });
-    }
+    };
 
-    // Crear elementos de forma continua
-    // Podés ajustar la frecuencia (en ms)
-    setInterval(() => {
-      // Generamos 1 o 2 elementos cada vez
-      const n = Math.random() < 0.6 ? 1 : 2;
-      for (let i = 0; i < n; i++) {
-        createJumpingItem();
-      }
-    }, 200); // cada 0.2 segundos aprox.
+    // Fallback: por si autoplay es bloqueado hasta interacción
+    document.addEventListener("click", () => {
+      if (!player) return;
+      try {
+        player.mute();
+        player.playVideo();
+      } catch (e) {}
+    }, { once: true });
 
-    // Crear algunos elementos iniciales apenas carga
-    for (let i = 0; i < 6; i++) {
-      setTimeout(createJumpingItem, i * 200);
-    }
+    loadYouTubeAPI();
   </script>
+
 </body>
 </html>
